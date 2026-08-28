@@ -23,9 +23,8 @@ export const Register = () => {
     setError('');
     const res = await register(formData);
     if (res.success) {
-      if (formData.role === 'admin') navigate('/dashboard/admin');
-      else if (formData.role === 'instructor') navigate('/dashboard/instructor');
-      else navigate('/dashboard/student');
+      // Redirect directly to 6-digit OTP verification screen
+      navigate(`/verify-email?email=${encodeURIComponent(formData.email)}&role=${formData.role}`);
     } else {
       setError(res.message);
     }
@@ -100,7 +99,6 @@ export const Register = () => {
             />
           </div>
 
-
           <div className="form-group">
             <label><Key size={14} style={{ display: 'inline', marginRight: '4px' }} /> Password</label>
             <input 
@@ -135,7 +133,7 @@ export const Register = () => {
             style={{ width: '100%', marginTop: '0.5rem', padding: '12px' }}
             disabled={loading}
           >
-            {loading ? 'Creating Account...' : 'Register Account'}
+            {loading ? 'Creating Account...' : 'Continue to OTP Verification →'}
           </button>
         </form>
 

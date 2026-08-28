@@ -14,7 +14,8 @@ export const VerifyEmail = () => {
   const [status, setStatus] = useState(token ? 'verifying' : 'idle'); // idle, verifying, success, error
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const { user } = useAuth();
+  const [verifiedUser, setVerifiedUser] = useState(null);
+  const { setVerifiedUserSession } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,7 +30,10 @@ export const VerifyEmail = () => {
       const res = await API.get(`/auth/verify-email/${t}`);
       setStatus('success');
       setMessage(res.data.message || 'Email verified successfully!');
-      updateLocalUserVerified();
+      if (res.data.user) {
+        setVerifiedUser(res.data.user);
+        setVerifiedUserSession(res.data.user);
+      }
     } catch (err) {
       setStatus('error');
       setMessage(err.response?.data?.message || 'Invalid or expired verification token.');
@@ -50,7 +54,10 @@ export const VerifyEmail = () => {
 
       setStatus('success');
       setMessage(res.data.message || 'OTP Verified! Account activated.');
-      updateLocalUserVerified();
+      if (res.data.user) {
+        setVerifiedUser(res.data.user);
+        setVerifiedUserSession(res.data.user);
+      }
     } catch (err) {
       setStatus('error');
       setMessage(err.response?.data?.message || 'Incorrect 6-digit OTP code.');
@@ -59,12 +66,11 @@ export const VerifyEmail = () => {
     }
   };
 
-  const updateLocalUserVerified = () => {
-    const savedUser = JSON.parse(localStorage.getItem('edusphere_user') || 'null');
-    if (savedUser) {
-      savedUser.isVerified = true;
-      localStorage.setItem('edusphere_user', JSON.stringify(savedUser));
-    }
+  const getDashboardLink = () => {
+    if (!verifiedUser) return '/login';
+    if (verifiedUser.role === 'admin') return '/dashboard/admin';
+    if (verifiedUser.role === 'instructor') return '/dashboard/instructor';
+    return '/dashboard/student';
   };
 
   return (
@@ -77,9 +83,14 @@ export const VerifyEmail = () => {
             </div>
             <h2 style={{ fontSize: '1.8rem', color: '#ffffff' }}>Account Activated!</h2>
             <p style={{ color: 'var(--text-muted)', margin: '1rem 0 1.5rem' }}>{message}</p>
-            <Link to="/courses" className="btn btn-primary btn-lg" style={{ width: '100%', justifyContent: 'center' }}>
-              Explore & Enroll in Courses <ArrowRight size={18} />
-            </Link>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <Link to={getDashboardLink()} className="btn btn-primary btn-lg" style={{ width: '100%', justifyContent: 'center' }}>
+                Go to Dashboard <ArrowRight size={18} />
+              </Link>
+              <Link to="/courses" className="btn btn-secondary btn-sm" style={{ width: '100%', justifyContent: 'center' }}>
+                Explore Courses
+              </Link>
+            </div>
           </div>
         ) : (
           <div>
@@ -100,7 +111,7 @@ export const VerifyEmail = () => {
               </div>
               <h2 style={{ fontSize: '1.6rem' }}>Enter 6-Digit OTP Code</h2>
               <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginTop: '4px' }}>
-                Check your email inbox for your EduSphere verification code
+                Enter the 6-digit OTP code sent to your email to activate your account
               </p>
             </div>
 
@@ -123,11 +134,11 @@ export const VerifyEmail = () => {
 
             <form onSubmit={handleOTPSubmit}>
               <div className="form-group">
-                <label><Mail size={14} style={{ display: 'inline', marginRight: '4px' }} /> Student Email Address</label>
+                <label><Mail size={14} style={{ display: 'inline', marginRight: '4px' }} /> Email Address</label>
                 <input 
                   type="email" 
                   className="form-control" 
-                  placeholder="student@example.com"
+                  placeholder="name@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -160,12 +171,12 @@ export const VerifyEmail = () => {
                 style={{ width: '100%', marginTop: '0.5rem', padding: '12px' }}
                 disabled={loading || otp.length < 6}
               >
-                {loading ? 'Verifying OTP...' : 'Verify OTP Code'}
+                {loading ? 'Verifying OTP...' : 'Verify OTP & Activate Account'}
               </button>
             </form>
 
             <p style={{ textAlign: 'center', fontSize: '0.82rem', marginTop: '1.5rem', color: 'var(--text-dim)' }}>
-              Didn't receive the email? Check your spam folder or contact support.
+              Didn't receive the email? Check your spam folder or console logs in dev mode.
             </p>
           </div>
         )}

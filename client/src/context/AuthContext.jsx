@@ -14,14 +14,29 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     try {
       const res = await API.post('/auth/login', { email, password });
+      
+      // Enforce isVerified check on login
+      if (res.data && res.data.isVerified === false) {
+        setLoading(false);
+        return {
+          success: false,
+          isUnverified: true,
+          email: res.data.email,
+          message: 'Your email address is not verified yet. Please enter your 6-digit OTP code.'
+        };
+      }
+
       setUser(res.data);
       localStorage.setItem('edusphere_user', JSON.stringify(res.data));
       setLoading(false);
-      return { success: true };
+      return { success: true, user: res.data };
     } catch (err) {
       setLoading(false);
+      const isUnverified = err.response?.data?.isVerified === false;
       return { 
         success: false, 
+        isUnverified,
+        email: err.response?.data?.email || email,
         message: err.response?.data?.message || 'Login failed. Please check credentials.' 
       };
     }
@@ -31,10 +46,14 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     try {
       const res = await API.post('/auth/register', userData);
-      setUser(res.data);
-      localStorage.setItem('edusphere_user', JSON.stringify(res.data));
+      // Registration creates unverified user - do NOT log in yet
       setLoading(false);
-      return { success: true };
+      return { 
+        success: true, 
+        email: userData.email,
+        role: userData.role,
+        message: res.data.message 
+      };
     } catch (err) {
       setLoading(false);
       return { 
@@ -42,6 +61,11 @@ export const AuthProvider = ({ children }) => {
         message: err.response?.data?.message || 'Registration failed.' 
       };
     }
+  };
+
+  const setVerifiedUserSession = (userData) => {
+    setUser(userData);
+    localStorage.setItem('edusphere_user', JSON.stringify(userData));
   };
 
   const logout = () => {
@@ -61,7 +85,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, updateProfile, loading }}>
+    <AuthContext.Provider value={{ user, login, register, setVerifiedUserSession, logout, updateProfile, loading }}>
       {children}
     </AuthContext.Provider>
   );

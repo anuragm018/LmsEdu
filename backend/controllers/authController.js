@@ -86,7 +86,7 @@ export const registerUser = async (req, res) => {
   }
 };
 
-// @desc    Verify 6-Digit OTP Code
+// @desc    Verify 6-Digit OTP Code for registration
 // @route   POST /api/auth/verify-otp
 // @access  Public
 export const verifyOTP = async (req, res) => {
@@ -104,7 +104,19 @@ export const verifyOTP = async (req, res) => {
     }
 
     if (user.isVerified) {
-      return res.json({ success: true, message: 'Account is already verified!' });
+      return res.json({ 
+        success: true, 
+        message: 'Account is already verified!',
+        user: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+          avatar: user.avatar,
+          isVerified: true,
+          token: generateToken(user._id)
+        }
+      });
     }
 
     if (user.otpCode !== otp.trim()) {
@@ -128,8 +140,113 @@ export const verifyOTP = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
-        isVerified: true
+        avatar: user.avatar,
+        isVerified: true,
+        token: generateToken(user._id)
       }
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// @desc    Request Password Reset 6-Digit OTP
+// @route   POST /api/auth/forgot-password
+// @access  Public
+export const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ message: 'Email address is required' });
+    }
+
+    const user = await User.findOne({ email: email.toLowerCase() });
+
+    if (!user) {
+      return res.status(404).json({ message: 'No account found with this email address' });
+    }
+
+    // Generate 6-Digit Reset OTP
+    const resetOtp = Math.floor(100000 + Math.random() * 900000).toString();
+    user.resetPasswordOTP = resetOtp;
+    user.resetPasswordOTPExpire = new Date(Date.now() + 15 * 60 * 1000); // 15 minutes
+    await user.save();
+
+    // Send Reset Email via Nodemailer
+    try {
+      await sendEmail({
+        email: user.email,
+        subject: 'EduSphere - Password Reset 6-Digit OTP Code',
+        message: `Hello ${user.name},\n\nYour 6-Digit Password Reset OTP Code is: ${resetOtp}\n\nThis code expires in 15 minutes.`,
+        html: `<div style="font-family: Arial, sans-serif; max-width: 550px; margin: 0 auto; padding: 24px; background: #0d1322; color: #f3f4f6; border-radius: 16px; border: 1px solid rgba(239,68,68,0.3);">
+          <div style="text-align: center; margin-bottom: 20px;">
+            <h2 style="color: #ef4444; margin: 0;">EduSphere Password Reset</h2>
+            <p style="color: #9ca3af; font-size: 0.9rem;">Reset Verification OTP Code</p>
+          </div>
+          
+          <p>Hello <strong>${user.name}</strong>,</p>
+          <p>We received a request to reset your password. Use the 6-digit OTP code below to reset your password:</p>
+          
+          <div style="text-align: center; margin: 30px 0;">
+            <div style="display: inline-block; background: rgba(239,68,68,0.15); border: 2px dashed #ef4444; padding: 16px 36px; border-radius: 12px; font-size: 2.2rem; font-weight: 800; letter-spacing: 0.35em; color: #ef4444;">
+              ${resetOtp}
+            </div>
+            <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 10px;">Valid for 15 minutes</p>
+          </div>
+        </div>`
+      });
+    } catch (mailErr) {
+      console.error('[Nodemailer Reset Warning]:', mailErr.message);
+    }
+
+    res.json({
+      success: true,
+      message: 'Password reset 6-digit OTP code sent to your email address.'
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// @desc    Reset Password with 6-Digit OTP
+// @route   POST /api/auth/reset-password
+// @access  Public
+export const resetPassword = async (req, res) => {
+  try {
+    const { email, otp, newPassword } = req.body;
+
+    if (!email || !otp || !newPassword) {
+      return res.status(400).json({ message: 'Email, OTP code, and new password are required' });
+    }
+
+    if (newPassword.length < 6) {
+      return res.status(400).json({ message: 'New password must be at least 6 characters long' });
+    }
+
+    const user = await User.findOne({ email: email.toLowerCase() });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User account not found' });
+    }
+
+    if (!user.resetPasswordOTP || user.resetPasswordOTP !== otp.trim()) {
+      return res.status(400).json({ message: 'Incorrect 6-digit Reset OTP code' });
+    }
+
+    if (user.resetPasswordOTPExpire && new Date() > user.resetPasswordOTPExpire) {
+      return res.status(400).json({ message: 'Reset OTP code has expired. Please request a new code.' });
+    }
+
+    // Update password
+    user.password = newPassword;
+    user.resetPasswordOTP = undefined;
+    user.resetPasswordOTPExpire = undefined;
+    await user.save();
+
+    res.json({
+      success: true,
+      message: 'Password reset successfully! You can now sign in with your new password.'
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -161,7 +278,9 @@ export const verifyEmailToken = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
-        isVerified: true
+        avatar: user.avatar,
+        isVerified: true,
+        token: generateToken(user._id)
       }
     });
   } catch (error) {
@@ -179,6 +298,14 @@ export const loginUser = async (req, res) => {
     const user = await User.findOne({ email }).select('+password');
 
     if (user && (await user.matchPassword(password))) {
+      if (user.isVerified === false) {
+        return res.status(403).json({
+          message: 'Account not verified. Please enter your 6-digit OTP code before signing in.',
+          email: user.email,
+          isVerified: false
+        });
+      }
+
       res.json({
         _id: user._id,
         name: user.name,

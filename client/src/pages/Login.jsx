@@ -20,7 +20,11 @@ export const Login = () => {
       else if (user?.role === 'instructor') navigate('/dashboard/instructor');
       else navigate('/dashboard/student');
     } else {
-      setError(res.message);
+      if (res.isUnverified) {
+        navigate(`/verify-email?email=${encodeURIComponent(res.email || email)}`);
+      } else {
+        setError(res.message);
+      }
     }
   };
 
@@ -85,7 +89,12 @@ export const Login = () => {
           </div>
 
           <div className="form-group">
-            <label><Key size={14} style={{ display: 'inline', marginRight: '4px' }} /> Password</label>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <label><Key size={14} style={{ display: 'inline', marginRight: '4px' }} /> Password</label>
+              <Link to="/forgot-password" style={{ fontSize: '0.78rem', color: 'var(--secondary)' }}>
+                Forgot Password?
+              </Link>
+            </div>
             <input 
               type="password" 
               className="form-control" 

@@ -1,0 +1,19 @@
+# Root Git Ignore for EduSphere LMS
+
+# Dependencies
+**/node_modules/
+
+# Production Builds
+**/dist/
+**/build/
+
+# Environment Files
+**/.env
+**/.env.local
+**/.env.production
+
+# Logs & Temporary Files
+*.log
+**/scratch/
+.DS_Store
+.vscode/

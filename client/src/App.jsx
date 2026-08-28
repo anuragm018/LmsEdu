@@ -9,6 +9,7 @@ import { Home } from './pages/Home';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { VerifyEmail } from './pages/VerifyEmail';
+import { ForgotPassword } from './pages/ForgotPassword';
 import { CourseCatalog } from './pages/CourseCatalog';
 import { CourseDetails } from './pages/CourseDetails';
 import { LearningRoom } from './pages/LearningRoom';
@@ -28,6 +29,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/courses" element={<CourseCatalog />} />
           <Route path="/courses/:id" element={<CourseDetails />} />
 
