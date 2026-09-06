@@ -3,6 +3,7 @@ import {
   getAdminStats, 
   getAllUsers, 
   updateUserRole, 
+  toggleBlockUser,
   deleteUser, 
   getAllCoursesAdmin 
 } from '../controllers/adminController.js';
@@ -17,6 +18,7 @@ router.use(authorize('admin'));
 router.get('/stats', getAdminStats);
 router.get('/users', getAllUsers);
 router.put('/users/:id/role', updateUserRole);
+router.put('/users/:id/toggle-block', toggleBlockUser);
 router.delete('/users/:id', deleteUser);
 router.get('/courses', getAllCoursesAdmin);
 

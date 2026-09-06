@@ -12,6 +12,10 @@ const ratingSchema = new mongoose.Schema({
     ref: 'Course',
     required: true
   },
+  section_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Section'
+  },
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -21,6 +25,6 @@ const ratingSchema = new mongoose.Schema({
   timestamps: true
 });
 
-ratingSchema.index({ user_id: 1, course_id: 1 }, { unique: true });
+ratingSchema.index({ user_id: 1, course_id: 1, section_id: 1 }, { unique: true });
 
 export default mongoose.model('Rating', ratingSchema);

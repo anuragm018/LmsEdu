@@ -78,7 +78,7 @@ export const CourseCard = ({ course }) => {
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <User size={14} />
-            <span>{course.tutor?.name || 'Instructor'}</span>
+            <span>{course.tutor?.name || 'Tutor'}</span>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>

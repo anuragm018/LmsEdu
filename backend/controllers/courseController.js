@@ -9,8 +9,12 @@ export const getCourses = async (req, res) => {
     const { search, category, type, level } = req.query;
     let query = { published: true };
 
-    if (search) {
-      query.name = { $regex: search, $options: 'i' };
+    if (search && search.trim()) {
+      const escaped = search.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      query.$or = [
+        { name: { $regex: escaped, $options: 'i' } },
+        { desc: { $regex: escaped, $options: 'i' } }
+      ];
     }
     if (category) {
       query.category = category;

@@ -4,6 +4,7 @@ import API from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { CertificateModal } from '../components/CertificateModal';
 import { AIChatbot } from '../components/AIChatbot';
+import { DoubtChatModal } from '../components/DoubtChatModal';
 import { 
   PlayCircle, 
   CheckCircle2, 
@@ -13,7 +14,9 @@ import {
   Award, 
   ChevronRight, 
   ArrowLeft,
-  BookOpen
+  BookOpen,
+  Star,
+  MessageSquare
 } from 'lucide-react';
 
 export const LearningRoom = () => {
@@ -26,7 +29,9 @@ export const LearningRoom = () => {
   const [quizzes, setQuizzes] = useState([]);
   const [activeLesson, setActiveLesson] = useState(null);
   const [progressInfo, setProgressInfo] = useState({ totalLessons: 0, completedCount: 0, percentage: 0, completedLessonIds: [] });
+  const [sectionRatings, setSectionRatings] = useState({});
   const [showCertModal, setShowCertModal] = useState(false);
+  const [showDoubtModal, setShowDoubtModal] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -35,17 +40,21 @@ export const LearningRoom = () => {
 
   const fetchData = async () => {
     try {
-      const [cRes, sRes, qRes, pRes] = await Promise.all([
+      const [cRes, sRes, qRes, pRes, rRes] = await Promise.all([
         API.get(`/courses/${courseId}`),
         API.get(`/syllabus/${courseId}`),
         API.get(`/quizzes/course/${courseId}`),
-        API.get(`/progress/course/${courseId}`)
+        API.get(`/progress/course/${courseId}`),
+        API.get(`/ratings/course/${courseId}`)
       ]);
 
       setCourse(cRes.data);
       setSyllabus(sRes.data);
       setQuizzes(qRes.data);
       setProgressInfo(pRes.data);
+      if (rRes.data.userSectionRatings) {
+        setSectionRatings(rRes.data.userSectionRatings);
+      }
 
       // Select first lesson by default
       if (sRes.data.length > 0 && sRes.data[0].lessons.length > 0) {
@@ -55,6 +64,19 @@ export const LearningRoom = () => {
       console.error(err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleRateSection = async (sectionId, ratingVal) => {
+    try {
+      await API.post('/ratings', {
+        course_id: courseId,
+        section_id: sectionId,
+        rating: ratingVal
+      });
+      setSectionRatings(prev => ({ ...prev, [sectionId]: ratingVal }));
+    } catch (err) {
+      console.error('Section rating failed:', err);
     }
   };
 
@@ -226,17 +248,23 @@ export const LearningRoom = () => {
           {/* Section & Lesson Accordion */}
           {syllabus.map((sec) => (
             <div key={sec._id} style={{ marginBottom: '1.25rem' }}>
-              <h4 style={{
-                fontSize: '0.85rem',
-                textTransform: 'uppercase',
-                letterSpacing: '0.05em',
-                color: 'var(--text-dim)',
-                marginBottom: '8px',
-                paddingBottom: '4px',
-                borderBottom: '1px solid var(--border-color)'
-              }}>
-                {sec.name}
-              </h4>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px', paddingBottom: '4px', borderBottom: '1px solid var(--border-color)' }}>
+                <span style={{ fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-dim)', fontWeight: 'bold' }}>
+                  {sec.name}
+                </span>
+                <div style={{ display: 'flex', gap: '3px', alignItems: 'center' }} title="Rate this Section">
+                  {[1, 2, 3, 4, 5].map((starNum) => (
+                    <Star 
+                      key={starNum} 
+                      size={13} 
+                      style={{ cursor: 'pointer', transition: 'transform 0.1s' }}
+                      fill={starNum <= (sectionRatings[sec._id] || 0) ? '#f59e0b' : 'none'} 
+                      color="#f59e0b" 
+                      onClick={() => handleRateSection(sec._id, starNum)}
+                    />
+                  ))}
+                </div>
+              </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 {sec.lessons.map((les) => {
@@ -311,8 +339,64 @@ export const LearningRoom = () => {
         />
       )}
 
+      {/* Floating Action Buttons: Course Tutor Doubt Chat & AI Assistant */}
+      <div 
+        style={{
+          position: 'fixed',
+          bottom: '24px',
+          right: '175px',
+          zIndex: 1500,
+          display: 'flex',
+          alignItems: 'center'
+        }}
+      >
+        <button
+          type="button"
+          onClick={() => setShowDoubtModal(true)}
+          className="floating-doubt-btn"
+          style={{
+            height: '56px',
+            padding: '0 20px',
+            borderRadius: '28px',
+            background: 'linear-gradient(135deg, #4f46e5, #06b6d4)',
+            color: '#ffffff',
+            border: '1px solid rgba(255, 255, 255, 0.25)',
+            boxShadow: '0 8px 24px rgba(79, 70, 229, 0.45)',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            fontWeight: 700,
+            fontSize: '0.92rem',
+            letterSpacing: '0.01em',
+            outline: 'none'
+          }}
+          title="Ask Course Tutor Doubts with text, images, or documents"
+        >
+          <div style={{
+            width: '32px',
+            height: '32px',
+            borderRadius: '50%',
+            background: 'rgba(255, 255, 255, 0.2)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <MessageSquare size={18} color="#ffffff" />
+          </div>
+          <span>Ask Tutor</span>
+        </button>
+      </div>
+
       {/* Floating AI Learning Assistant Chatbot */}
       <AIChatbot courseName={course?.name} lessonTitle={activeLesson?.title} />
+
+      {/* Doubt Resolution Chat with Course Tutor */}
+      <DoubtChatModal
+        isOpen={showDoubtModal}
+        onClose={() => setShowDoubtModal(false)}
+        course={course}
+      />
     </div>
   );
 };

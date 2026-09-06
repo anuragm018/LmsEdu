@@ -10,6 +10,33 @@ export const AuthProvider = ({ children }) => {
   });
   const [loading, setLoading] = useState(false);
 
+  // Sync user profile & role from database on app load
+  useEffect(() => {
+    const syncProfile = async () => {
+      const saved = localStorage.getItem('edusphere_user');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (parsed && parsed.token) {
+            const res = await API.get('/auth/profile');
+            const userData = res.data.user || res.data;
+            if (userData && userData.role) {
+              const freshUser = { ...parsed, ...userData };
+              delete freshUser.success;
+              setUser(freshUser);
+              localStorage.setItem('edusphere_user', JSON.stringify(freshUser));
+            }
+          }
+        } catch (err) {
+          if (err.response && err.response.status === 401) {
+            logout();
+          }
+        }
+      }
+    };
+    syncProfile();
+  }, []);
+
   const login = async (email, password) => {
     setLoading(true);
     try {
@@ -76,8 +103,11 @@ export const AuthProvider = ({ children }) => {
   const updateProfile = async (updatedData) => {
     try {
       const res = await API.put('/auth/profile', updatedData);
-      setUser(res.data);
-      localStorage.setItem('edusphere_user', JSON.stringify(res.data));
+      const updated = { ...user, ...res.data };
+      // Remove 'success' flag from user state
+      delete updated.success;
+      setUser(updated);
+      localStorage.setItem('edusphere_user', JSON.stringify(updated));
       return { success: true };
     } catch (err) {
       return { success: false, message: err.response?.data?.message || 'Update failed' };

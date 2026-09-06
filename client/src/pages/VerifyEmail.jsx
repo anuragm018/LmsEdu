@@ -15,8 +15,33 @@ export const VerifyEmail = () => {
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [verifiedUser, setVerifiedUser] = useState(null);
+  const [resending, setResending] = useState(false);
+  const [resendMsg, setResendMsg] = useState('');
+  const [cooldown, setCooldown] = useState(0);
   const { setVerifiedUserSession } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (cooldown > 0) {
+      const timer = setTimeout(() => setCooldown(cooldown - 1), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [cooldown]);
+
+  const handleResendOTP = async () => {
+    if (!email.trim() || cooldown > 0 || resending) return;
+    setResending(true);
+    setResendMsg('');
+    try {
+      const res = await API.post('/auth/resend-otp', { email: email.trim() });
+      setResendMsg(res.data.message || 'New OTP sent to your email!');
+      setCooldown(30);
+    } catch (err) {
+      setResendMsg(err.response?.data?.message || 'Failed to resend OTP.');
+    } finally {
+      setResending(false);
+    }
+  };
 
   useEffect(() => {
     if (token) {
@@ -173,10 +198,38 @@ export const VerifyEmail = () => {
               >
                 {loading ? 'Verifying OTP...' : 'Verify OTP & Activate Account'}
               </button>
+
+              <div style={{ textAlign: 'center', marginTop: '1.25rem' }}>
+                <button
+                  type="button"
+                  onClick={handleResendOTP}
+                  disabled={resending || cooldown > 0 || !email.trim()}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: (resending || cooldown > 0) ? 'var(--text-dim)' : 'var(--primary)',
+                    fontSize: '0.85rem',
+                    fontWeight: 600,
+                    cursor: (resending || cooldown > 0) ? 'not-allowed' : 'pointer',
+                    textDecoration: (resending || cooldown > 0) ? 'none' : 'underline'
+                  }}
+                >
+                  {resending ? 'Sending new OTP...' : cooldown > 0 ? `Resend OTP in ${cooldown}s` : 'Resend OTP to Email'}
+                </button>
+                {resendMsg && (
+                  <p style={{ 
+                    fontSize: '0.82rem', 
+                    color: resendMsg.includes('Failed') ? 'var(--danger)' : 'var(--success)', 
+                    marginTop: '6px' 
+                  }}>
+                    {resendMsg}
+                  </p>
+                )}
+              </div>
             </form>
 
             <p style={{ textAlign: 'center', fontSize: '0.82rem', marginTop: '1.5rem', color: 'var(--text-dim)' }}>
-              Didn't receive the email? Check your spam folder or console logs in dev mode.
+              Didn't receive the email? Check your spam folder or click Resend OTP above.
             </p>
           </div>
         )}

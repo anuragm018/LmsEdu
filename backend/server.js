@@ -1,6 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import connectDB from './config/db.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
@@ -15,8 +17,15 @@ import commentRatingRoutes from './routes/commentRatingRoutes.js';
 import transactionRoutes from './routes/transactionRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import aiRoutes from './routes/aiRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js';
+import chatRoutes from './routes/chatRoutes.js';
+import analyticsRoutes from './routes/analyticsRoutes.js';
+import announcementRoutes from './routes/announcementRoutes.js';
 
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -26,6 +35,9 @@ connectDB();
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Serve Static MP4 & Resource Uploads
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // API Routes
 app.use('/api/auth', authRoutes);
@@ -38,6 +50,10 @@ app.use('/api', commentRatingRoutes); // includes /api/comments and /api/ratings
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/ai', aiRoutes);
+app.use('/api/upload', uploadRoutes);
+app.use('/api/chat', chatRoutes);
+app.use('/api/analytics', analyticsRoutes);
+app.use('/api/announcements', announcementRoutes);
 
 app.get('/', (req, res) => {
   res.json({
@@ -48,7 +64,7 @@ app.get('/', (req, res) => {
       auth: '/api/auth',
       courses: '/api/courses',
       enrollments: '/api/enrollments',
-      quizzes: '/api/quizzes',
+      upload: '/api/upload/video',
       admin: '/api/admin'
     }
   });

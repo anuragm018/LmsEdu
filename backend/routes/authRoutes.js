@@ -1,26 +1,49 @@
 import express from 'express';
-import { 
-  registerUser, 
-  loginUser, 
-  getUserProfile, 
+
+import {
+  registerUser,
+  loginUser,
+  getUserProfile,
   updateUserProfile,
-  verifyEmailToken,
   verifyOTP,
+  resendOTP,
   forgotPassword,
   resetPassword
 } from '../controllers/authController.js';
+
 import { protect } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
+
+// Authentication Routes
+
+// Register
 router.post('/register', registerUser);
+
+// Login
 router.post('/login', loginUser);
+
+// Email OTP Verification
 router.post('/verify-otp', verifyOTP);
+
+// Resend OTP
+router.post('/resend-otp', resendOTP);
+
+// Forgot Password
 router.post('/forgot-password', forgotPassword);
+
+// Reset Password
 router.post('/reset-password', resetPassword);
-router.get('/verify-email/:token', verifyEmailToken);
-router.route('/profile')
-  .get(protect, getUserProfile)
-  .put(protect, updateUserProfile);
+
+
+// Profile Routes
+
+
+// Get Profile
+router.get('/profile', protect, getUserProfile);
+
+// Update Profile
+router.put('/profile', protect, updateUserProfile);
 
 export default router;

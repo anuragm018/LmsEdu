@@ -17,6 +17,8 @@ import { QuizPage } from './pages/QuizPage';
 import { StudentDashboard } from './pages/StudentDashboard';
 import { InstructorDashboard } from './pages/InstructorDashboard';
 import { AdminDashboard } from './pages/AdminDashboard';
+import { ProfilePage } from './pages/ProfilePage';
+import { StudentDoubtsPage } from './pages/StudentDoubtsPage';
 
 export default function App() {
   return (
@@ -35,7 +37,9 @@ export default function App() {
 
           {/* Student Protected Routes */}
           <Route element={<ProtectedRoute allowedRoles={['student', 'instructor', 'admin']} />}>
+            <Route path="/profile" element={<ProfilePage />} />
             <Route path="/dashboard/student" element={<StudentDashboard />} />
+            <Route path="/doubts" element={<StudentDoubtsPage />} />
             <Route path="/learn/:courseId" element={<LearningRoom />} />
             <Route path="/quiz/:id" element={<QuizPage />} />
           </Route>

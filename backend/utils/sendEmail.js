@@ -1,59 +1,93 @@
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
 
 export const sendEmail = async (options) => {
   try {
-    let transporter;
+    const rawUser = process.env.SMTP_USER || "";
+    const rawPass = process.env.SMTP_PASS || "";
+    const rawHost = process.env.SMTP_HOST || "";
+    const rawPort = process.env.SMTP_PORT || "";
 
-    if (process.env.SMTP_HOST && process.env.SMTP_USER) {
-      transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
-        port: Number(process.env.SMTP_PORT) || 587,
-        secure: false,
-        auth: {
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASS
-        }
-      });
-    } else {
-      // Create a mock jsonTransport or attempt ethereal test account safely
-      try {
-        const testAccount = await nodemailer.createTestAccount();
-        transporter = nodemailer.createTransport({
-          host: 'smtp.ethereal.email',
-          port: 587,
-          secure: false,
+    // Clean credentials (removes accidental spaces, tabs, or quotes often copied with Google App Passwords)
+    const cleanUser = rawUser.trim().replace(/^["']|["']$/g, "");
+    const cleanPass = rawPass.replace(/\s+/g, "").replace(/^["']|["']$/g, "");
+
+    const isGmail =
+      rawHost.toLowerCase().includes("gmail") ||
+      cleanUser.toLowerCase().endsWith("@gmail.com") ||
+      (process.env.SMTP_SERVICE && process.env.SMTP_SERVICE.toLowerCase() === "gmail");
+
+    // Configure transporter
+    const transporterConfig = isGmail
+      ? {
+          service: "gmail",
           auth: {
-            user: testAccount.user,
-            pass: testAccount.pass
-          }
-        });
-      } catch (etherealErr) {
-        // Fallback to JSON logger transport if network/Ethereal is unreachable
-        transporter = nodemailer.createTransport({
-          jsonTransport: true
-        });
-      }
-    }
+            user: cleanUser,
+            pass: cleanPass,
+          },
+        }
+      : {
+          host: rawHost || "smtp.gmail.com",
+          port: Number(rawPort) || 465,
+          secure: Number(rawPort) === 465 || !rawPort,
+          auth: {
+            user: cleanUser,
+            pass: cleanPass,
+          },
+        };
+
+    const transporter = nodemailer.createTransport(transporterConfig);
+
+    // Email Message
+    const fromName = process.env.FROM_NAME || "EduSphere LMS";
+    const fromEmail = process.env.FROM_EMAIL || cleanUser;
 
     const message = {
-      from: `${process.env.FROM_NAME || 'EduSphere LMS'} <${process.env.FROM_EMAIL || 'noreply@edusphere.com'}>`,
+      from: `"${fromName}" <${fromEmail}>`,
       to: options.email,
       subject: options.subject,
       text: options.message,
-      html: options.html || `<div style="font-family: Arial, sans-serif; padding: 20px; background: #f4f4f5; border-radius: 8px;">
-        <h2 style="color: #6366f1;">EduSphere LMS Notification</h2>
-        <p>${options.message}</p>
-      </div>`
+      html:
+        options.html ||
+        `
+        <div style="
+          font-family: Arial, sans-serif;
+          padding: 24px;
+          background: #0f172a;
+          color: #f8fafc;
+          border-radius: 12px;
+          border: 1px solid rgba(99, 102, 241, 0.3);
+        ">
+          <h2 style="color: #6366f1; margin-top: 0;">
+            EduSphere LMS
+          </h2>
+          <p style="font-size: 15px; line-height: 1.6; color: #e2e8f0;">
+            ${options.message}
+          </p>
+        </div>
+        `,
     };
 
+    // Send Email
     const info = await transporter.sendMail(message);
-    console.log(`[Nodemailer] Email processed: %s`, info.messageId || 'Success');
-    if (nodemailer.getTestMessageUrl(info)) {
-      console.log(`[Nodemailer] Preview Email URL: %s`, nodemailer.getTestMessageUrl(info));
-    }
+
+    console.log(`[Nodemailer] Email sent successfully to: ${options.email}`);
+    console.log(`[Nodemailer] Message ID: ${info.messageId}`);
+
     return info;
   } catch (error) {
-    console.warn('[Nodemailer Warning]: Email could not be delivered, but registration succeeded. Details:', error.message);
-    return null;
+    console.error("[Nodemailer Error]: Email delivery failed:", error.message);
+
+    if (error.message && error.message.includes("535-5.7.8")) {
+      console.error(
+        "\n[SMTP TROUBLESHOOTING]: Google rejected your SMTP credentials (BadCredentials 535-5.7.8)."
+      );
+      console.error("To fix this with Gmail:");
+      console.error("1. Enable 2-Step Verification on your Google Account: https://myaccount.google.com/security");
+      console.error("2. Generate a 16-character App Password at: https://myaccount.google.com/apppasswords");
+      console.error("3. Paste that 16-character code into backend/.env as SMTP_PASS\n");
+    }
+
+    // Let controller know email failed
+    throw error;
   }
 };

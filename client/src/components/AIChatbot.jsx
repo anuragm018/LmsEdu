@@ -9,47 +9,227 @@ import {
   Lightbulb, 
   Code, 
   FileText, 
-  ChevronDown 
+  ChevronDown,
+  Copy,
+  Check,
+  Paperclip,
+  File,
+  Image as ImageIcon,
+  Loader2
 } from 'lucide-react';
+
+/**
+ * Clean markdown formatter for AI responses (headers, bold, lists, and code blocks)
+ */
+const FormattedMessage = ({ text }) => {
+  if (!text) return null;
+
+  // Split by code blocks ```lang ... ```
+  const codeBlockRegex = /```([a-zA-Z0-9_-]*)\n([\s\S]*?)```/g;
+  const parts = [];
+  let lastIndex = 0;
+  let match;
+
+  while ((match = codeBlockRegex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push({ type: 'text', content: text.slice(lastIndex, match.index) });
+    }
+    parts.push({ type: 'code', lang: match[1] || 'code', content: match[2] });
+    lastIndex = match.index + match[0].length;
+  }
+  if (lastIndex < text.length) {
+    parts.push({ type: 'text', content: text.slice(lastIndex) });
+  }
+
+  const renderInline = (str) => {
+    // Replace **bold** with <strong> and `code` with <code>
+    const inlineRegex = /(\*\*[^*]+\*\*|`[^`]+`)/g;
+    const segments = str.split(inlineRegex);
+
+    return segments.map((seg, i) => {
+      if (seg.startsWith('**') && seg.endsWith('**')) {
+        return <strong key={i} style={{ color: '#fff', fontWeight: 700 }}>{seg.slice(2, -2)}</strong>;
+      }
+      if (seg.startsWith('`') && seg.endsWith('`')) {
+        return (
+          <code key={i} style={{
+            background: 'rgba(99, 102, 241, 0.25)',
+            color: '#a5b4fc',
+            padding: '2px 6px',
+            borderRadius: '4px',
+            fontSize: '0.82em',
+            fontFamily: 'monospace'
+          }}>
+            {seg.slice(1, -1)}
+          </code>
+        );
+      }
+      return seg;
+    });
+  };
+
+  return (
+    <div>
+      {parts.map((part, pIdx) => {
+        if (part.type === 'code') {
+          return (
+            <div key={pIdx} style={{
+              margin: '8px 0',
+              background: '#070b14',
+              borderRadius: '8px',
+              border: '1px solid rgba(255,255,255,0.1)',
+              overflow: 'hidden'
+            }}>
+              <div style={{
+                padding: '4px 10px',
+                background: 'rgba(255,255,255,0.05)',
+                fontSize: '0.7rem',
+                color: 'var(--text-dim)',
+                textTransform: 'uppercase',
+                fontWeight: 600,
+                letterSpacing: '0.05em'
+              }}>
+                {part.lang}
+              </div>
+              <pre style={{
+                margin: 0,
+                padding: '10px 12px',
+                fontSize: '0.82rem',
+                color: '#e2e8f0',
+                fontFamily: 'Consolas, Monaco, "Courier New", monospace',
+                overflowX: 'auto',
+                lineHeight: 1.45
+              }}>
+                <code>{part.content}</code>
+              </pre>
+            </div>
+          );
+        }
+
+        // Render plain text with paragraphs and list bullet points
+        const lines = part.content.split('\n');
+        return (
+          <div key={pIdx}>
+            {lines.map((line, lIdx) => {
+              const trimmed = line.trim();
+              if (!trimmed) {
+                return <div key={lIdx} style={{ height: '6px' }} />;
+              }
+              if (trimmed.startsWith('### ')) {
+                return (
+                  <h4 key={lIdx} style={{ fontSize: '0.95rem', fontWeight: 700, margin: '8px 0 4px', color: '#fff' }}>
+                    {renderInline(trimmed.slice(4))}
+                  </h4>
+                );
+              }
+              if (trimmed.startsWith('## ')) {
+                return (
+                  <h3 key={lIdx} style={{ fontSize: '1.05rem', fontWeight: 700, margin: '10px 0 4px', color: '#fff' }}>
+                    {renderInline(trimmed.slice(3))}
+                  </h3>
+                );
+              }
+              if (trimmed.startsWith('* ') || trimmed.startsWith('- ') || trimmed.startsWith('• ')) {
+                return (
+                  <div key={lIdx} style={{ display: 'flex', gap: '6px', alignItems: 'flex-start', margin: '3px 0' }}>
+                    <span style={{ color: 'var(--primary)', fontWeight: 'bold' }}>•</span>
+                    <span style={{ flex: 1 }}>{renderInline(trimmed.replace(/^(\*|-|•)\s+/, ''))}</span>
+                  </div>
+                );
+              }
+              return (
+                <p key={lIdx} style={{ margin: '3px 0' }}>
+                  {renderInline(line)}
+                </p>
+              );
+            })}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
 
 export const AIChatbot = ({ courseName = '', lessonTitle = '' }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     {
       sender: 'ai',
-      text: `Hello! I am **EduSphere AI**, your personal learning assistant. Ask me any doubt about ${lessonTitle ? `"${lessonTitle}"` : courseName ? `"${courseName}"` : 'your course'}!`,
+      text: 'Hello! I am **EduSphere AI**, your personal learning assistant.',
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
   ]);
   const [inputMessage, setInputMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [attachment, setAttachment] = useState(null);
+  const [uploadingFile, setUploadingFile] = useState(false);
   const chatEndRef = useRef(null);
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     if (isOpen) {
       chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [messages, isOpen]);
+  }, [messages, isOpen, loading]);
+
+  const handleFileUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 20 * 1024 * 1024) {
+      alert('File size exceeds 20MB limit. Please choose a smaller file.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('attachment', file);
+
+    setUploadingFile(true);
+    try {
+      const res = await API.post('/chat/upload', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+      setAttachment(res.data);
+    } catch (err) {
+      console.error('File upload failed:', err);
+      alert(err.response?.data?.message || 'Failed to upload document or image.');
+    } finally {
+      setUploadingFile(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
 
   const handleSend = async (textToSend) => {
     const prompt = textToSend || inputMessage;
-    if (!prompt.trim() || loading) return;
+    if ((!prompt.trim() && !attachment) || loading) return;
 
+    const currentAttachment = attachment;
     const userMsg = {
       sender: 'user',
-      text: prompt,
+      text: prompt.trim() || (currentAttachment ? `Attached: ${currentAttachment.fileName}` : ''),
+      attachment: currentAttachment,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
 
     setMessages((prev) => [...prev, userMsg]);
     if (!textToSend) setInputMessage('');
+    setAttachment(null);
     setLoading(true);
 
     try {
+      // Send message along with recent conversation history for contextual Gemini responses
+      const historyPayload = messages.slice(-6).map((m) => ({
+        sender: m.sender,
+        text: m.text
+      }));
+
       const res = await API.post('/ai/chat', {
         message: prompt,
         courseName,
-        lessonTitle
+        lessonTitle,
+        history: historyPayload,
+        attachment: currentAttachment
       });
 
       const aiMsg = {
@@ -77,30 +257,45 @@ export const AIChatbot = ({ courseName = '', lessonTitle = '' }) => {
 
   return (
     <>
-      {/* Floating Trigger Button */}
+      {/* Floating Trigger Button: Ask AI */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         style={{
           position: 'fixed',
           bottom: '24px',
           right: '24px',
-          width: '60px',
-          height: '60px',
-          borderRadius: '50%',
+          height: '56px',
+          padding: '0 20px',
+          borderRadius: '28px',
           background: 'linear-gradient(135deg, var(--primary), var(--secondary))',
           color: '#ffffff',
-          border: 'none',
-          boxShadow: '0 8px 24px rgba(99, 102, 241, 0.5)',
+          border: '1px solid rgba(255, 255, 255, 0.25)',
+          boxShadow: '0 8px 24px rgba(99, 102, 241, 0.45)',
           cursor: 'pointer',
           zIndex: 1500,
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
-          transition: 'transform 0.3s ease'
+          gap: '10px',
+          fontWeight: 700,
+          fontSize: '0.92rem',
+          letterSpacing: '0.01em',
+          outline: 'none',
+          transition: 'all 0.25s ease'
         }}
         title="EduSphere AI Doubt Assistant"
       >
-        {isOpen ? <X size={28} /> : <Bot size={30} />}
+        <div style={{
+          width: '32px',
+          height: '32px',
+          borderRadius: '50%',
+          background: 'rgba(255, 255, 255, 0.2)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          {isOpen ? <X size={20} color="#ffffff" /> : <Bot size={20} color="#ffffff" />}
+        </div>
+        <span>{isOpen ? 'Close AI' : 'Ask AI'}</span>
       </button>
 
       {/* Chat Window Popup */}
@@ -188,11 +383,51 @@ export const AIChatbot = ({ courseName = '', lessonTitle = '' }) => {
                     border: msg.sender === 'user' ? 'none' : '1px solid var(--border-color)',
                     color: '#ffffff',
                     fontSize: '0.86rem',
-                    lineHeight: '1.45',
-                    whiteSpace: 'pre-wrap'
+                    lineHeight: '1.45'
                   }}
                 >
-                  {msg.text}
+                  {msg.sender === 'ai' ? (
+                    <FormattedMessage text={msg.text} />
+                  ) : (
+                    <div>
+                      {msg.attachment && (
+                        <div style={{ marginBottom: '6px' }}>
+                          {msg.attachment.fileType === 'image' ? (
+                            <img
+                              src={msg.attachment.fileUrl}
+                              alt={msg.attachment.fileName}
+                              style={{
+                                maxWidth: '100%',
+                                maxHeight: '160px',
+                                borderRadius: '8px',
+                                objectFit: 'cover',
+                                display: 'block',
+                                border: '1px solid rgba(255,255,255,0.2)'
+                              }}
+                            />
+                          ) : (
+                            <div style={{
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '6px',
+                              background: 'rgba(255, 255, 255, 0.15)',
+                              padding: '4px 8px',
+                              borderRadius: '6px',
+                              fontSize: '0.78rem'
+                            }}>
+                              <File size={14} />
+                              <span style={{ maxWidth: '180px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                {msg.attachment.fileName}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                      {msg.text && (
+                        <div style={{ whiteSpace: 'pre-wrap' }}>{msg.text}</div>
+                      )}
+                    </div>
+                  )}
                 </div>
                 <div
                   style={{
@@ -283,6 +518,46 @@ export const AIChatbot = ({ courseName = '', lessonTitle = '' }) => {
             </button>
           </div>
 
+          {/* Pending Attachment Preview */}
+          {attachment && (
+            <div style={{
+              padding: '6px 12px',
+              background: 'rgba(99, 102, 241, 0.12)',
+              borderTop: '1px solid rgba(99, 102, 241, 0.25)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '8px'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', color: '#a5b4fc', minWidth: 0 }}>
+                {attachment.fileType === 'image' ? <ImageIcon size={14} /> : <File size={14} />}
+                <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {attachment.fileName}
+                </span>
+                <span style={{ fontSize: '0.68rem', color: 'var(--text-dim)' }}>
+                  ({Math.round(attachment.fileSize / 1024)} KB)
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setAttachment(null)}
+                style={{ background: 'none', border: 'none', color: 'var(--danger)', cursor: 'pointer', display: 'flex', padding: '2px' }}
+                title="Remove attachment"
+              >
+                <X size={14} />
+              </button>
+            </div>
+          )}
+
+          {/* Hidden File Input */}
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileUpload}
+            style={{ display: 'none' }}
+            accept="image/*,.pdf,.txt,.js,.jsx,.ts,.tsx,.py,.java,.html,.css,.json,.md"
+          />
+
           {/* Input Box */}
           <form
             onSubmit={(e) => {
@@ -292,14 +567,37 @@ export const AIChatbot = ({ courseName = '', lessonTitle = '' }) => {
             style={{
               padding: '10px 12px',
               display: 'flex',
+              alignItems: 'center',
               gap: '8px',
               background: '#090d16'
             }}
           >
+            {/* Attach File Button */}
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={uploadingFile || loading}
+              style={{
+                background: 'rgba(255, 255, 255, 0.08)',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                borderRadius: 'var(--radius-sm)',
+                color: uploadingFile ? 'var(--primary)' : 'var(--text-muted)',
+                padding: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: uploadingFile || loading ? 'not-allowed' : 'pointer',
+                transition: 'all 0.2s ease'
+              }}
+              title="Attach screenshot, code file, or document (PDF, TXT, Images)"
+            >
+              {uploadingFile ? <Loader2 size={16} className="animate-spin" /> : <Paperclip size={16} />}
+            </button>
+
             <input
               type="text"
               className="form-control"
-              placeholder="Ask your doubt..."
+              placeholder={attachment ? "Ask a question about this file..." : "Ask your doubt..."}
               style={{ fontSize: '0.85rem', padding: '8px 12px' }}
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
@@ -308,7 +606,7 @@ export const AIChatbot = ({ courseName = '', lessonTitle = '' }) => {
               type="submit"
               className="btn btn-primary btn-sm"
               style={{ borderRadius: 'var(--radius-sm)' }}
-              disabled={loading || !inputMessage.trim()}
+              disabled={loading || uploadingFile || (!inputMessage.trim() && !attachment)}
             >
               <Send size={16} />
             </button>

@@ -95,7 +95,7 @@ export const Home = () => {
             Explore All Courses <ArrowRight size={20} />
           </Link>
           <Link to="/register" className="btn btn-secondary btn-lg">
-            Join as Student / Instructor
+            Join as Student / Tutor
           </Link>
         </div>
 
@@ -109,7 +109,7 @@ export const Home = () => {
         }}>
           <div className="glass-panel" style={{ padding: '1.5rem', textAlign: 'center' }}>
             <h3 style={{ fontSize: '2rem', color: 'var(--primary)' }}>3 Roles</h3>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Student, Instructor, Admin</p>
+            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Student, Tutor, Admin</p>
           </div>
           <div className="glass-panel" style={{ padding: '1.5rem', textAlign: 'center' }}>
             <h3 style={{ fontSize: '2rem', color: 'var(--secondary)' }}>Automated</h3>
@@ -166,7 +166,7 @@ export const Home = () => {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
           <div>
             <h2 style={{ fontSize: '1.8rem' }}>Featured Courses</h2>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Handcrafted learning paths by expert instructors</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Handcrafted learning paths by expert tutors</p>
           </div>
           <Link to="/courses" className="btn btn-secondary btn-sm">
             View All Courses <ArrowRight size={16} />

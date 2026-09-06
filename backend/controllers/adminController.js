@@ -66,6 +66,36 @@ export const updateUserRole = async (req, res) => {
   }
 };
 
+// @desc    Toggle block/unblock user account (Admin)
+// @route   PUT /api/admin/users/:id/toggle-block
+// @access  Private (Admin)
+export const toggleBlockUser = async (req, res) => {
+  try {
+    // Prevent admin from blocking their own account
+    if (req.user._id.toString() === req.params.id) {
+      return res.status(400).json({ message: 'You cannot block your own admin account' });
+    }
+
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Toggle status
+    user.isBlocked = !user.isBlocked;
+    await user.save();
+
+    res.json({
+      success: true,
+      message: user.isBlocked ? 'User account has been blocked' : 'User account has been unblocked',
+      isBlocked: user.isBlocked,
+      user
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // @desc    Delete user account (Admin)
 // @route   DELETE /api/admin/users/:id
 // @access  Private (Admin)

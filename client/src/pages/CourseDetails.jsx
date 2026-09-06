@@ -93,7 +93,11 @@ export const CourseDetails = () => {
     e.preventDefault();
     if (!newComment.trim()) return;
     try {
-      const res = await API.post('/comments', { course_id: course._id, comment: newComment });
+      const res = await API.post('/comments', { 
+        course_id: course._id, 
+        comment: newComment,
+        rating: userRating || 5
+      });
       setComments([res.data, ...comments]);
       setNewComment('');
     } catch (err) {
@@ -268,8 +272,48 @@ export const CourseDetails = () => {
                     />
                     <strong style={{ fontSize: '0.85rem' }}>{c.user_id?.name || 'User'}</strong>
                     <span className="badge badge-role" style={{ fontSize: '0.65rem' }}>{c.user_id?.role}</span>
+                    {c.rating && (
+                      <div style={{ display: 'inline-flex', gap: '2px', marginLeft: 'auto' }}>
+                        {[1, 2, 3, 4, 5].map((st) => (
+                          <Star key={st} size={12} fill={st <= c.rating ? '#f59e0b' : 'none'} color="#f59e0b" />
+                        ))}
+                      </div>
+                    )}
                   </div>
                   <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)' }}>{c.comment}</p>
+
+                  {/* Tutor Official Response */}
+                  {c.reply && c.reply.text && (
+                    <div style={{
+                      marginTop: '10px',
+                      padding: '10px 14px',
+                      borderRadius: '8px',
+                      background: 'rgba(99, 102, 241, 0.09)',
+                      borderLeft: '3px solid var(--primary)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '4px'
+                    }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <img
+                          src={c.reply.instructor_id?.avatar || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150'}
+                          alt=""
+                          style={{ width: '22px', height: '22px', borderRadius: '50%' }}
+                        />
+                        <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--primary)' }}>
+                          👨‍🏫 Instructor Response
+                        </span>
+                        {c.reply.replied_at && (
+                          <span style={{ fontSize: '0.7rem', color: 'var(--text-dim)' }}>
+                            • {new Date(c.reply.replied_at).toLocaleDateString()}
+                          </span>
+                        )}
+                      </div>
+                      <p style={{ fontSize: '0.84rem', color: 'var(--text-main)', margin: 0, paddingLeft: '30px' }}>
+                        {c.reply.text}
+                      </p>
+                    </div>
+                  )}
                 </div>
               ))
             )}

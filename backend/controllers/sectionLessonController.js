@@ -67,6 +67,32 @@ export const createLesson = async (req, res) => {
   }
 };
 
+// @desc    Update a lesson / replace video MP4 file
+// @route   PUT /api/syllabus/lesson/:id
+// @access  Private (Instructor/Admin)
+export const updateLesson = async (req, res) => {
+  try {
+    const { title, video_url, document_url, content, duration, section_id } = req.body;
+
+    const lesson = await Lesson.findById(req.params.id);
+    if (!lesson) {
+      return res.status(404).json({ message: 'Lesson not found' });
+    }
+
+    if (title) lesson.title = title;
+    if (video_url) lesson.video_url = video_url;
+    if (document_url !== undefined) lesson.document_url = document_url;
+    if (content !== undefined) lesson.content = content;
+    if (duration) lesson.duration = duration;
+    if (section_id) lesson.section_id = section_id;
+
+    const updatedLesson = await lesson.save();
+    res.json(updatedLesson);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // @desc    Delete a lesson
 // @route   DELETE /api/syllabus/lesson/:id
 // @access  Private (Instructor/Admin)
