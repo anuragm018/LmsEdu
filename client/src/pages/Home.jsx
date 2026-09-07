@@ -12,7 +12,9 @@ import {
   Code,
   Cpu,
   Palette,
-  Briefcase
+  Briefcase,
+  Clock,
+  ShieldCheck
 } from 'lucide-react';
 
 export const Home = () => {
@@ -102,22 +104,61 @@ export const Home = () => {
         {/* Platform Highlights Stats */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
           gap: '1.5rem',
-          maxWidth: '900px',
-          margin: '4rem auto 0'
+          maxWidth: '720px',
+          margin: '3.5rem auto 0'
         }}>
-          <div className="glass-panel" style={{ padding: '1.5rem', textAlign: 'center' }}>
-            <h3 style={{ fontSize: '2rem', color: 'var(--primary)' }}>3 Roles</h3>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Student, Tutor, Admin</p>
+          <div className="glass-panel" style={{ 
+            padding: '1.75rem 1.5rem', 
+            textAlign: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '8px',
+            border: '1px solid rgba(6, 182, 212, 0.25)',
+            background: 'linear-gradient(180deg, rgba(6, 182, 212, 0.08) 0%, rgba(17, 24, 39, 0.6) 100%)'
+          }}>
+            <div style={{
+              width: '42px',
+              height: '42px',
+              borderRadius: '10px',
+              background: 'rgba(6, 182, 212, 0.15)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: '4px'
+            }}>
+              <Clock size={22} color="var(--secondary)" />
+            </div>
+            <h3 style={{ fontSize: '1.75rem', color: 'var(--secondary)', fontWeight: 700, margin: 0 }}>Automated</h3>
+            <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', margin: 0 }}>Smart Quiz Timer & Auto Grading</p>
           </div>
-          <div className="glass-panel" style={{ padding: '1.5rem', textAlign: 'center' }}>
-            <h3 style={{ fontSize: '2rem', color: 'var(--secondary)' }}>Automated</h3>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Quiz Timer & Auto Grading</p>
-          </div>
-          <div className="glass-panel" style={{ padding: '1.5rem', textAlign: 'center' }}>
-            <h3 style={{ fontSize: '2rem', color: 'var(--success)' }}>100% Verified</h3>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Digital Certificates</p>
+
+          <div className="glass-panel" style={{ 
+            padding: '1.75rem 1.5rem', 
+            textAlign: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '8px',
+            border: '1px solid rgba(16, 185, 129, 0.25)',
+            background: 'linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, rgba(17, 24, 39, 0.6) 100%)'
+          }}>
+            <div style={{
+              width: '42px',
+              height: '42px',
+              borderRadius: '10px',
+              background: 'rgba(16, 185, 129, 0.15)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: '4px'
+            }}>
+              <ShieldCheck size={22} color="var(--success)" />
+            </div>
+            <h3 style={{ fontSize: '1.75rem', color: 'var(--success)', fontWeight: 700, margin: 0 }}>100% Verified</h3>
+            <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', margin: 0 }}>Instant Downloadable Certificates</p>
           </div>
         </div>
       </section>
