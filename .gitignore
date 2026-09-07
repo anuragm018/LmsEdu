@@ -17,3 +17,10 @@
 **/scratch/
 .DS_Store
 .vscode/
+
+# Media & Uploads (Exceeds Git size limits)
+backend/uploads/
+**/uploads/
+*.mp4
+*.webm
+

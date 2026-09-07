@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LogIn, Key, Mail, AlertCircle, Info, Eye, EyeOff } from 'lucide-react';
+import { LogIn, Key, Mail, AlertCircle, Eye, EyeOff } from 'lucide-react';
 
 export const Login = () => {
   const [email, setEmail] = useState('');
@@ -27,11 +27,6 @@ export const Login = () => {
         setError(res.message);
       }
     }
-  };
-
-  const fillQuickDemo = (demoEmail, demoPass) => {
-    setEmail(demoEmail);
-    setPassword(demoPass);
   };
 
   return (
@@ -136,41 +131,12 @@ export const Login = () => {
           <button 
             type="submit" 
             className="btn btn-primary"
-            style={{ width: '100%', marginTop: '0.5rem', padding: '12px' }}
+            style={{ width: '100%', marginTop: '1.25rem', padding: '12px' }}
             disabled={loading}
           >
             {loading ? 'Authenticating...' : 'Sign In'}
           </button>
         </form>
-
-        {/* Quick Demo Credentials for Student & Tutor */}
-        <div style={{
-          marginTop: '1.75rem',
-          paddingTop: '1.25rem',
-          borderTop: '1px solid var(--border-color)'
-        }}>
-          <p style={{ fontSize: '0.8rem', color: 'var(--text-dim)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <Info size={14} /> Choose Your Role:
-          </p>
-          <div style={{ display: 'flex', gap: '8px' }}>
-            <button 
-              type="button" 
-              onClick={() => fillQuickDemo('student@edusphere.com', 'stud123')}
-              className="btn btn-secondary btn-sm"
-              style={{ fontSize: '0.8rem', flex: 1, padding: '8px 12px' }}
-            >
-              🎓 Student
-            </button>
-            <button 
-              type="button" 
-              onClick={() => fillQuickDemo('instructor@edusphere.com', 'inst123')}
-              className="btn btn-secondary btn-sm"
-              style={{ fontSize: '0.8rem', flex: 1, padding: '8px 12px' }}
-            >
-              👨‍🏫 Tutor
-            </button>
-          </div>
-        </div>
 
         <p style={{ textAlign: 'center', fontSize: '0.85rem', marginTop: '1.5rem', color: 'var(--text-muted)' }}>
           Don't have an account? <Link to="/register" style={{ color: 'var(--primary)', fontWeight: 600 }}>Create One</Link>

@@ -8,7 +8,7 @@ export const Register = () => {
     name: '',
     email: '',
     password: '',
-    role: 'student'
+    role: 'student' // Default active selection
   });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
@@ -22,6 +22,13 @@ export const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+
+    // Compulsory role validation
+    if (!formData.role) {
+      setError('Please select your account role (Student or Tutor) to continue.');
+      return;
+    }
+
     const res = await register(formData);
     if (res.success) {
       // Redirect directly to 6-digit OTP verification screen
@@ -141,17 +148,18 @@ export const Register = () => {
             </div>
           </div>
 
+          {/* Compulsory Role Selection */}
           <div className="form-group" style={{ marginBottom: '1.25rem' }}>
             <label style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px', fontSize: '0.84rem' }}>
-              <ShieldCheck size={15} color="var(--primary)" /> Select Your Account Role
+              <ShieldCheck size={15} color="var(--primary)" /> Select Your Account Role <span style={{ color: 'var(--danger)' }}>*</span>
             </label>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-              {/* Student Card (Compact) */}
+              {/* Student Card */}
               <div 
                 onClick={() => setFormData({ ...formData, role: 'student' })}
                 className="role-selector-card"
                 style={{
-                  padding: '9px 12px',
+                  padding: '10px 14px',
                   borderRadius: 'var(--radius-sm)',
                   border: formData.role === 'student' ? '1.5px solid var(--primary)' : '1px solid var(--border-color)',
                   background: formData.role === 'student' 
@@ -189,12 +197,12 @@ export const Register = () => {
                 )}
               </div>
 
-              {/* Tutor Card (Compact) */}
+              {/* Tutor Card */}
               <div 
                 onClick={() => setFormData({ ...formData, role: 'instructor' })}
                 className="role-selector-card"
                 style={{
-                  padding: '9px 12px',
+                  padding: '10px 14px',
                   borderRadius: 'var(--radius-sm)',
                   border: formData.role === 'instructor' ? '1.5px solid var(--secondary)' : '1px solid var(--border-color)',
                   background: formData.role === 'instructor' 
@@ -237,7 +245,7 @@ export const Register = () => {
           <button 
             type="submit" 
             className="btn btn-primary"
-            style={{ width: '100%', marginTop: '0.5rem', padding: '12px' }}
+            style={{ width: '100%', marginTop: '0.75rem', padding: '12px' }}
             disabled={loading}
           >
             {loading ? 'Creating Account...' : 'Continue to OTP Verification →'}

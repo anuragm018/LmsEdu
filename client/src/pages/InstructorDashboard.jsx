@@ -743,6 +743,23 @@ export const InstructorDashboard = () => {
     });
   };
 
+  const handleRemoveOptionItem = (qIndex, oIndex) => {
+    setQuizForm(prev => {
+      const updated = [...prev.questions];
+      if (updated[qIndex].options.length <= 2) {
+        alert('A question must have at least 2 options.');
+        return prev;
+      }
+      const wasCorrect = updated[qIndex].options[oIndex].is_correct;
+      updated[qIndex].options = updated[qIndex].options.filter((_, i) => i !== oIndex);
+      // If the removed option was marked correct, designate the first option as correct
+      if (wasCorrect && updated[qIndex].options.length > 0) {
+        updated[qIndex].options[0].is_correct = true;
+      }
+      return { ...prev, questions: updated };
+    });
+  };
+
   const handleRemoveQuestionItem = (index) => {
     setQuizForm(prev => ({
       ...prev,
@@ -3053,12 +3070,32 @@ export const InstructorDashboard = () => {
                           <input 
                             type="text" 
                             className="form-control" 
-                            style={{ fontSize: '0.82rem', padding: '6px 10px' }}
+                            style={{ fontSize: '0.82rem', padding: '6px 10px', flex: 1 }}
                             placeholder={`Option ${oIdx + 1}`}
                             value={opt.option_text}
                             onChange={(e) => handleOptionTextChange(qIdx, oIdx, e.target.value)}
                             required
                           />
+                          {q.options.length > 2 && (
+                            <button
+                              type="button"
+                              onClick={() => handleRemoveOptionItem(qIdx, oIdx)}
+                              title="Delete this option"
+                              style={{
+                                background: 'rgba(239, 68, 68, 0.1)',
+                                border: 'none',
+                                color: 'var(--danger)',
+                                cursor: 'pointer',
+                                borderRadius: '4px',
+                                padding: '4px 6px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                              }}
+                            >
+                              <X size={14} />
+                            </button>
+                          )}
                         </div>
                       ))}
                     </div>
