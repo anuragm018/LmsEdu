@@ -23,15 +23,14 @@ export const CertificateModal = ({ courseName, studentName, date, onClose }) => 
       justifyContent: 'center',
       padding: '1.5rem'
     }}>
-      <div className="glass-panel" style={{
-        maxWidth: '800px',
+      <div style={{
+        maxWidth: '780px',
         width: '100%',
-        background: '#0d1322',
-        border: '2px solid rgba(245, 158, 11, 0.4)',
-        boxShadow: '0 0 50px rgba(245, 158, 11, 0.2)',
+        background: 'var(--color-surface)',
+        border: '1px solid var(--color-border)',
         padding: '2.5rem',
         position: 'relative',
-        borderRadius: '24px'
+        borderRadius: 'var(--radius-sm)'
       }}>
         {/* Close Button */}
         <button 
@@ -42,64 +41,64 @@ export const CertificateModal = ({ courseName, studentName, date, onClose }) => 
             right: '20px',
             background: 'none',
             border: 'none',
-            color: 'var(--text-muted)',
+            color: 'var(--color-text-muted)',
             cursor: 'pointer'
           }}
         >
-          <X size={24} />
+          <X size={22} />
         </button>
 
         {/* Certificate Frame */}
         <div style={{
-          border: '1px dashed rgba(245, 158, 11, 0.5)',
+          border: '2px solid var(--color-primary)',
           padding: '2rem',
           textAlign: 'center',
-          borderRadius: '16px',
-          background: 'radial-gradient(circle at center, rgba(245, 158, 11, 0.05) 0%, transparent 70%)'
+          borderRadius: 'var(--radius-sm)',
+          background: 'var(--color-surface)'
         }}>
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
             <div style={{
-              width: '64px',
-              height: '64px',
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg, #f59e0b, #d97706)',
+              width: '56px',
+              height: '56px',
+              borderRadius: 'var(--radius-sm)',
+              background: 'var(--color-primary-subtle)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#fff',
-              boxShadow: '0 0 20px rgba(245, 158, 11, 0.5)'
+              color: 'var(--color-primary)'
             }}>
-              <Award size={36} />
+              <Award size={32} />
             </div>
           </div>
 
-          <p style={{ textTransform: 'uppercase', letterSpacing: '0.2em', color: '#f59e0b', fontSize: '0.85rem', fontWeight: 700 }}>
+          <p style={{ textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--color-accent-hover)', fontSize: '0.82rem', fontWeight: 700 }}>
             Certificate of Completion
           </p>
 
-          <h2 style={{ fontSize: '2rem', margin: '0.5rem 0', fontFamily: 'var(--font-heading)' }}>
+          <h2 style={{ fontSize: '1.8rem', margin: '0.5rem 0', color: 'var(--color-primary)' }}>
             EduSphere E-Learning Platform
           </h2>
 
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>
+          <p style={{ color: 'var(--color-text-muted)', fontSize: '0.92rem' }}>
             This certifies that
           </p>
 
           <h1 style={{
-            fontSize: '2.4rem',
-            color: '#ffffff',
+            fontSize: '2.2rem',
+            color: 'var(--color-primary)',
             margin: '0.8rem 0',
-            textDecoration: 'underline',
-            textDecorationColor: '#f59e0b'
+            borderBottom: '2px solid var(--color-accent)',
+            display: 'inline-block',
+            paddingBottom: '4px'
           }}>
-            {studentName || 'Sarah Connor'}
+            {studentName || 'Student Name'}
           </h1>
 
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', maxWidth: '550px', margin: '0 auto' }}>
+          <p style={{ color: 'var(--color-text-muted)', fontSize: '0.92rem', maxWidth: '550px', margin: '0.8rem auto 0' }}>
             has successfully completed all lessons, assessments, and quizzes for the course
           </p>
 
-          <h3 style={{ fontSize: '1.4rem', color: 'var(--secondary)', margin: '1rem 0' }}>
+          <h3 style={{ fontSize: '1.25rem', color: 'var(--color-primary)', margin: '1rem 0' }}>
             "{courseName}"
           </h3>
 
@@ -109,25 +108,25 @@ export const CertificateModal = ({ courseName, studentName, date, onClose }) => 
             alignItems: 'center',
             marginTop: '2rem',
             paddingTop: '1.5rem',
-            borderTop: '1px solid var(--border-color)'
+            borderTop: '1px solid var(--color-border)'
           }}>
             <div>
-              <p style={{ fontSize: '0.75rem', color: 'var(--text-dim)', textTransform: 'uppercase' }}>Issued Date</p>
-              <p style={{ fontWeight: 600, fontSize: '0.9rem' }}>{date || new Date().toLocaleDateString()}</p>
+              <p style={{ fontSize: '0.75rem', color: 'var(--color-text-subtle)', textTransform: 'uppercase' }}>Issued Date</p>
+              <p style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--color-text)' }}>{date || new Date().toLocaleDateString()}</p>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--success)', fontSize: '0.85rem', fontWeight: 600 }}>
-              <ShieldCheck size={18} /> Verified Certificate
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-primary)', fontSize: '0.85rem', fontWeight: 700 }}>
+              <ShieldCheck size={18} color="var(--color-accent)" /> Verified Certificate
             </div>
 
             <div>
-              <p style={{ fontSize: '0.75rem', color: 'var(--text-dim)', textTransform: 'uppercase' }}>Verification ID</p>
-              <p style={{ fontWeight: 600, fontSize: '0.85rem', color: '#f59e0b' }}>{certId}</p>
+              <p style={{ fontSize: '0.75rem', color: 'var(--color-text-subtle)', textTransform: 'uppercase' }}>Verification ID</p>
+              <p style={{ fontWeight: 600, fontSize: '0.85rem', color: 'var(--color-primary)' }}>{certId}</p>
             </div>
           </div>
         </div>
 
-        {/* Modal Actions */}
+        {/* Modal Actions: One green primary CTA */}
         <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1.5rem' }}>
           <button onClick={handlePrint} className="btn btn-primary">
             <Download size={18} /> Download / Print Certificate

@@ -39,10 +39,10 @@ export const Home = () => {
 
   const getCategoryIcon = (iconName) => {
     switch (iconName) {
-      case 'Code': return <Code size={24} color="var(--primary)" />;
-      case 'Cpu': return <Cpu size={24} color="var(--secondary)" />;
-      case 'Palette': return <Palette size={24} color="var(--accent)" />;
-      default: return <Briefcase size={24} color="var(--warning)" />;
+      case 'Code': return <Code size={24} color="var(--color-primary)" />;
+      case 'Cpu': return <Cpu size={24} color="var(--color-primary)" />;
+      case 'Palette': return <Palette size={24} color="var(--color-primary)" />;
+      default: return <Briefcase size={24} color="var(--color-primary)" />;
     }
   };
 
@@ -60,9 +60,9 @@ export const Home = () => {
           gap: '8px',
           padding: '6px 16px',
           borderRadius: 'var(--radius-full)',
-          background: 'rgba(99, 102, 241, 0.12)',
-          border: '1px solid rgba(99, 102, 241, 0.3)',
-          color: 'var(--primary)',
+          background: 'var(--color-primary-subtle)',
+          border: '1px solid var(--color-border)',
+          color: 'var(--color-primary)',
           fontSize: '0.85rem',
           fontWeight: 600,
           marginBottom: '1.5rem'
@@ -76,16 +76,14 @@ export const Home = () => {
           lineHeight: 1.15,
           maxWidth: '900px',
           margin: '0 auto 1.5rem',
-          background: 'linear-gradient(180deg, #ffffff 0%, #94a3b8 100%)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent'
+          color: 'var(--color-text)'
         }}>
-          Empowering Learners & Educators with <span style={{ color: 'var(--primary)', WebkitTextFillColor: 'initial' }}>EduSphere</span>
+          Empowering Learners & Educators with <span style={{ color: 'var(--color-primary)' }}>EduSphere</span>
         </h1>
 
         <p style={{
           fontSize: '1.1rem',
-          color: 'var(--text-muted)',
+          color: 'var(--color-text-muted)',
           maxWidth: '680px',
           margin: '0 auto 2.5rem'
         }}>
@@ -116,23 +114,24 @@ export const Home = () => {
             flexDirection: 'column',
             alignItems: 'center',
             gap: '8px',
-            border: '1px solid rgba(6, 182, 212, 0.25)',
-            background: 'linear-gradient(180deg, rgba(6, 182, 212, 0.08) 0%, rgba(17, 24, 39, 0.6) 100%)'
+            border: '1px solid var(--color-border)',
+            background: 'var(--color-surface)',
+            borderRadius: 'var(--radius-sm)'
           }}>
             <div style={{
               width: '42px',
               height: '42px',
-              borderRadius: '10px',
-              background: 'rgba(6, 182, 212, 0.15)',
+              borderRadius: 'var(--radius-sm)',
+              background: 'var(--color-primary-subtle)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               marginBottom: '4px'
             }}>
-              <Clock size={22} color="var(--secondary)" />
+              <Clock size={22} color="var(--color-primary)" />
             </div>
-            <h3 style={{ fontSize: '1.75rem', color: 'var(--secondary)', fontWeight: 700, margin: 0 }}>Automated</h3>
-            <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', margin: 0 }}>Smart Quiz Timer & Auto Grading</p>
+            <h3 style={{ fontSize: '1.75rem', color: 'var(--color-primary)', fontWeight: 700, margin: 0 }}>Automated</h3>
+            <p style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)', margin: 0 }}>Smart Quiz Timer & Auto Grading</p>
           </div>
 
           <div className="glass-panel" style={{ 
@@ -142,23 +141,24 @@ export const Home = () => {
             flexDirection: 'column',
             alignItems: 'center',
             gap: '8px',
-            border: '1px solid rgba(16, 185, 129, 0.25)',
-            background: 'linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, rgba(17, 24, 39, 0.6) 100%)'
+            border: '1px solid var(--color-border)',
+            background: 'var(--color-surface)',
+            borderRadius: 'var(--radius-sm)'
           }}>
             <div style={{
               width: '42px',
               height: '42px',
-              borderRadius: '10px',
-              background: 'rgba(16, 185, 129, 0.15)',
+              borderRadius: 'var(--radius-sm)',
+              background: 'var(--color-accent-subtle)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               marginBottom: '4px'
             }}>
-              <ShieldCheck size={22} color="var(--success)" />
+              <ShieldCheck size={22} color="var(--color-primary)" />
             </div>
-            <h3 style={{ fontSize: '1.75rem', color: 'var(--success)', fontWeight: 700, margin: 0 }}>100% Verified</h3>
-            <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', margin: 0 }}>Instant Downloadable Certificates</p>
+            <h3 style={{ fontSize: '1.75rem', color: 'var(--color-primary)', fontWeight: 700, margin: 0 }}>100% Verified</h3>
+            <p style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)', margin: 0 }}>Instant Downloadable Certificates</p>
           </div>
         </div>
       </section>
@@ -168,8 +168,8 @@ export const Home = () => {
         <section style={{ margin: '4rem 0' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
             <div>
-              <h2 style={{ fontSize: '1.8rem' }}>Browse Categories</h2>
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Choose from top educational domains</p>
+              <h2 style={{ fontSize: '1.8rem', color: 'var(--color-primary)', fontWeight: 700 }}>Browse Categories</h2>
+              <p style={{ color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>Choose from top educational domains</p>
             </div>
           </div>
 
@@ -183,18 +183,21 @@ export const Home = () => {
                 to={`/courses?category=${cat._id}`} 
                 key={cat._id}
                 className="glass-card" 
-                style={{ padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}
+                style={{ padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '1rem', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)' }}
               >
                 <div style={{
                   padding: '12px',
-                  borderRadius: '12px',
-                  background: 'rgba(255, 255, 255, 0.05)'
+                  borderRadius: 'var(--radius-sm)',
+                  background: 'var(--color-primary-subtle)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
                 }}>
                   {getCategoryIcon(cat.icon)}
                 </div>
                 <div>
-                  <h4 style={{ fontSize: '1.05rem' }}>{cat.name}</h4>
-                  <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>{cat.description || 'Explore courses'}</p>
+                  <h4 style={{ fontSize: '1.05rem', color: 'var(--color-primary)', fontWeight: 700 }}>{cat.name}</h4>
+                  <p style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>{cat.description || 'Explore courses'}</p>
                 </div>
               </Link>
             ))}
@@ -206,8 +209,8 @@ export const Home = () => {
       <section style={{ margin: '4rem 0' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
           <div>
-            <h2 style={{ fontSize: '1.8rem' }}>Featured Courses</h2>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Handcrafted learning paths by expert tutors</p>
+            <h2 style={{ fontSize: '1.8rem', color: 'var(--color-primary)', fontWeight: 700 }}>Featured Courses</h2>
+            <p style={{ color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>Handcrafted learning paths by expert tutors</p>
           </div>
           <Link to="/courses" className="btn btn-secondary btn-sm">
             View All Courses <ArrowRight size={16} />

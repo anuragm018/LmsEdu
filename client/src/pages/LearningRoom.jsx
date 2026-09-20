@@ -91,7 +91,7 @@ export const LearningRoom = () => {
   };
 
   if (loading || !course) {
-    return <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-muted)' }}>Loading Learning Classroom...</div>;
+    return <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--color-text-muted)' }}>Loading Learning Classroom...</div>;
   }
 
   const isCompleted = activeLesson && progressInfo.completedLessonIds.includes(activeLesson._id);
@@ -107,13 +107,15 @@ export const LearningRoom = () => {
         justifyContent: 'space-between',
         borderLeft: 'none',
         borderRight: 'none',
-        borderTop: 'none'
+        borderTop: 'none',
+        background: 'var(--color-surface)',
+        borderBottom: '1px solid var(--color-border)'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <Link to="/dashboard/student" className="btn btn-sm btn-secondary">
             <ArrowLeft size={16} /> My Courses
           </Link>
-          <h2 style={{ fontSize: '1.2rem' }}>{course.name}</h2>
+          <h2 style={{ fontSize: '1.2rem', color: 'var(--color-primary)', fontWeight: 700, margin: 0 }}>{course.name}</h2>
         </div>
 
         {/* Progress Bar & Certificate CTA */}
@@ -122,18 +124,18 @@ export const LearningRoom = () => {
             <div style={{
               width: '140px',
               height: '8px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              borderRadius: '4px',
+              background: 'var(--color-border)',
+              borderRadius: 'var(--radius-full)',
               overflow: 'hidden'
             }}>
               <div style={{
                 width: `${progressInfo.percentage}%`,
                 height: '100%',
-                background: 'linear-gradient(90deg, var(--primary), var(--secondary))',
+                background: 'var(--color-accent)',
                 transition: 'width 0.4s ease'
               }} />
             </div>
-            <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--secondary)' }}>
+            <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--color-primary)' }}>
               {progressInfo.percentage}% Complete
             </span>
           </div>
@@ -142,7 +144,6 @@ export const LearningRoom = () => {
             <button 
               onClick={() => setShowCertModal(true)} 
               className="btn btn-sm btn-primary"
-              style={{ background: 'linear-gradient(135deg, #f59e0b, #d97706)' }}
             >
               <Award size={16} /> Claim Certificate
             </button>
@@ -157,7 +158,7 @@ export const LearningRoom = () => {
         minHeight: 'calc(100vh - 120px)'
       }}>
         {/* Left Column: Player & Lesson Content */}
-        <div style={{ padding: '1.5rem', background: '#070a11' }}>
+        <div style={{ padding: '1.5rem', background: 'var(--color-background)' }}>
           {activeLesson ? (
             <div>
               {/* Video Player */}
@@ -165,9 +166,9 @@ export const LearningRoom = () => {
                 position: 'relative',
                 paddingTop: '56.25%', // 16:9 Aspect Ratio
                 background: '#000',
-                borderRadius: 'var(--radius-md)',
+                borderRadius: 'var(--radius-sm)',
                 overflow: 'hidden',
-                boxShadow: 'var(--shadow-main)',
+                boxShadow: 'var(--shadow-md)',
                 marginBottom: '1.5rem'
               }}>
                 <video 
@@ -190,35 +191,35 @@ export const LearningRoom = () => {
 
               {/* Lesson Controls & Description */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                <h2 style={{ fontSize: '1.5rem' }}>{activeLesson.title}</h2>
+                <h2 style={{ fontSize: '1.5rem', color: 'var(--color-primary)', fontWeight: 700 }}>{activeLesson.title}</h2>
                 <button 
                   onClick={() => handleToggleLessonComplete(activeLesson._id)}
                   className={`btn btn-sm ${isCompleted ? 'btn-primary' : 'btn-secondary'}`}
                   style={{
-                    background: isCompleted ? 'rgba(16, 185, 129, 0.2)' : undefined,
-                    color: isCompleted ? 'var(--success)' : undefined,
-                    border: isCompleted ? '1px solid rgba(16, 185, 129, 0.4)' : undefined
+                    background: isCompleted ? 'var(--color-accent-subtle)' : undefined,
+                    color: isCompleted ? 'var(--color-primary)' : undefined,
+                    border: isCompleted ? '1px solid var(--color-accent)' : undefined
                   }}
                 >
-                  <CheckCircle2 size={18} /> {isCompleted ? 'Completed' : 'Mark as Complete'}
+                  <CheckCircle2 size={18} color={isCompleted ? 'var(--color-accent)' : 'currentColor'} /> {isCompleted ? 'Completed' : 'Mark as Complete'}
                 </button>
               </div>
 
-              <div className="glass-panel" style={{ padding: '1.25rem', marginBottom: '1.5rem' }}>
-                <h4 style={{ fontSize: '0.95rem', marginBottom: '8px', color: 'var(--secondary)' }}>Lesson Details</h4>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+              <div className="glass-panel" style={{ padding: '1.25rem', marginBottom: '1.5rem', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)' }}>
+                <h4 style={{ fontSize: '0.95rem', marginBottom: '8px', color: 'var(--color-primary)', fontWeight: 700 }}>Lesson Details</h4>
+                <p style={{ color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>
                   {activeLesson.content || 'Watch the video lecture attentively and complete the associated quizzes.'}
                 </p>
               </div>
 
               {/* Document Resource Download */}
               {activeLesson.document_url && (
-                <div className="glass-panel" style={{ padding: '1rem 1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div className="glass-panel" style={{ padding: '1rem 1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <FileText size={20} color="var(--primary)" />
+                    <FileText size={20} color="var(--color-primary)" />
                     <div>
-                      <h4 style={{ fontSize: '0.9rem' }}>Downloadable Study Resource (PDF / Document)</h4>
-                      <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>Included with this lesson</span>
+                      <h4 style={{ fontSize: '0.9rem', color: 'var(--color-text)', margin: 0, fontWeight: 600 }}>Downloadable Study Resource (PDF / Document)</h4>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>Included with this lesson</span>
                     </div>
                   </div>
                   <a href={activeLesson.document_url} target="_blank" rel="noreferrer" className="btn btn-secondary btn-sm">
@@ -228,7 +229,7 @@ export const LearningRoom = () => {
               )}
             </div>
           ) : (
-            <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-muted)' }}>
+            <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--color-text-muted)' }}>
               Select a lesson from the syllabus sidebar to begin.
             </div>
           )}
@@ -236,20 +237,20 @@ export const LearningRoom = () => {
 
         {/* Right Column: Syllabus Sidebar */}
         <div style={{
-          background: 'var(--bg-glass)',
-          borderLeft: '1px solid var(--border-color)',
+          background: 'var(--color-surface)',
+          borderLeft: '1px solid var(--color-border)',
           padding: '1.25rem',
           overflowY: 'auto'
         }}>
-          <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <BookOpen size={18} color="var(--primary)" /> Course Curriculum
+          <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-primary)', fontWeight: 700 }}>
+            <BookOpen size={18} color="var(--color-primary)" /> Course Curriculum
           </h3>
 
           {/* Section & Lesson Accordion */}
           {syllabus.map((sec) => (
             <div key={sec._id} style={{ marginBottom: '1.25rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px', paddingBottom: '4px', borderBottom: '1px solid var(--border-color)' }}>
-                <span style={{ fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-dim)', fontWeight: 'bold' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px', paddingBottom: '4px', borderBottom: '1px solid var(--color-border)' }}>
+                <span style={{ fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--color-text-muted)', fontWeight: 'bold' }}>
                   {sec.name}
                 </span>
                 <div style={{ display: 'flex', gap: '3px', alignItems: 'center' }} title="Rate this Section">
@@ -280,9 +281,10 @@ export const LearningRoom = () => {
                         textAlign: 'left',
                         padding: '10px 12px',
                         borderRadius: 'var(--radius-sm)',
-                        background: isActive ? 'rgba(99, 102, 241, 0.15)' : 'rgba(255, 255, 255, 0.02)',
-                        border: isActive ? '1px solid var(--primary-glow)' : '1px solid transparent',
-                        color: isActive ? '#ffffff' : 'var(--text-muted)',
+                        background: isActive ? 'var(--color-primary-subtle)' : 'transparent',
+                        border: isActive ? '1px solid var(--color-primary)' : '1px solid var(--color-border)',
+                        color: isActive ? 'var(--color-primary)' : 'var(--color-text)',
+                        fontWeight: isActive ? 600 : 400,
                         cursor: 'pointer',
                         display: 'flex',
                         alignItems: 'center',
@@ -292,15 +294,15 @@ export const LearningRoom = () => {
                     >
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflow: 'hidden' }}>
                         {done ? (
-                          <CheckCircle2 size={16} color="var(--success)" />
+                          <CheckCircle2 size={16} color="var(--color-accent)" />
                         ) : (
-                          <PlayCircle size={16} color={isActive ? 'var(--primary)' : 'var(--text-dim)'} />
+                          <PlayCircle size={16} color={isActive ? 'var(--color-primary)' : 'var(--color-text-muted)'} />
                         )}
                         <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                           {les.title}
                         </span>
                       </div>
-                      <span style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>{les.duration}</span>
+                      <span style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)' }}>{les.duration}</span>
                     </button>
                   );
                 })}
@@ -310,9 +312,9 @@ export const LearningRoom = () => {
 
           {/* Quizzes Section */}
           {quizzes.length > 0 && (
-            <div style={{ marginTop: '2rem', paddingTop: '1rem', borderTop: '1px solid var(--border-color)' }}>
-              <h4 style={{ fontSize: '0.95rem', marginBottom: '10px', color: '#f59e0b', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <HelpCircle size={18} /> Course Quizzes & Assessments
+            <div style={{ marginTop: '2rem', paddingTop: '1rem', borderTop: '1px solid var(--color-border)' }}>
+              <h4 style={{ fontSize: '0.95rem', marginBottom: '10px', color: 'var(--color-primary)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <HelpCircle size={18} color="var(--color-primary)" /> Course Quizzes & Assessments
               </h4>
               {quizzes.map((q) => (
                 <Link 
@@ -344,7 +346,7 @@ export const LearningRoom = () => {
         style={{
           position: 'fixed',
           bottom: '24px',
-          right: '175px',
+          right: '160px',
           zIndex: 1500,
           display: 'flex',
           alignItems: 'center'
@@ -355,34 +357,34 @@ export const LearningRoom = () => {
           onClick={() => setShowDoubtModal(true)}
           className="floating-doubt-btn"
           style={{
-            height: '56px',
-            padding: '0 20px',
-            borderRadius: '28px',
-            background: 'linear-gradient(135deg, #4f46e5, #06b6d4)',
-            color: '#ffffff',
-            border: '1px solid rgba(255, 255, 255, 0.25)',
-            boxShadow: '0 8px 24px rgba(79, 70, 229, 0.45)',
+            height: '48px',
+            padding: '0 18px',
+            borderRadius: 'var(--radius-sm)',
+            background: 'var(--color-surface)',
+            color: 'var(--color-primary)',
+            border: '1.5px solid var(--color-primary)',
+            boxShadow: 'var(--shadow-md)',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
-            gap: '10px',
+            gap: '8px',
             fontWeight: 700,
-            fontSize: '0.92rem',
-            letterSpacing: '0.01em',
-            outline: 'none'
+            fontSize: '0.9rem',
+            outline: 'none',
+            transition: 'all 0.2s ease'
           }}
           title="Ask Course Tutor Doubts with text, images, or documents"
         >
           <div style={{
-            width: '32px',
-            height: '32px',
-            borderRadius: '50%',
-            background: 'rgba(255, 255, 255, 0.2)',
+            width: '28px',
+            height: '28px',
+            borderRadius: 'var(--radius-sm)',
+            background: 'var(--color-primary-subtle)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center'
           }}>
-            <MessageSquare size={18} color="#ffffff" />
+            <MessageSquare size={16} color="var(--color-primary)" />
           </div>
           <span>Ask Tutor</span>
         </button>

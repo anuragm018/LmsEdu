@@ -809,22 +809,22 @@ export const InstructorDashboard = () => {
         alignItems: 'center',
         flexWrap: 'wrap',
         gap: '1.25rem',
-        background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.75), rgba(15, 23, 42, 0.85))',
-        borderLeft: '4px solid var(--primary)',
-        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.35)'
+        background: 'var(--color-surface)',
+        borderLeft: '4px solid var(--color-primary)',
+        boxShadow: 'var(--shadow-sm)'
       }}>
         <div>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '4px 10px', borderRadius: '12px', background: 'rgba(99, 102, 241, 0.15)', color: 'var(--primary-light, #a5b4fc)', fontSize: '0.75rem', fontWeight: 600, marginBottom: '6px' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '4px 10px', borderRadius: 'var(--radius-full)', background: 'var(--color-primary-subtle)', color: 'var(--color-primary)', fontSize: '0.75rem', fontWeight: 600, marginBottom: '6px', border: '1px solid var(--color-border)' }}>
             <Sparkles size={13} /> Tutor Studio &amp; Creator Hub
           </div>
-          <h1 style={{ fontSize: '1.85rem', fontWeight: 800, letterSpacing: '-0.02em', background: 'linear-gradient(135deg, #ffffff, #cbd5e1)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+          <h1 style={{ fontSize: '1.85rem', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--color-primary)', margin: 0 }}>
             Tutor Course Studio
           </h1>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', marginTop: '2px' }}>
+          <p style={{ color: 'var(--color-text-muted)', fontSize: '0.88rem', marginTop: '2px', marginBottom: 0 }}>
             Build, publish, and manage courses, video lessons, interactive quizzes, and track earnings
           </p>
         </div>
-        <button onClick={() => setShowCreateCourse(true)} className="btn btn-primary" style={{ padding: '12px 22px', borderRadius: '10px', fontWeight: 600, boxShadow: '0 4px 18px rgba(99, 102, 241, 0.4)' }}>
+        <button onClick={() => setShowCreateCourse(true)} className="btn btn-primary" style={{ padding: '12px 22px', borderRadius: 'var(--radius-sm)', fontWeight: 600 }}>
           <PlusCircle size={18} /> Create New Course
         </button>
       </div>
@@ -837,84 +837,81 @@ export const InstructorDashboard = () => {
         marginBottom: '2rem'
       }}>
         {/* Total Earnings Card */}
-        <div className="glass-panel studio-metric-card" style={{ padding: '1.4rem', display: 'flex', alignItems: 'center', gap: '1.2rem', position: 'relative', overflow: 'hidden' }}>
+        <div className="glass-panel studio-metric-card" style={{ padding: '1.4rem', display: 'flex', alignItems: 'center', gap: '1.2rem', position: 'relative', overflow: 'hidden', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)' }}>
           <div style={{
             width: '52px',
             height: '52px',
-            borderRadius: '14px',
-            background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(5, 150, 105, 0.15))',
-            border: '1px solid rgba(16, 185, 129, 0.4)',
-            color: 'var(--success)',
+            borderRadius: 'var(--radius-sm)',
+            background: 'var(--color-accent-subtle)',
+            border: '1px solid var(--color-border)',
+            color: 'var(--color-primary)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            flexShrink: 0,
-            boxShadow: '0 0 16px rgba(16, 185, 129, 0.25)'
+            flexShrink: 0
           }}>
             <DollarSign size={26} />
           </div>
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>Total Revenue</div>
-            <h3 style={{ fontSize: '1.7rem', fontWeight: 800, color: '#ffffff', marginTop: '2px', lineHeight: 1.1 }}>
+            <div style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>Total Revenue</div>
+            <h3 style={{ fontSize: '1.7rem', fontWeight: 800, color: 'var(--color-primary)', marginTop: '2px', lineHeight: 1.1 }}>
               ${earningsData.totalEarnings.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </h3>
-            <span style={{ fontSize: '0.72rem', color: 'var(--success)', marginTop: '4px', display: 'inline-block' }}>
+            <span style={{ fontSize: '0.72rem', color: 'var(--color-primary)', marginTop: '4px', display: 'inline-block', fontWeight: 600 }}>
               ● Lifetime Earnings
             </span>
           </div>
         </div>
 
         {/* Paid Student Enrollments */}
-        <div className="glass-panel studio-metric-card" style={{ padding: '1.4rem', display: 'flex', alignItems: 'center', gap: '1.2rem', position: 'relative', overflow: 'hidden' }}>
+        <div className="glass-panel studio-metric-card" style={{ padding: '1.4rem', display: 'flex', alignItems: 'center', gap: '1.2rem', position: 'relative', overflow: 'hidden', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)' }}>
           <div style={{
             width: '52px',
             height: '52px',
-            borderRadius: '14px',
-            background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.25), rgba(8, 145, 178, 0.15))',
-            border: '1px solid rgba(6, 182, 212, 0.4)',
-            color: 'var(--secondary)',
+            borderRadius: 'var(--radius-sm)',
+            background: 'var(--color-primary-subtle)',
+            border: '1px solid var(--color-border)',
+            color: 'var(--color-primary)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            flexShrink: 0,
-            boxShadow: '0 0 16px rgba(6, 182, 212, 0.25)'
+            flexShrink: 0
           }}>
             <Users size={26} />
           </div>
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>Paid Students</div>
-            <h3 style={{ fontSize: '1.7rem', fontWeight: 800, color: '#ffffff', marginTop: '2px', lineHeight: 1.1 }}>
+            <div style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>Paid Students</div>
+            <h3 style={{ fontSize: '1.7rem', fontWeight: 800, color: 'var(--color-primary)', marginTop: '2px', lineHeight: 1.1 }}>
               {earningsData.totalSales}
             </h3>
-            <span style={{ fontSize: '0.72rem', color: 'var(--secondary)', marginTop: '4px', display: 'inline-block' }}>
+            <span style={{ fontSize: '0.72rem', color: 'var(--color-primary)', marginTop: '4px', display: 'inline-block', fontWeight: 600 }}>
               ● Enrolled Purchases
             </span>
           </div>
         </div>
 
         {/* Total Courses */}
-        <div className="glass-panel studio-metric-card" style={{ padding: '1.4rem', display: 'flex', alignItems: 'center', gap: '1.2rem', position: 'relative', overflow: 'hidden' }}>
+        <div className="glass-panel studio-metric-card" style={{ padding: '1.4rem', display: 'flex', alignItems: 'center', gap: '1.2rem', position: 'relative', overflow: 'hidden', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)' }}>
           <div style={{
             width: '52px',
             height: '52px',
-            borderRadius: '14px',
-            background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(79, 70, 229, 0.15))',
-            border: '1px solid rgba(99, 102, 241, 0.4)',
-            color: 'var(--primary)',
+            borderRadius: 'var(--radius-sm)',
+            background: 'var(--color-primary-subtle)',
+            border: '1px solid var(--color-border)',
+            color: 'var(--color-primary)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            flexShrink: 0,
-            boxShadow: '0 0 16px rgba(99, 102, 241, 0.25)'
+            flexShrink: 0
           }}>
             <BookOpen size={26} />
           </div>
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>Active Courses</div>
-            <h3 style={{ fontSize: '1.7rem', fontWeight: 800, color: '#ffffff', marginTop: '2px', lineHeight: 1.1 }}>
+            <div style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>Active Courses</div>
+            <h3 style={{ fontSize: '1.7rem', fontWeight: 800, color: 'var(--color-primary)', marginTop: '2px', lineHeight: 1.1 }}>
               {courses.length}
             </h3>
-            <span style={{ fontSize: '0.72rem', color: 'var(--primary-light, #a5b4fc)', marginTop: '4px', display: 'inline-block' }}>
+            <span style={{ fontSize: '0.72rem', color: 'var(--color-primary)', marginTop: '4px', display: 'inline-block', fontWeight: 600 }}>
               ● Published in Catalog
             </span>
           </div>
@@ -930,41 +927,41 @@ export const InstructorDashboard = () => {
             alignItems: 'center', 
             gap: '1.2rem', 
             position: 'relative', 
-            overflow: 'hidden',
+            overflow: 'hidden', 
             cursor: 'pointer',
-            border: tutorThreads.reduce((sum, t) => sum + (t.unreadCount || 0), 0) > 0 ? '1px solid rgba(239, 68, 68, 0.45)' : undefined,
-            background: tutorThreads.reduce((sum, t) => sum + (t.unreadCount || 0), 0) > 0 ? 'linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(30, 41, 59, 0.7))' : undefined
+            borderRadius: 'var(--radius-sm)',
+            border: tutorThreads.reduce((sum, t) => sum + (t.unreadCount || 0), 0) > 0 ? '1px solid var(--color-danger)' : '1px solid var(--color-border)',
+            background: tutorThreads.reduce((sum, t) => sum + (t.unreadCount || 0), 0) > 0 ? 'rgba(220, 38, 38, 0.05)' : 'var(--color-surface)'
           }}
           title="Click to review student doubts"
         >
           <div style={{
             width: '52px',
             height: '52px',
-            borderRadius: '14px',
+            borderRadius: 'var(--radius-sm)',
             background: tutorThreads.reduce((sum, t) => sum + (t.unreadCount || 0), 0) > 0
-              ? 'linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(220, 38, 38, 0.15))'
-              : 'linear-gradient(135deg, rgba(147, 51, 234, 0.25), rgba(126, 34, 206, 0.15))',
+              ? 'rgba(220, 38, 38, 0.15)'
+              : 'var(--color-primary-subtle)',
             border: tutorThreads.reduce((sum, t) => sum + (t.unreadCount || 0), 0) > 0
-              ? '1px solid rgba(239, 68, 68, 0.5)'
-              : '1px solid rgba(147, 51, 234, 0.4)',
-            color: tutorThreads.reduce((sum, t) => sum + (t.unreadCount || 0), 0) > 0 ? 'var(--danger)' : '#c084fc',
+              ? '1px solid var(--color-danger)'
+              : '1px solid var(--color-border)',
+            color: tutorThreads.reduce((sum, t) => sum + (t.unreadCount || 0), 0) > 0 ? 'var(--color-danger)' : 'var(--color-primary)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            flexShrink: 0,
-            boxShadow: '0 0 16px rgba(147, 51, 234, 0.25)'
+            flexShrink: 0
           }}>
             <MessageSquare size={26} />
           </div>
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>Student Doubts</div>
-            <h3 style={{ fontSize: '1.7rem', fontWeight: 800, color: '#ffffff', marginTop: '2px', lineHeight: 1.1 }}>
+            <div style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>Student Doubts</div>
+            <h3 style={{ fontSize: '1.7rem', fontWeight: 800, color: 'var(--color-text)', marginTop: '2px', lineHeight: 1.1 }}>
               {tutorThreads.reduce((sum, t) => sum + (t.unreadCount || 0), 0)}
-              <span style={{ fontSize: '0.82rem', fontWeight: 500, color: 'var(--text-muted)', marginLeft: '6px' }}>
+              <span style={{ fontSize: '0.82rem', fontWeight: 500, color: 'var(--color-text-muted)', marginLeft: '6px' }}>
                 unread ({tutorThreads.length} total)
               </span>
             </h3>
-            <span style={{ fontSize: '0.72rem', color: tutorThreads.reduce((sum, t) => sum + (t.unreadCount || 0), 0) > 0 ? 'var(--danger)' : 'var(--text-dim)', marginTop: '4px', display: 'inline-block', fontWeight: 600 }}>
+            <span style={{ fontSize: '0.72rem', color: tutorThreads.reduce((sum, t) => sum + (t.unreadCount || 0), 0) > 0 ? 'var(--color-danger)' : 'var(--color-text-muted)', marginTop: '4px', display: 'inline-block', fontWeight: 600 }}>
               {tutorThreads.reduce((sum, t) => sum + (t.unreadCount || 0), 0) > 0 ? '● Needs Tutor Attention' : '● All Doubts Addressed'}
             </span>
           </div>
@@ -976,7 +973,7 @@ export const InstructorDashboard = () => {
         display: 'flex',
         gap: '10px',
         marginBottom: '1.75rem',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+        borderBottom: '1px solid var(--color-border)',
         paddingBottom: '0.75rem',
         flexWrap: 'wrap'
       }}>
@@ -984,7 +981,7 @@ export const InstructorDashboard = () => {
           type="button"
           onClick={() => setActiveStudioTab('curriculum')}
           className={`btn ${activeStudioTab === 'curriculum' ? 'btn-primary' : 'btn-secondary'}`}
-          style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '9px 18px', borderRadius: '10px' }}
+          style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '9px 18px', borderRadius: 'var(--radius-sm)' }}
         >
           <BookOpen size={17} /> Course Curriculum &amp; Lessons
         </button>
@@ -997,7 +994,7 @@ export const InstructorDashboard = () => {
             else if (courses.length > 0) fetchCourseAnalytics(courses[0]._id);
           }}
           className={`btn ${activeStudioTab === 'analytics' ? 'btn-primary' : 'btn-secondary'}`}
-          style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '9px 18px', borderRadius: '10px' }}
+          style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '9px 18px', borderRadius: 'var(--radius-sm)' }}
         >
           <BarChart3 size={17} /> Student Analytics &amp; Progress
         </button>
@@ -1009,7 +1006,7 @@ export const InstructorDashboard = () => {
             fetchReviews();
           }}
           className={`btn ${activeStudioTab === 'reviews' ? 'btn-primary' : 'btn-secondary'}`}
-          style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '9px 18px', borderRadius: '10px' }}
+          style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '9px 18px', borderRadius: 'var(--radius-sm)' }}
         >
           <Star size={17} /> Reviews &amp; Feedback
         </button>
@@ -1024,7 +1021,7 @@ export const InstructorDashboard = () => {
             }
           }}
           className={`btn ${activeStudioTab === 'announcements' ? 'btn-primary' : 'btn-secondary'}`}
-          style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '9px 18px', borderRadius: '10px' }}
+          style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '9px 18px', borderRadius: 'var(--radius-sm)' }}
         >
           <Megaphone size={17} /> Announcements &amp; Broadcasts
         </button>
@@ -1041,7 +1038,7 @@ export const InstructorDashboard = () => {
             alignItems: 'center',
             gap: '8px',
             padding: '9px 18px',
-            borderRadius: '10px',
+            borderRadius: 'var(--radius-sm)',
             position: 'relative'
           }}
         >
@@ -1053,7 +1050,7 @@ export const InstructorDashboard = () => {
               fontSize: '0.72rem',
               fontWeight: 800,
               padding: '2px 8px',
-              borderRadius: '10px',
+              borderRadius: 'var(--radius-full)',
               marginLeft: '4px'
             }}>
               {tutorThreads.reduce((sum, t) => sum + (t.unreadCount || 0), 0)} new
@@ -1065,7 +1062,7 @@ export const InstructorDashboard = () => {
           type="button"
           onClick={() => setActiveStudioTab('revenue')}
           className={`btn ${activeStudioTab === 'revenue' ? 'btn-primary' : 'btn-secondary'}`}
-          style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '9px 18px', borderRadius: '10px' }}
+          style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '9px 18px', borderRadius: 'var(--radius-sm)' }}
         >
           <CreditCard size={17} /> Earnings &amp; Purchases History
         </button>
@@ -1077,7 +1074,7 @@ export const InstructorDashboard = () => {
           {/* Left Column: Course Selector List */}
           <div className="glass-panel" style={{ padding: '1.25rem', height: 'fit-content' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-            <h3 style={{ fontSize: '1.05rem', color: 'var(--secondary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <h3 style={{ fontSize: '1.05rem', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
               <BookOpen size={18} /> My Courses
             </h3>
             <span className="badge badge-free" style={{ fontSize: '0.72rem', padding: '2px 8px' }}>
@@ -1097,32 +1094,32 @@ export const InstructorDashboard = () => {
                   style={{
                     textAlign: 'left',
                     padding: '10px 12px',
-                    borderRadius: '10px',
-                    background: isSelected ? 'linear-gradient(135deg, rgba(99, 102, 241, 0.22), rgba(6, 182, 212, 0.12))' : 'rgba(255,255,255,0.03)',
-                    border: isSelected ? '1.5px solid var(--primary)' : '1px solid rgba(255,255,255,0.06)',
-                    borderLeft: isSelected ? '4px solid var(--primary)' : '1px solid rgba(255,255,255,0.06)',
-                    color: isSelected ? '#ffffff' : 'var(--text-muted)',
+                    borderRadius: 'var(--radius-sm)',
+                    background: isSelected ? 'var(--color-primary-subtle)' : 'var(--color-surface)',
+                    border: isSelected ? '1.5px solid var(--color-primary)' : '1px solid var(--color-border)',
+                    borderLeft: isSelected ? '4px solid var(--color-primary)' : '1px solid var(--color-border)',
+                    color: isSelected ? 'var(--color-primary)' : 'var(--color-text)',
                     cursor: 'pointer',
                     fontSize: '0.88rem',
                     display: 'flex',
                     alignItems: 'center',
                     gap: '10px',
-                    boxShadow: isSelected ? '0 0 14px rgba(99, 102, 241, 0.3)' : 'none'
+                    boxShadow: isSelected ? '0 1px 3px rgba(0, 0, 0, 0.06)' : 'none'
                   }}
                 >
                   <img 
                     src={c.thumbnail || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=100'} 
                     alt={c.name}
-                    style={{ width: '42px', height: '42px', borderRadius: '8px', objectFit: 'cover', flexShrink: 0, border: '1px solid rgba(255,255,255,0.1)' }}
+                    style={{ width: '42px', height: '42px', borderRadius: 'var(--radius-sm)', objectFit: 'cover', flexShrink: 0, border: '1px solid var(--color-border)' }}
                   />
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontWeight: 600, color: isSelected ? '#fff' : 'var(--text-main)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    <div style={{ fontWeight: 600, color: isSelected ? 'var(--color-primary)' : 'var(--color-text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                       {c.name}
                     </div>
-                    <div style={{ fontSize: '0.74rem', color: 'var(--text-dim)', marginTop: '2px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', marginTop: '2px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <span>{c.type === 'free' ? 'FREE' : `$${c.price}`} • {c.level}</span>
                       {cBreakdown && cBreakdown.earnings > 0 && (
-                        <span style={{ color: 'var(--success)', fontWeight: 700, fontSize: '0.72rem', background: 'rgba(16,185,129,0.15)', padding: '1px 6px', borderRadius: '4px' }}>
+                        <span style={{ color: 'var(--color-primary)', fontWeight: 700, fontSize: '0.72rem', background: 'var(--color-primary-subtle)', padding: '1px 6px', borderRadius: '4px' }}>
                           +${cBreakdown.earnings}
                         </span>
                       )}
@@ -1140,40 +1137,41 @@ export const InstructorDashboard = () => {
             <div className="glass-panel" style={{
               padding: '1.5rem',
               marginBottom: '1.5rem',
-              background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.7))',
-              border: '1px solid rgba(255,255,255,0.08)'
+              background: 'var(--color-surface)',
+              border: '1px solid var(--color-border)',
+              borderRadius: 'var(--radius-sm)'
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
                 <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
                   <img 
                     src={selectedCourse.thumbnail || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=200'} 
                     alt={selectedCourse.name} 
-                    style={{ width: '68px', height: '68px', borderRadius: '12px', objectFit: 'cover', border: '2px solid rgba(255,255,255,0.1)', flexShrink: 0 }}
+                    style={{ width: '68px', height: '68px', borderRadius: 'var(--radius-sm)', objectFit: 'cover', border: '1px solid var(--color-border)', flexShrink: 0 }}
                   />
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                      <h2 style={{ fontSize: '1.35rem', fontWeight: 700 }}>{selectedCourse.name}</h2>
+                      <h2 style={{ fontSize: '1.35rem', fontWeight: 700, color: 'var(--color-primary)' }}>{selectedCourse.name}</h2>
                       <span className={`badge ${selectedCourse.type === 'free' ? 'badge-free' : 'badge-paid'}`} style={{ fontSize: '0.72rem' }}>
                         {selectedCourse.type === 'free' ? 'FREE COURSE' : `$${selectedCourse.price}`}
                       </span>
                       {selectedCourseBreakdown && (
-                        <span className="badge badge-paid" style={{ background: 'rgba(16, 185, 129, 0.2)', color: 'var(--success)', border: '1px solid rgba(16, 185, 129, 0.4)', fontSize: '0.72rem' }}>
+                        <span className="badge badge-paid" style={{ background: 'var(--color-primary-subtle)', color: 'var(--color-primary)', border: '1px solid var(--color-border)', fontSize: '0.72rem' }}>
                           💰 Revenue: ${selectedCourseBreakdown.earnings.toFixed(2)} ({selectedCourseBreakdown.salesCount} {selectedCourseBreakdown.salesCount === 1 ? 'sale' : 'sales'})
                         </span>
                       )}
                     </div>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.86rem', marginTop: '4px', maxWidth: '600px' }}>{selectedCourse.desc}</p>
+                    <p style={{ color: 'var(--color-text-muted)', fontSize: '0.86rem', marginTop: '4px', maxWidth: '600px' }}>{selectedCourse.desc}</p>
                   </div>
                 </div>
-                <button onClick={() => setShowCreateQuiz(true)} className="btn btn-secondary btn-sm" style={{ borderRadius: '8px' }}>
+                <button onClick={() => setShowCreateQuiz(true)} className="btn btn-secondary btn-sm" style={{ borderRadius: 'var(--radius-sm)' }}>
                   <HelpCircle size={16} /> Add Course Quiz
                 </button>
               </div>
             </div>
 
             {/* Add Section Form */}
-            <div className="glass-panel" style={{ padding: '1.25rem 1.5rem', marginBottom: '1.5rem', border: '1px solid rgba(255,255,255,0.06)' }}>
-              <h4 style={{ fontSize: '0.95rem', marginBottom: '0.75rem', color: 'var(--secondary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <div className="glass-panel" style={{ padding: '1.25rem 1.5rem', marginBottom: '1.5rem', border: '1px solid var(--color-border)', background: 'var(--color-surface)', borderRadius: 'var(--radius-sm)' }}>
+              <h4 style={{ fontSize: '0.95rem', marginBottom: '0.75rem', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <Layers size={16} /> Add Syllabus Section / Chapter
               </h4>
               <form onSubmit={handleCreateSection} style={{ display: 'flex', gap: '10px' }}>
@@ -1183,10 +1181,10 @@ export const InstructorDashboard = () => {
                   placeholder="e.g. 1. Introduction & Environment Setup"
                   value={newSectionName}
                   onChange={(e) => setNewSectionName(e.target.value)}
-                  style={{ borderRadius: '8px' }}
+                  style={{ borderRadius: 'var(--radius-sm)' }}
                   required
                 />
-                <button type="submit" className="btn btn-primary btn-sm" style={{ whiteSpace: 'nowrap', padding: '8px 18px', borderRadius: '8px' }}>
+                <button type="submit" className="btn btn-primary btn-sm" style={{ whiteSpace: 'nowrap', padding: '8px 18px', borderRadius: 'var(--radius-sm)' }}>
                   + Add Section
                 </button>
               </form>
@@ -1194,8 +1192,8 @@ export const InstructorDashboard = () => {
 
             {/* Add Lesson Form */}
             {syllabus.length > 0 && (
-              <div className="glass-panel" style={{ padding: '1.25rem 1.5rem', marginBottom: '1.5rem', border: '1px solid rgba(255,255,255,0.06)', position: 'relative', zIndex: 30 }}>
-                <h4 style={{ fontSize: '0.95rem', marginBottom: '1rem', color: 'var(--secondary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <div className="glass-panel" style={{ padding: '1.25rem 1.5rem', marginBottom: '1.5rem', border: '1px solid var(--color-border)', background: 'var(--color-surface)', borderRadius: 'var(--radius-sm)', position: 'relative', zIndex: 30 }}>
+                <h4 style={{ fontSize: '0.95rem', marginBottom: '1rem', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
                   <Video size={16} /> Add Video Lecture &amp; PDF Notes to Syllabus
                 </h4>
                 <form onSubmit={handleCreateLesson}>
@@ -1207,18 +1205,18 @@ export const InstructorDashboard = () => {
                       <button
                         type="button"
                         className={`category-dropdown-trigger ${isTargetSectionOpen ? 'open' : ''}`}
-                        style={{ width: '100%', minHeight: '42px', borderRadius: '8px', padding: '9px 12px' }}
+                        style={{ width: '100%', minHeight: '42px', borderRadius: 'var(--radius-sm)', padding: '9px 12px' }}
                         onClick={() => setIsTargetSectionOpen(!isTargetSectionOpen)}
                         aria-haspopup="listbox"
                         aria-expanded={isTargetSectionOpen}
                       >
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflow: 'hidden' }}>
-                          <Layers size={15} color="var(--primary)" style={{ flexShrink: 0 }} />
+                          <Layers size={15} color="var(--color-primary)" style={{ flexShrink: 0 }} />
                           <span style={{ 
                             whiteSpace: 'nowrap', 
                             overflow: 'hidden', 
                             textOverflow: 'ellipsis',
-                            color: newLesson.section_id ? '#ffffff' : 'var(--text-dim)' 
+                            color: newLesson.section_id ? 'var(--color-text)' : 'var(--color-text-muted)' 
                           }}>
                             {(() => {
                               if (!newLesson.section_id) return 'Select Target Chapter...';
@@ -1232,7 +1230,7 @@ export const InstructorDashboard = () => {
                           size={16} 
                           style={{ 
                             flexShrink: 0, 
-                            color: 'var(--text-muted)',
+                            color: 'var(--color-text-muted)',
                             transform: isTargetSectionOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                             transition: 'transform 0.25s cubic-bezier(0.4, 0, 0.2, 1)'
                           }} 
@@ -1253,7 +1251,7 @@ export const InstructorDashboard = () => {
                             fontWeight: 600,
                             textTransform: 'uppercase',
                             letterSpacing: '0.05em',
-                            color: 'var(--text-dim)'
+                            color: 'var(--color-text-muted)'
                           }}>
                             Select Target Chapter
                           </div>
@@ -1279,8 +1277,8 @@ export const InstructorDashboard = () => {
                                       fontWeight: 700, 
                                       padding: '2px 6px', 
                                       borderRadius: '4px',
-                                      background: isSelected ? 'rgba(99, 102, 241, 0.3)' : 'rgba(255, 255, 255, 0.08)',
-                                      color: isSelected ? 'var(--primary)' : 'var(--text-dim)',
+                                      background: isSelected ? 'var(--color-primary-subtle)' : 'var(--color-background)',
+                                      color: isSelected ? 'var(--color-primary)' : 'var(--color-text-muted)',
                                       flexShrink: 0 
                                     }}>
                                       Chapter {idx + 1}
@@ -1289,7 +1287,7 @@ export const InstructorDashboard = () => {
                                       {s.name}
                                     </span>
                                   </div>
-                                  {isSelected && <Check size={14} color="var(--primary)" style={{ flexShrink: 0 }} />}
+                                  {isSelected && <Check size={14} color="var(--color-primary)" style={{ flexShrink: 0 }} />}
                                 </button>
                               );
                             })}
@@ -1306,7 +1304,7 @@ export const InstructorDashboard = () => {
                         placeholder="e.g. Understanding MVC Architecture"
                         value={newLesson.title}
                         onChange={(e) => setNewLesson({ ...newLesson, title: e.target.value })}
-                        style={{ borderRadius: '8px' }}
+                        style={{ borderRadius: 'var(--radius-sm)' }}
                         required
                       />
                     </div>
@@ -1315,23 +1313,23 @@ export const InstructorDashboard = () => {
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
                     <div className="form-group" style={{ marginBottom: 0 }}>
                       <label style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <Video size={15} color="var(--primary)" /> Upload Local MP4 Video File
+                        <Video size={15} color="var(--color-primary)" /> Upload Local MP4 Video File
                       </label>
                       <input 
                         type="file" 
                         accept="video/mp4,video/mkv,video/webm"
                         className="form-control"
                         onChange={handleVideoUpload}
-                        style={{ borderRadius: '8px' }}
+                        style={{ borderRadius: 'var(--radius-sm)' }}
                         required={!newLesson.video_url}
                       />
                       {uploadingVideo && (
-                        <div style={{ fontSize: '0.8rem', color: 'var(--secondary)', marginTop: '4px' }}>
+                        <div style={{ fontSize: '0.8rem', color: 'var(--color-primary)', marginTop: '4px' }}>
                           ⚡ Uploading local MP4 video file... Please wait.
                         </div>
                       )}
                       {newLesson.video_url && !uploadingVideo && (
-                        <div style={{ fontSize: '0.8rem', color: 'var(--success)', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                        <div style={{ fontSize: '0.8rem', color: 'var(--color-primary)', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
                           <CheckCircle size={14} /> Local MP4 Uploaded: {videoFileName || 'video.mp4'}
                         </div>
                       )}
@@ -1339,22 +1337,22 @@ export const InstructorDashboard = () => {
 
                     <div className="form-group" style={{ marginBottom: 0 }}>
                       <label style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <FileText size={15} color="var(--secondary)" /> Upload PDF Study Notes (Optional)
+                        <FileText size={15} color="var(--color-primary)" /> Upload PDF Study Notes (Optional)
                       </label>
                       <input 
                         type="file" 
                         accept=".pdf,.doc,.docx"
                         className="form-control"
                         onChange={handleDocUpload}
-                        style={{ borderRadius: '8px' }}
+                        style={{ borderRadius: 'var(--radius-sm)' }}
                       />
                       {uploadingDoc && (
-                        <div style={{ fontSize: '0.8rem', color: 'var(--secondary)', marginTop: '4px' }}>
+                        <div style={{ fontSize: '0.8rem', color: 'var(--color-primary)', marginTop: '4px' }}>
                           ⚡ Uploading resource file...
                         </div>
                       )}
                       {newLesson.document_url && !uploadingDoc && (
-                        <div style={{ fontSize: '0.8rem', color: 'var(--success)', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                        <div style={{ fontSize: '0.8rem', color: 'var(--color-primary)', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
                           <CheckCircle size={14} /> Document Uploaded: {docFileName || 'notes.pdf'}
                         </div>
                       )}
@@ -1364,7 +1362,7 @@ export const InstructorDashboard = () => {
                   <div className="form-group" style={{ marginBottom: '1rem' }}>
                     <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                       <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Clock size={14} /> Lesson Duration</span>
-                      <span style={{ fontSize: '0.72rem', color: 'var(--success)', fontWeight: 500 }}>
+                      <span style={{ fontSize: '0.72rem', color: 'var(--color-primary)', fontWeight: 500 }}>
                         ⚡ Automatically calculated from video ({newLesson.duration || '15 mins'})
                       </span>
                     </label>
@@ -1374,11 +1372,11 @@ export const InstructorDashboard = () => {
                       value={newLesson.duration}
                       onChange={(e) => setNewLesson({ ...newLesson, duration: e.target.value })}
                       placeholder="e.g. 15 mins or 12m 30s"
-                      style={{ borderRadius: '8px' }}
+                      style={{ borderRadius: 'var(--radius-sm)' }}
                     />
                   </div>
 
-                  <button type="submit" className="btn btn-secondary btn-sm" style={{ padding: '8px 18px', borderRadius: '8px', fontWeight: 600 }}>
+                  <button type="submit" className="btn btn-secondary btn-sm" style={{ padding: '8px 18px', borderRadius: 'var(--radius-sm)', fontWeight: 600 }}>
                     + Add Lesson to Syllabus
                   </button>
                 </form>
@@ -1387,8 +1385,8 @@ export const InstructorDashboard = () => {
 
             {/* Render Current Course Syllabus Tree */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-              <h3 style={{ fontSize: '1.15rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Layers size={18} color="var(--primary)" /> Course Syllabus Structure
+              <h3 style={{ fontSize: '1.15rem', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-primary)' }}>
+                <Layers size={18} color="var(--color-primary)" /> Course Syllabus Structure
               </h3>
               <span className="badge badge-free" style={{ fontSize: '0.74rem' }}>
                 {syllabus.length} {syllabus.length === 1 ? 'Chapter' : 'Chapters'}
@@ -1396,31 +1394,31 @@ export const InstructorDashboard = () => {
             </div>
 
             {syllabus.map((sec, sIdx) => (
-              <div key={sec._id} className="glass-panel" style={{ padding: '1.25rem', marginBottom: '1rem', border: '1px solid rgba(255,255,255,0.06)' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', paddingBottom: '8px', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                  <h4 style={{ fontSize: '1.02rem', color: '#ffffff', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600 }}>
-                    <span style={{ fontSize: '0.72rem', background: 'rgba(99, 102, 241, 0.2)', color: 'var(--primary-light, #a5b4fc)', padding: '2px 8px', borderRadius: '4px', border: '1px solid rgba(99, 102, 241, 0.4)' }}>
+              <div key={sec._id} className="glass-panel" style={{ padding: '1.25rem', marginBottom: '1rem', border: '1px solid var(--color-border)', background: 'var(--color-surface)', borderRadius: 'var(--radius-sm)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', paddingBottom: '8px', borderBottom: '1px solid var(--color-border)' }}>
+                  <h4 style={{ fontSize: '1.02rem', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600 }}>
+                    <span style={{ fontSize: '0.72rem', background: 'var(--color-primary-subtle)', color: 'var(--color-primary)', padding: '2px 8px', borderRadius: '4px', border: '1px solid var(--color-border)' }}>
                       Chapter {sIdx + 1}
                     </span>
                     {sec.name}
                   </h4>
-                  <span style={{ fontSize: '0.74rem', color: 'var(--text-dim)' }}>
+                  <span style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)' }}>
                     {sec.lessons.length} {sec.lessons.length === 1 ? 'lesson' : 'lessons'}
                   </span>
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   {sec.lessons.length === 0 ? (
-                    <div style={{ fontSize: '0.8rem', color: 'var(--text-dim)', fontStyle: 'italic', padding: '8px 4px' }}>
+                    <div style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', fontStyle: 'italic', padding: '8px 4px' }}>
                       No lessons added to this chapter yet.
                     </div>
                   ) : (
                     sec.lessons.map((les) => (
                       <div key={les._id} className="studio-lesson-row" style={{
                         padding: '10px 14px',
-                        background: 'rgba(255,255,255,0.025)',
-                        borderRadius: '8px',
-                        border: '1px solid rgba(255,255,255,0.04)',
+                        background: 'var(--color-background)',
+                        borderRadius: 'var(--radius-sm)',
+                        border: '1px solid var(--color-border)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
@@ -1432,8 +1430,8 @@ export const InstructorDashboard = () => {
                             width: '30px',
                             height: '30px',
                             borderRadius: '50%',
-                            background: 'rgba(6, 182, 212, 0.15)',
-                            color: 'var(--secondary)',
+                            background: 'var(--color-primary-subtle)',
+                            color: 'var(--color-primary)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
@@ -1441,7 +1439,7 @@ export const InstructorDashboard = () => {
                           }}>
                             <Video size={15} />
                           </div>
-                          <span style={{ fontWeight: 600, color: '#ffffff' }}>{les.title}</span>
+                          <span style={{ fontWeight: 600, color: 'var(--color-text)' }}>{les.title}</span>
                           {les.document_url && (
                             <a 
                               href={les.document_url} 
@@ -1457,7 +1455,7 @@ export const InstructorDashboard = () => {
                         </div>
 
                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
-                          <span style={{ fontSize: '0.74rem', color: 'var(--text-dim)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                          <span style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
                             <Clock size={13} /> {les.duration}
                           </span>
                           <button 
@@ -1465,11 +1463,11 @@ export const InstructorDashboard = () => {
                             onClick={() => handleOpenEditLesson(les)} 
                             title="Edit Lesson Video & PDF Notes" 
                             style={{
-                              background: 'rgba(6, 182, 212, 0.1)',
-                              border: '1px solid rgba(6, 182, 212, 0.25)',
-                              borderRadius: '6px',
+                              background: 'var(--color-primary-subtle)',
+                              border: '1px solid var(--color-border)',
+                              borderRadius: 'var(--radius-sm)',
                               padding: '5px 10px',
-                              color: 'var(--secondary)',
+                              color: 'var(--color-primary)',
                               cursor: 'pointer',
                               display: 'flex',
                               alignItems: 'center',
@@ -1498,7 +1496,7 @@ export const InstructorDashboard = () => {
             ))}
           </div>
         ) : (
-          <div className="glass-panel" style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+          <div className="glass-panel" style={{ padding: '3rem', textAlign: 'center', color: 'var(--color-text-muted)' }}>
             No courses found. Click <strong>Create New Course</strong> to launch your first course.
           </div>
         )}
@@ -1507,7 +1505,7 @@ export const InstructorDashboard = () => {
 
       {/* Feature 1: Student Analytics & Learning Telemetry Tab */}
       {activeStudioTab === 'analytics' && (
-        <div className="glass-panel" style={{ padding: '1.75rem' }}>
+        <div className="glass-panel" style={{ padding: '1.75rem', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)' }}>
           {/* Header & Course Selector */}
           <div style={{
             display: 'flex',
@@ -1517,20 +1515,20 @@ export const InstructorDashboard = () => {
             gap: '1rem',
             marginBottom: '1.75rem',
             paddingBottom: '1.25rem',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
+            borderBottom: '1px solid var(--color-border)'
           }}>
             <div>
-              <h2 style={{ fontSize: '1.35rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '8px', color: '#fff' }}>
-                <BarChart3 size={22} color="var(--primary)" /> Student Progress &amp; Learning Analytics
+              <h2 style={{ fontSize: '1.35rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-primary)' }}>
+                <BarChart3 size={22} color="var(--color-primary)" /> Student Progress &amp; Learning Analytics
               </h2>
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '3px' }}>
+              <p style={{ color: 'var(--color-text-muted)', fontSize: '0.85rem', marginTop: '3px' }}>
                 Monitor enrolled students, syllabus completion rates, drop-off, and identify at-risk learners
               </p>
             </div>
 
             {/* Course Selector Dropdown */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span style={{ fontSize: '0.84rem', color: 'var(--text-muted)', fontWeight: 500 }}>Active Course:</span>
+              <span style={{ fontSize: '0.84rem', color: 'var(--color-text-muted)', fontWeight: 500 }}>Active Course:</span>
               <select
                 className="form-control"
                 value={selectedCourse?._id || ''}
@@ -1540,10 +1538,12 @@ export const InstructorDashboard = () => {
                 }}
                 style={{
                   minWidth: '220px',
-                  background: 'rgba(15, 23, 42, 0.8)',
-                  borderColor: 'rgba(99, 102, 241, 0.3)',
+                  background: 'var(--color-surface)',
+                  borderColor: 'var(--color-border)',
+                  color: 'var(--color-text)',
                   padding: '7px 12px',
-                  fontSize: '0.85rem'
+                  fontSize: '0.85rem',
+                  borderRadius: 'var(--radius-sm)'
                 }}
               >
                 {courses.map(c => (
@@ -1556,7 +1556,7 @@ export const InstructorDashboard = () => {
                 onClick={() => selectedCourse && fetchCourseAnalytics(selectedCourse._id)}
                 className="btn btn-secondary btn-sm"
                 title="Refresh Analytics Telemetry"
-                style={{ padding: '8px 12px' }}
+                style={{ padding: '8px 12px', borderRadius: 'var(--radius-sm)' }}
               >
                 <RefreshCw size={14} className={analyticsLoading ? 'animate-spin' : ''} />
               </button>
@@ -1571,44 +1571,44 @@ export const InstructorDashboard = () => {
               gap: '1rem',
               marginBottom: '1.75rem'
             }}>
-              <div className="glass-panel" style={{ padding: '1.2rem', borderLeft: '3px solid var(--primary)' }}>
-                <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>
+              <div className="glass-panel" style={{ padding: '1.2rem', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderLeft: '3px solid var(--color-primary)', borderRadius: 'var(--radius-sm)' }}>
+                <span style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>
                   Total Enrolled
                 </span>
-                <h3 style={{ fontSize: '1.6rem', fontWeight: 800, marginTop: '4px' }}>
+                <h3 style={{ fontSize: '1.6rem', fontWeight: 800, marginTop: '4px', color: 'var(--color-text)' }}>
                   {courseAnalytics.stats.totalStudents}
                 </h3>
-                <span style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>Enrolled Students</span>
+                <span style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)' }}>Enrolled Students</span>
               </div>
 
-              <div className="glass-panel" style={{ padding: '1.2rem', borderLeft: '3px solid var(--secondary)' }}>
-                <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>
+              <div className="glass-panel" style={{ padding: '1.2rem', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderLeft: '3px solid var(--color-primary)', borderRadius: 'var(--radius-sm)' }}>
+                <span style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>
                   Class Avg Completion
                 </span>
-                <h3 style={{ fontSize: '1.6rem', fontWeight: 800, marginTop: '4px', color: 'var(--secondary)' }}>
+                <h3 style={{ fontSize: '1.6rem', fontWeight: 800, marginTop: '4px', color: 'var(--color-primary)' }}>
                   {courseAnalytics.stats.avgCompletionRate}%
                 </h3>
-                <span style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>Across all lessons</span>
+                <span style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)' }}>Across all lessons</span>
               </div>
 
-              <div className="glass-panel" style={{ padding: '1.2rem', borderLeft: '3px solid var(--success)' }}>
-                <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>
+              <div className="glass-panel" style={{ padding: '1.2rem', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderLeft: '3px solid var(--color-accent)', borderRadius: 'var(--radius-sm)' }}>
+                <span style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>
                   Course Graduates
                 </span>
-                <h3 style={{ fontSize: '1.6rem', fontWeight: 800, marginTop: '4px', color: 'var(--success)' }}>
+                <h3 style={{ fontSize: '1.6rem', fontWeight: 800, marginTop: '4px', color: 'var(--color-primary)' }}>
                   {courseAnalytics.stats.completedStudents}
                 </h3>
-                <span style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>100% Finished Syllabus</span>
+                <span style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)' }}>100% Finished Syllabus</span>
               </div>
 
-              <div className="glass-panel" style={{ padding: '1.2rem', borderLeft: `3px solid ${courseAnalytics.stats.inactiveStudents > 0 ? 'var(--danger)' : 'rgba(255,255,255,0.2)'}` }}>
-                <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>
+              <div className="glass-panel" style={{ padding: '1.2rem', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderLeft: `3px solid ${courseAnalytics.stats.inactiveStudents > 0 ? 'var(--danger)' : 'var(--color-border)'}`, borderRadius: 'var(--radius-sm)' }}>
+                <span style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>
                   At-Risk Learners
                 </span>
-                <h3 style={{ fontSize: '1.6rem', fontWeight: 800, marginTop: '4px', color: courseAnalytics.stats.inactiveStudents > 0 ? 'var(--danger)' : '#fff' }}>
+                <h3 style={{ fontSize: '1.6rem', fontWeight: 800, marginTop: '4px', color: courseAnalytics.stats.inactiveStudents > 0 ? 'var(--danger)' : 'var(--color-text)' }}>
                   {courseAnalytics.stats.inactiveStudents}
                 </h3>
-                <span style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>0% Progress &gt; 7 Days</span>
+                <span style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)' }}>0% Progress &gt; 7 Days</span>
               </div>
             </div>
           )}
@@ -1629,14 +1629,14 @@ export const InstructorDashboard = () => {
                 onClick={() => setAnalyticsFilter('all')}
                 style={{
                   padding: '5px 12px',
-                  borderRadius: '20px',
+                  borderRadius: 'var(--radius-full)',
                   fontSize: '0.78rem',
                   fontWeight: 600,
                   cursor: 'pointer',
                   border: '1px solid',
-                  borderColor: analyticsFilter === 'all' ? 'var(--primary)' : 'rgba(255,255,255,0.1)',
-                  background: analyticsFilter === 'all' ? 'rgba(99, 102, 241, 0.2)' : 'rgba(255,255,255,0.02)',
-                  color: analyticsFilter === 'all' ? '#fff' : 'var(--text-muted)'
+                  borderColor: analyticsFilter === 'all' ? 'var(--color-primary)' : 'var(--color-border)',
+                  background: analyticsFilter === 'all' ? 'var(--color-primary-subtle)' : 'var(--color-surface)',
+                  color: analyticsFilter === 'all' ? 'var(--color-primary)' : 'var(--color-text-muted)'
                 }}
               >
                 All Students ({courseAnalytics?.students?.length || 0})
@@ -1646,14 +1646,14 @@ export const InstructorDashboard = () => {
                 onClick={() => setAnalyticsFilter('completed')}
                 style={{
                   padding: '5px 12px',
-                  borderRadius: '20px',
+                  borderRadius: 'var(--radius-full)',
                   fontSize: '0.78rem',
                   fontWeight: 600,
                   cursor: 'pointer',
                   border: '1px solid',
-                  borderColor: analyticsFilter === 'completed' ? 'var(--success)' : 'rgba(255,255,255,0.1)',
-                  background: analyticsFilter === 'completed' ? 'rgba(16, 185, 129, 0.2)' : 'rgba(255,255,255,0.02)',
-                  color: analyticsFilter === 'completed' ? '#34d399' : 'var(--text-muted)'
+                  borderColor: analyticsFilter === 'completed' ? 'var(--color-accent)' : 'var(--color-border)',
+                  background: analyticsFilter === 'completed' ? 'var(--color-accent-subtle)' : 'var(--color-surface)',
+                  color: analyticsFilter === 'completed' ? 'var(--color-primary)' : 'var(--color-text-muted)'
                 }}
               >
                 Graduated ({courseAnalytics?.stats?.completedStudents || 0})
@@ -1663,14 +1663,14 @@ export const InstructorDashboard = () => {
                 onClick={() => setAnalyticsFilter('in_progress')}
                 style={{
                   padding: '5px 12px',
-                  borderRadius: '20px',
+                  borderRadius: 'var(--radius-full)',
                   fontSize: '0.78rem',
                   fontWeight: 600,
                   cursor: 'pointer',
                   border: '1px solid',
-                  borderColor: analyticsFilter === 'in_progress' ? 'var(--secondary)' : 'rgba(255,255,255,0.1)',
-                  background: analyticsFilter === 'in_progress' ? 'rgba(6, 182, 212, 0.2)' : 'rgba(255,255,255,0.02)',
-                  color: analyticsFilter === 'in_progress' ? '#22d3ee' : 'var(--text-muted)'
+                  borderColor: analyticsFilter === 'in_progress' ? 'var(--color-primary)' : 'var(--color-border)',
+                  background: analyticsFilter === 'in_progress' ? 'var(--color-primary-subtle)' : 'var(--color-surface)',
+                  color: analyticsFilter === 'in_progress' ? 'var(--color-primary)' : 'var(--color-text-muted)'
                 }}
               >
                 In Progress ({courseAnalytics?.stats?.inProgressStudents || 0})
@@ -1680,14 +1680,14 @@ export const InstructorDashboard = () => {
                 onClick={() => setAnalyticsFilter('inactive')}
                 style={{
                   padding: '5px 12px',
-                  borderRadius: '20px',
+                  borderRadius: 'var(--radius-full)',
                   fontSize: '0.78rem',
                   fontWeight: 600,
                   cursor: 'pointer',
                   border: '1px solid',
-                  borderColor: analyticsFilter === 'inactive' ? 'var(--danger)' : 'rgba(255,255,255,0.1)',
-                  background: analyticsFilter === 'inactive' ? 'rgba(239, 68, 68, 0.2)' : 'rgba(255,255,255,0.02)',
-                  color: analyticsFilter === 'inactive' ? '#f87171' : 'var(--text-muted)'
+                  borderColor: analyticsFilter === 'inactive' ? 'var(--danger)' : 'var(--color-border)',
+                  background: analyticsFilter === 'inactive' ? 'rgba(239, 68, 68, 0.1)' : 'var(--color-surface)',
+                  color: analyticsFilter === 'inactive' ? 'var(--danger)' : 'var(--color-text-muted)'
                 }}
               >
                 At Risk ({courseAnalytics?.stats?.inactiveStudents || 0})
@@ -1696,7 +1696,7 @@ export const InstructorDashboard = () => {
 
             {/* Search Input */}
             <div style={{ position: 'relative', minWidth: '220px' }}>
-              <Search size={14} style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-dim)' }} />
+              <Search size={14} style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-muted)' }} />
               <input
                 type="text"
                 value={analyticsSearch}
@@ -1705,10 +1705,10 @@ export const InstructorDashboard = () => {
                 style={{
                   padding: '6px 12px 6px 30px',
                   fontSize: '0.82rem',
-                  borderRadius: '8px',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                  background: 'rgba(15, 23, 42, 0.6)',
-                  color: '#fff',
+                  borderRadius: 'var(--radius-sm)',
+                  border: '1px solid var(--color-border)',
+                  background: 'var(--color-surface)',
+                  color: 'var(--color-text)',
                   width: '100%'
                 }}
               />
@@ -1717,18 +1717,18 @@ export const InstructorDashboard = () => {
 
           {/* Student Telemetry Table */}
           {analyticsLoading ? (
-            <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+            <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--color-text-muted)' }}>
               Loading student telemetry metrics...
             </div>
           ) : !courseAnalytics || !courseAnalytics.students || courseAnalytics.students.length === 0 ? (
-            <div className="glass-panel" style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+            <div className="glass-panel" style={{ padding: '3rem', textAlign: 'center', color: 'var(--color-text-muted)' }}>
               No students enrolled in this course yet.
             </div>
           ) : (
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.86rem' }}>
                 <thead>
-                  <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', textAlign: 'left', color: 'var(--text-dim)' }}>
+                  <tr style={{ borderBottom: '1px solid var(--color-border)', textAlign: 'left', color: 'var(--color-text-muted)' }}>
                     <th style={{ padding: '10px' }}>Student</th>
                     <th style={{ padding: '10px' }}>Enrolled On</th>
                     <th style={{ padding: '10px' }}>Last Activity</th>
@@ -1749,7 +1749,7 @@ export const InstructorDashboard = () => {
                       return true;
                     })
                     .map((s) => (
-                      <tr key={s.enrollmentId} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
+                      <tr key={s.enrollmentId} style={{ borderBottom: '1px solid var(--color-border)' }}>
                         <td style={{ padding: '10px', display: 'flex', alignItems: 'center', gap: '10px' }}>
                           <img
                             src={s.student?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150'}
@@ -1757,28 +1757,28 @@ export const InstructorDashboard = () => {
                             style={{ width: '32px', height: '32px', borderRadius: '50%' }}
                           />
                           <div>
-                            <strong style={{ display: 'block', fontSize: '0.88rem' }}>{s.student?.name}</strong>
-                            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{s.student?.email}</span>
+                            <strong style={{ display: 'block', fontSize: '0.88rem', color: 'var(--color-text)' }}>{s.student?.name}</strong>
+                            <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>{s.student?.email}</span>
                           </div>
                         </td>
-                        <td style={{ padding: '10px', color: 'var(--text-muted)' }}>
+                        <td style={{ padding: '10px', color: 'var(--color-text-muted)' }}>
                           {new Date(s.enrolledAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
                         </td>
-                        <td style={{ padding: '10px', color: 'var(--text-muted)' }}>
+                        <td style={{ padding: '10px', color: 'var(--color-text-muted)' }}>
                           {s.lastActiveAt ? new Date(s.lastActiveAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : 'Never'}
                         </td>
                         <td style={{ padding: '10px' }}>
                           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
                             <span style={{ fontSize: '0.78rem', fontWeight: 600 }}>{s.percentage}%</span>
-                            <span style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>
+                            <span style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)' }}>
                               {s.completedLessons}/{s.totalLessons} lessons
                             </span>
                           </div>
-                          <div style={{ width: '100%', height: '6px', background: 'rgba(255,255,255,0.08)', borderRadius: '3px', overflow: 'hidden' }}>
+                          <div style={{ width: '100%', height: '6px', background: 'var(--color-border)', borderRadius: '3px', overflow: 'hidden' }}>
                             <div style={{
                               width: `${s.percentage}%`,
                               height: '100%',
-                              background: s.percentage === 100 ? 'var(--success)' : 'linear-gradient(90deg, var(--primary), var(--secondary))',
+                              background: s.percentage === 100 ? 'var(--color-accent)' : 'var(--color-primary)',
                               borderRadius: '3px'
                             }} />
                           </div>
@@ -1790,11 +1790,11 @@ export const InstructorDashboard = () => {
                               alignItems: 'center',
                               gap: '4px',
                               padding: '2px 8px',
-                              borderRadius: '12px',
+                              borderRadius: 'var(--radius-full)',
                               fontSize: '0.74rem',
                               fontWeight: 600,
-                              background: 'rgba(16, 185, 129, 0.15)',
-                              color: '#34d399'
+                              background: 'var(--color-accent-subtle)',
+                              color: 'var(--color-primary)'
                             }}>
                               <GraduationCap size={12} /> Graduated
                             </span>
@@ -1804,11 +1804,11 @@ export const InstructorDashboard = () => {
                               alignItems: 'center',
                               gap: '4px',
                               padding: '2px 8px',
-                              borderRadius: '12px',
+                              borderRadius: 'var(--radius-full)',
                               fontSize: '0.74rem',
                               fontWeight: 600,
                               background: 'rgba(239, 68, 68, 0.15)',
-                              color: '#f87171'
+                              color: 'var(--danger)'
                             }}>
                               <AlertTriangle size={12} /> At Risk
                             </span>
@@ -1818,11 +1818,11 @@ export const InstructorDashboard = () => {
                               alignItems: 'center',
                               gap: '4px',
                               padding: '2px 8px',
-                              borderRadius: '12px',
+                              borderRadius: 'var(--radius-full)',
                               fontSize: '0.74rem',
                               fontWeight: 600,
-                              background: 'rgba(6, 182, 212, 0.15)',
-                              color: '#22d3ee'
+                              background: 'var(--color-primary-subtle)',
+                              color: 'var(--color-primary)'
                             }}>
                               In Progress
                             </span>
@@ -1832,11 +1832,11 @@ export const InstructorDashboard = () => {
                               alignItems: 'center',
                               gap: '4px',
                               padding: '2px 8px',
-                              borderRadius: '12px',
+                              borderRadius: 'var(--radius-full)',
                               fontSize: '0.74rem',
                               fontWeight: 600,
-                              background: 'rgba(255, 255, 255, 0.08)',
-                              color: 'var(--text-muted)'
+                              background: 'var(--color-background)',
+                              color: 'var(--color-text-muted)'
                             }}>
                               Not Started
                             </span>
@@ -1853,7 +1853,7 @@ export const InstructorDashboard = () => {
 
       {/* Feature 2: Course Reviews & Feedback Tab */}
       {activeStudioTab === 'reviews' && (
-        <div className="glass-panel" style={{ padding: '1.75rem' }}>
+        <div className="glass-panel" style={{ padding: '1.75rem', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)' }}>
           {/* Header */}
           <div style={{
             display: 'flex',
@@ -1863,30 +1863,32 @@ export const InstructorDashboard = () => {
             gap: '1rem',
             marginBottom: '1.75rem',
             paddingBottom: '1.25rem',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
+            borderBottom: '1px solid var(--color-border)'
           }}>
             <div>
-              <h2 style={{ fontSize: '1.35rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '8px', color: '#fff' }}>
+              <h2 style={{ fontSize: '1.35rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-primary)' }}>
                 <Star size={22} color="#f59e0b" fill="#f59e0b" /> Course Reviews &amp; Feedback Management
               </h2>
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '3px' }}>
+              <p style={{ color: 'var(--color-text-muted)', fontSize: '0.85rem', marginTop: '3px' }}>
                 View student ratings, feedback sentiment, and post verified public replies
               </p>
             </div>
 
             {/* Course Filter Dropdown */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ fontSize: '0.84rem', color: 'var(--text-muted)' }}>Filter Course:</span>
+              <span style={{ fontSize: '0.84rem', color: 'var(--color-text-muted)' }}>Filter Course:</span>
               <select
                 className="form-control"
                 value={reviewFilterCourse}
                 onChange={(e) => setReviewFilterCourse(e.target.value)}
                 style={{
                   minWidth: '200px',
-                  background: 'rgba(15, 23, 42, 0.8)',
-                  borderColor: 'rgba(99, 102, 241, 0.3)',
+                  background: 'var(--color-surface)',
+                  borderColor: 'var(--color-border)',
+                  color: 'var(--color-text)',
                   padding: '7px 12px',
-                  fontSize: '0.85rem'
+                  fontSize: '0.85rem',
+                  borderRadius: 'var(--radius-sm)'
                 }}
               >
                 <option value="all">All My Courses ({courses.length})</option>
@@ -1905,7 +1907,7 @@ export const InstructorDashboard = () => {
             marginBottom: '1.75rem'
           }}>
             {/* Average Rating Block */}
-            <div className="glass-panel" style={{ padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+            <div className="glass-panel" style={{ padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '1.5rem', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)' }}>
               <div style={{ textAlign: 'center' }}>
                 <div style={{ fontSize: '3rem', fontWeight: 900, color: '#f59e0b', lineHeight: 1 }}>
                   {reviewsData.stats?.avgRating || '5.0'}
@@ -1920,24 +1922,24 @@ export const InstructorDashboard = () => {
                     />
                   ))}
                 </div>
-                <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)', marginTop: '4px', display: 'block' }}>
+                <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '4px', display: 'block' }}>
                   Course Rating
                 </span>
               </div>
 
-              <div style={{ flex: 1, borderLeft: '1px solid rgba(255,255,255,0.08)', paddingLeft: '1.25rem' }}>
-                <h4 style={{ fontSize: '1.1rem', fontWeight: 700 }}>
+              <div style={{ flex: 1, borderLeft: '1px solid var(--color-border)', paddingLeft: '1.25rem' }}>
+                <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--color-text)' }}>
                   {reviewsData.stats?.totalReviews || 0} Total Reviews
                 </h4>
-                <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '4px' }}>
+                <p style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
                   From verified enrolled students across published courses.
                 </p>
               </div>
             </div>
 
             {/* Star Distribution Breakdown */}
-            <div className="glass-panel" style={{ padding: '1.25rem' }}>
-              <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 600, marginBottom: '8px' }}>
+            <div className="glass-panel" style={{ padding: '1.25rem', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)' }}>
+              <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', fontWeight: 600, marginBottom: '8px' }}>
                 RATING DISTRIBUTION
               </div>
               {[5, 4, 3, 2, 1].map((star) => {
@@ -1946,11 +1948,11 @@ export const InstructorDashboard = () => {
                 const percent = Math.round((count / (reviewsData.stats?.totalReviews || 1)) * 100);
                 return (
                   <div key={star} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.78rem', marginBottom: '5px' }}>
-                    <span style={{ width: '25px', color: 'var(--text-muted)' }}>{star}★</span>
-                    <div style={{ flex: 1, height: '6px', background: 'rgba(255,255,255,0.08)', borderRadius: '3px', overflow: 'hidden' }}>
+                    <span style={{ width: '25px', color: 'var(--color-text-muted)' }}>{star}★</span>
+                    <div style={{ flex: 1, height: '6px', background: 'var(--color-border)', borderRadius: '3px', overflow: 'hidden' }}>
                       <div style={{ width: `${percent}%`, height: '100%', background: '#f59e0b', borderRadius: '3px' }} />
                     </div>
-                    <span style={{ width: '30px', textAlign: 'right', color: 'var(--text-dim)' }}>{count}</span>
+                    <span style={{ width: '30px', textAlign: 'right', color: 'var(--color-text-muted)' }}>{count}</span>
                   </div>
                 );
               })}
@@ -1959,11 +1961,11 @@ export const InstructorDashboard = () => {
 
           {/* Reviews List Feed */}
           {reviewsLoading ? (
-            <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+            <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--color-text-muted)' }}>
               Loading reviews and ratings...
             </div>
           ) : !reviewsData.reviews || reviewsData.reviews.length === 0 ? (
-            <div className="glass-panel" style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+            <div className="glass-panel" style={{ padding: '3rem', textAlign: 'center', color: 'var(--color-text-muted)', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)' }}>
               No reviews or discussion feedback received yet for your courses.
             </div>
           ) : (
@@ -1971,7 +1973,7 @@ export const InstructorDashboard = () => {
               {reviewsData.reviews
                 .filter(r => reviewFilterCourse === 'all' || r.course_id?._id === reviewFilterCourse)
                 .map((r) => (
-                  <div key={r._id} className="glass-panel" style={{ padding: '1.25rem' }}>
+                  <div key={r._id} className="glass-panel" style={{ padding: '1.25rem', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)' }}>
                     {/* Header */}
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px', marginBottom: '8px' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -1981,13 +1983,13 @@ export const InstructorDashboard = () => {
                           style={{ width: '34px', height: '34px', borderRadius: '50%' }}
                         />
                         <div>
-                          <strong style={{ fontSize: '0.9rem' }}>{r.user_id?.name || 'Student'}</strong>
+                          <strong style={{ fontSize: '0.9rem', color: 'var(--color-text)' }}>{r.user_id?.name || 'Student'}</strong>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '2px' }}>
-                            <span style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>
+                            <span style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)' }}>
                               {new Date(r.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
                             </span>
-                            <span style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>•</span>
-                            <span style={{ fontSize: '0.74rem', color: 'var(--secondary)', fontWeight: 600 }}>
+                            <span style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)' }}>•</span>
+                            <span style={{ fontSize: '0.74rem', color: 'var(--color-primary)', fontWeight: 600 }}>
                               {r.course_id?.name}
                             </span>
                           </div>
@@ -2003,7 +2005,7 @@ export const InstructorDashboard = () => {
                     </div>
 
                     {/* Review Text */}
-                    <p style={{ fontSize: '0.88rem', color: 'var(--text-main)', margin: '8px 0 12px', lineHeight: 1.5 }}>
+                    <p style={{ fontSize: '0.88rem', color: 'var(--color-text)', margin: '8px 0 12px', lineHeight: 1.5 }}>
                       "{r.comment}"
                     </p>
 
@@ -2011,18 +2013,18 @@ export const InstructorDashboard = () => {
                     {r.reply && r.reply.text ? (
                       <div style={{
                         padding: '12px 14px',
-                        borderRadius: '8px',
-                        background: 'rgba(99, 102, 241, 0.08)',
-                        borderLeft: '3px solid var(--primary)',
+                        borderRadius: 'var(--radius-sm)',
+                        background: 'var(--color-primary-subtle)',
+                        borderLeft: '3px solid var(--color-primary)',
                         display: 'flex',
                         flexDirection: 'column',
                         gap: '6px'
                       }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--primary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-primary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
                             👨‍🏫 Your Official Reply
                             {r.reply.replied_at && (
-                              <span style={{ fontSize: '0.7rem', color: 'var(--text-dim)', fontWeight: 400 }}>
+                              <span style={{ fontSize: '0.7rem', color: 'var(--color-text-muted)', fontWeight: 400 }}>
                                 • {new Date(r.reply.replied_at).toLocaleDateString()}
                               </span>
                             )}
@@ -2035,7 +2037,7 @@ export const InstructorDashboard = () => {
                             Remove Reply
                           </button>
                         </div>
-                        <p style={{ fontSize: '0.84rem', color: 'var(--text-muted)', margin: 0 }}>
+                        <p style={{ fontSize: '0.84rem', color: 'var(--color-text)', margin: 0 }}>
                           {r.reply.text}
                         </p>
                       </div>
@@ -2050,13 +2052,14 @@ export const InstructorDashboard = () => {
                               value={replyText}
                               onChange={(e) => setReplyText(e.target.value)}
                               placeholder="Write a helpful, professional reply to this review..."
-                              style={{ fontSize: '0.84rem' }}
+                              style={{ fontSize: '0.84rem', borderRadius: 'var(--radius-sm)' }}
                             />
                             <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
                               <button
                                 type="button"
                                 onClick={() => { setReplyingCommentId(null); setReplyText(''); }}
                                 className="btn btn-secondary btn-sm"
+                                style={{ borderRadius: 'var(--radius-sm)' }}
                               >
                                 Cancel
                               </button>
@@ -2065,6 +2068,7 @@ export const InstructorDashboard = () => {
                                 onClick={() => handlePostReply(r._id)}
                                 disabled={submittingReply || !replyText.trim()}
                                 className="btn btn-primary btn-sm"
+                                style={{ borderRadius: 'var(--radius-sm)' }}
                               >
                                 {submittingReply ? 'Posting...' : 'Post Public Reply'}
                               </button>
@@ -2075,7 +2079,7 @@ export const InstructorDashboard = () => {
                             type="button"
                             onClick={() => { setReplyingCommentId(r._id); setReplyText(''); }}
                             className="btn btn-secondary btn-sm"
-                            style={{ fontSize: '0.78rem', padding: '4px 10px', marginTop: '4px' }}
+                            style={{ fontSize: '0.78rem', padding: '4px 10px', marginTop: '4px', borderRadius: 'var(--radius-sm)' }}
                           >
                             <MessageSquare size={13} /> Reply to Student
                           </button>
@@ -2093,22 +2097,23 @@ export const InstructorDashboard = () => {
       {activeStudioTab === 'announcements' && (
         <div style={{ display: 'grid', gridTemplateColumns: 'minmax(320px, 420px) 1fr', gap: '1.5rem' }}>
           {/* Left Column: Create Announcement Form */}
-          <div className="glass-panel" style={{ padding: '1.5rem', height: 'fit-content' }}>
-            <h3 style={{ fontSize: '1.15rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '8px', color: '#fff', marginBottom: '6px' }}>
-              <Megaphone size={18} color="var(--primary)" /> Broadcast New Announcement
+          <div className="glass-panel" style={{ padding: '1.5rem', height: 'fit-content', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)' }}>
+            <h3 style={{ fontSize: '1.15rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-primary)', marginBottom: '6px' }}>
+              <Megaphone size={18} color="var(--color-primary)" /> Broadcast New Announcement
             </h3>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', marginBottom: '1.25rem' }}>
+            <p style={{ color: 'var(--color-text-muted)', fontSize: '0.82rem', marginBottom: '1.25rem' }}>
               Send course updates, schedule notices, or exam reminders directly to all enrolled students.
             </p>
 
             <form onSubmit={handleCreateAnnouncement} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {/* Target Course */}
               <div className="form-group">
-                <label style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Target Course</label>
+                <label style={{ fontSize: '0.82rem', color: 'var(--color-text-muted)' }}>Target Course</label>
                 <select
                   className="form-control"
                   value={newAnnouncement.course_id}
                   onChange={(e) => setNewAnnouncement({ ...newAnnouncement, course_id: e.target.value })}
+                  style={{ borderRadius: 'var(--radius-sm)' }}
                   required
                 >
                   <option value="">Select a Course...</option>
@@ -2120,10 +2125,10 @@ export const InstructorDashboard = () => {
 
               {/* Priority Tag */}
               <div className="form-group">
-                <label style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Announcement Priority</label>
+                <label style={{ fontSize: '0.82rem', color: 'var(--color-text-muted)' }}>Announcement Priority</label>
                 <div style={{ display: 'flex', gap: '8px' }}>
                   {[
-                    { val: 'normal', label: '📢 Notice', color: '#22d3ee', bg: 'rgba(6,182,212,0.15)' },
+                    { val: 'normal', label: '📢 Notice', color: 'var(--color-primary)', bg: 'var(--color-primary-subtle)' },
                     { val: 'update', label: '✨ Update', color: '#c084fc', bg: 'rgba(168,85,247,0.15)' },
                     { val: 'important', label: '🚨 Important', color: '#f87171', bg: 'rgba(239,68,68,0.15)' }
                   ].map(p => (
@@ -2134,13 +2139,13 @@ export const InstructorDashboard = () => {
                       style={{
                         flex: 1,
                         padding: '6px 8px',
-                        borderRadius: '8px',
+                        borderRadius: 'var(--radius-sm)',
                         fontSize: '0.78rem',
                         fontWeight: 600,
                         cursor: 'pointer',
-                        border: `1px solid ${newAnnouncement.priority === p.val ? p.color : 'rgba(255,255,255,0.1)'}`,
-                        background: newAnnouncement.priority === p.val ? p.bg : 'rgba(255,255,255,0.02)',
-                        color: newAnnouncement.priority === p.val ? '#fff' : 'var(--text-muted)',
+                        border: `1px solid ${newAnnouncement.priority === p.val ? p.color : 'var(--color-border)'}`,
+                        background: newAnnouncement.priority === p.val ? p.bg : 'var(--color-surface)',
+                        color: newAnnouncement.priority === p.val ? (p.val === 'normal' ? 'var(--color-primary)' : p.color) : 'var(--color-text-muted)',
                         transition: 'all 0.15s ease'
                       }}
                     >
@@ -2152,26 +2157,28 @@ export const InstructorDashboard = () => {
 
               {/* Title */}
               <div className="form-group">
-                <label style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Headline / Title</label>
+                <label style={{ fontSize: '0.82rem', color: 'var(--color-text-muted)' }}>Headline / Title</label>
                 <input
                   type="text"
                   className="form-control"
                   placeholder="e.g. New Lesson Added: Redux Toolkit Setup"
                   value={newAnnouncement.title}
                   onChange={(e) => setNewAnnouncement({ ...newAnnouncement, title: e.target.value })}
+                  style={{ borderRadius: 'var(--radius-sm)' }}
                   required
                 />
               </div>
 
               {/* Message Content */}
               <div className="form-group">
-                <label style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Message Body</label>
+                <label style={{ fontSize: '0.82rem', color: 'var(--color-text-muted)' }}>Message Body</label>
                 <textarea
                   className="form-control"
                   rows="4"
                   placeholder="Explain what is new, any deadlines, or instructions for your students..."
                   value={newAnnouncement.content}
                   onChange={(e) => setNewAnnouncement({ ...newAnnouncement, content: e.target.value })}
+                  style={{ borderRadius: 'var(--radius-sm)' }}
                   required
                 />
               </div>
@@ -2180,7 +2187,7 @@ export const InstructorDashboard = () => {
                 type="submit"
                 disabled={creatingAnnouncement}
                 className="btn btn-primary"
-                style={{ padding: '10px 16px', fontWeight: 600, marginTop: '4px' }}
+                style={{ padding: '10px 16px', fontWeight: 600, marginTop: '4px', borderRadius: 'var(--radius-sm)' }}
               >
                 {creatingAnnouncement ? 'Broadcasting...' : '📢 Broadcast to Students'}
               </button>
@@ -2188,27 +2195,28 @@ export const InstructorDashboard = () => {
           </div>
 
           {/* Right Column: Sent Announcements Feed */}
-          <div className="glass-panel" style={{ padding: '1.5rem' }}>
+          <div className="glass-panel" style={{ padding: '1.5rem', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
-              <h3 style={{ fontSize: '1.15rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Clock size={18} color="var(--secondary)" /> Broadcast History ({announcements.length})
+              <h3 style={{ fontSize: '1.15rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-primary)' }}>
+                <Clock size={18} color="var(--color-primary)" /> Broadcast History ({announcements.length})
               </h3>
               <button
                 type="button"
                 onClick={fetchInstructorAnnouncements}
                 className="btn btn-secondary btn-sm"
                 title="Refresh announcements"
+                style={{ borderRadius: 'var(--radius-sm)' }}
               >
                 <RefreshCw size={13} className={announcementsLoading ? 'animate-spin' : ''} />
               </button>
             </div>
 
             {announcementsLoading ? (
-              <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+              <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--color-text-muted)' }}>
                 Loading announcement history...
               </div>
             ) : announcements.length === 0 ? (
-              <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+              <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--color-text-muted)' }}>
                 No announcements broadcasted yet. Send your first announcement from the left panel!
               </div>
             ) : (
@@ -2221,9 +2229,9 @@ export const InstructorDashboard = () => {
                       key={ann._id}
                       style={{
                         padding: '14px 16px',
-                        borderRadius: '10px',
-                        background: 'rgba(255, 255, 255, 0.03)',
-                        border: `1px solid ${isImportant ? 'rgba(239, 68, 68, 0.3)' : isUpdate ? 'rgba(168, 85, 247, 0.3)' : 'rgba(255, 255, 255, 0.08)'}`
+                        borderRadius: 'var(--radius-sm)',
+                        background: 'var(--color-background)',
+                        border: `1px solid ${isImportant ? 'rgba(239, 68, 68, 0.3)' : isUpdate ? 'rgba(168, 85, 247, 0.3)' : 'var(--color-border)'}`
                       }}
                     >
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '10px', marginBottom: '6px' }}>
@@ -2232,14 +2240,14 @@ export const InstructorDashboard = () => {
                             fontSize: '0.72rem',
                             fontWeight: 700,
                             padding: '2px 8px',
-                            borderRadius: '12px',
+                            borderRadius: 'var(--radius-full)',
                             textTransform: 'uppercase',
-                            background: isImportant ? 'rgba(239, 68, 68, 0.2)' : isUpdate ? 'rgba(168, 85, 247, 0.2)' : 'rgba(6, 182, 212, 0.2)',
-                            color: isImportant ? '#f87171' : isUpdate ? '#c084fc' : '#22d3ee'
+                            background: isImportant ? 'rgba(239, 68, 68, 0.15)' : isUpdate ? 'rgba(168, 85, 247, 0.15)' : 'var(--color-primary-subtle)',
+                            color: isImportant ? '#f87171' : isUpdate ? '#c084fc' : 'var(--color-primary)'
                           }}>
                             {isImportant ? '🚨 Important' : isUpdate ? '✨ Update' : '📢 Notice'}
                           </span>
-                          <strong style={{ fontSize: '0.94rem' }}>{ann.title}</strong>
+                          <strong style={{ fontSize: '0.94rem', color: 'var(--color-text)' }}>{ann.title}</strong>
                         </div>
 
                         <button
@@ -2248,7 +2256,7 @@ export const InstructorDashboard = () => {
                           style={{
                             background: 'none',
                             border: 'none',
-                            color: 'var(--text-dim)',
+                            color: 'var(--color-text-muted)',
                             cursor: 'pointer',
                             padding: '2px'
                           }}
@@ -2258,12 +2266,12 @@ export const InstructorDashboard = () => {
                         </button>
                       </div>
 
-                      <p style={{ fontSize: '0.86rem', color: 'var(--text-muted)', marginBottom: '10px', lineHeight: 1.45 }}>
+                      <p style={{ fontSize: '0.86rem', color: 'var(--color-text-muted)', marginBottom: '10px', lineHeight: 1.45 }}>
                         {ann.content}
                       </p>
 
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--text-dim)' }}>
-                        <span>Course: <strong style={{ color: 'var(--secondary)' }}>{ann.course_id?.name || 'All Courses'}</strong></span>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
+                        <span>Course: <strong style={{ color: 'var(--color-primary)' }}>{ann.course_id?.name || 'All Courses'}</strong></span>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                           <span>👥 {ann.recipientCount || 0} students notified</span>
                           <span>{new Date(ann.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}</span>
@@ -2293,18 +2301,20 @@ export const InstructorDashboard = () => {
             display: 'flex',
             flexDirection: 'column',
             overflow: 'hidden',
-            borderRadius: '16px'
+            borderRadius: 'var(--radius-sm)',
+            background: 'var(--color-surface)',
+            border: '1px solid var(--color-border)'
           }}>
             <div style={{
               padding: '1rem 1.25rem',
-              borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-              background: 'rgba(17, 24, 39, 0.95)',
+              borderBottom: '1px solid var(--color-border)',
+              background: 'var(--color-surface)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between'
             }}>
-              <h3 style={{ fontSize: '1.05rem', margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <MessageSquare size={18} color="var(--primary)" /> Student Doubts
+              <h3 style={{ fontSize: '1.05rem', margin: 0, display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-primary)' }}>
+                <MessageSquare size={18} color="var(--color-primary)" /> Student Doubts
               </h3>
               <span className="badge badge-free" style={{ fontSize: '0.72rem' }}>
                 {tutorThreads.length} Threads
@@ -2313,9 +2323,9 @@ export const InstructorDashboard = () => {
 
             <div style={{ flex: 1, overflowY: 'auto', padding: '0.5rem' }}>
               {tutorThreads.length === 0 ? (
-                <div style={{ textAlign: 'center', padding: '3rem 1rem', color: 'var(--text-muted)' }}>
-                  <MessageSquare size={36} color="var(--text-dim)" style={{ marginBottom: '0.75rem' }} />
-                  <h4 style={{ color: '#fff', fontSize: '0.95rem' }}>No doubts submitted yet</h4>
+                <div style={{ textAlign: 'center', padding: '3rem 1rem', color: 'var(--color-text-muted)' }}>
+                  <MessageSquare size={36} color="var(--color-primary)" style={{ marginBottom: '0.75rem' }} />
+                  <h4 style={{ color: 'var(--color-primary)', fontSize: '0.95rem' }}>No doubts submitted yet</h4>
                   <p style={{ fontSize: '0.8rem', marginTop: '4px' }}>
                     When students in your courses ask a question or attach code screenshots, they will appear here.
                   </p>
@@ -2329,36 +2339,36 @@ export const InstructorDashboard = () => {
                       onClick={() => handleSelectThread(thread)}
                       style={{
                         padding: '12px',
-                        borderRadius: '12px',
+                        borderRadius: 'var(--radius-sm)',
                         marginBottom: '6px',
                         cursor: 'pointer',
                         display: 'flex',
                         alignItems: 'center',
                         gap: '12px',
                         background: isSelected 
-                          ? 'rgba(99, 102, 241, 0.2)' 
+                          ? 'var(--color-primary-subtle)' 
                           : thread.unreadCount > 0 
-                            ? 'rgba(99, 102, 241, 0.08)' 
+                            ? 'var(--color-primary-subtle)' 
                             : 'transparent',
                         border: isSelected 
-                          ? '1px solid var(--primary)' 
+                          ? '1px solid var(--color-primary)' 
                           : thread.unreadCount > 0 
-                            ? '1px solid rgba(99, 102, 241, 0.3)' 
+                            ? '1px solid var(--color-border)' 
                             : '1px solid transparent',
                         transition: 'all 0.15s ease'
                       }}
                       onMouseEnter={(e) => {
-                        if (!isSelected) e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)';
+                        if (!isSelected) e.currentTarget.style.background = 'var(--color-background)';
                       }}
                       onMouseLeave={(e) => {
-                        if (!isSelected) e.currentTarget.style.background = thread.unreadCount > 0 ? 'rgba(99, 102, 241, 0.08)' : 'transparent';
+                        if (!isSelected) e.currentTarget.style.background = thread.unreadCount > 0 ? 'var(--color-primary-subtle)' : 'transparent';
                       }}
                     >
                       <div style={{ position: 'relative' }}>
                         <img 
                           src={thread.student?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150'} 
                           alt={thread.student?.name}
-                          style={{ width: '42px', height: '42px', borderRadius: '50%', objectFit: 'cover', border: '1px solid rgba(255,255,255,0.1)' }}
+                          style={{ width: '42px', height: '42px', borderRadius: '50%', objectFit: 'cover', border: '1px solid var(--color-border)' }}
                         />
                         {thread.unreadCount > 0 && (
                           <span style={{
@@ -2375,7 +2385,7 @@ export const InstructorDashboard = () => {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            border: '2px solid #0d131f'
+                            border: '2px solid var(--color-surface)'
                           }}>
                             {thread.unreadCount}
                           </span>
@@ -2384,10 +2394,10 @@ export const InstructorDashboard = () => {
 
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
-                          <span style={{ fontWeight: 700, fontSize: '0.9rem', color: '#fff', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                          <span style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--color-text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                             {thread.student?.name}
                           </span>
-                          <span style={{ fontSize: '0.68rem', color: 'var(--text-dim)' }}>
+                          <span style={{ fontSize: '0.68rem', color: 'var(--color-text-muted)' }}>
                             {new Date(thread.updatedAt).toLocaleDateString([], { month: 'short', day: 'numeric' })}
                           </span>
                         </div>
@@ -2396,17 +2406,17 @@ export const InstructorDashboard = () => {
                           display: 'inline-flex',
                           alignItems: 'center',
                           gap: '5px',
-                          background: 'rgba(6, 182, 212, 0.12)',
-                          border: '1px solid rgba(6, 182, 212, 0.25)',
-                          borderRadius: '6px',
+                          background: 'var(--color-primary-subtle)',
+                          border: '1px solid var(--color-border)',
+                          borderRadius: '4px',
                           padding: '2px 8px',
                           marginBottom: '5px',
                           maxWidth: '100%'
                         }}>
-                          <BookOpen size={11} color="var(--secondary)" />
+                          <BookOpen size={11} color="var(--color-primary)" />
                           <span style={{
                             fontSize: '0.73rem',
-                            color: 'var(--secondary)',
+                            color: 'var(--color-primary)',
                             fontWeight: 600,
                             whiteSpace: 'nowrap',
                             overflow: 'hidden',
@@ -2415,7 +2425,7 @@ export const InstructorDashboard = () => {
                             {thread.courseName}
                           </span>
                         </div>
-                        <div style={{ fontSize: '0.78rem', color: thread.unreadCount > 0 ? '#ffffff' : 'var(--text-dim)', fontWeight: thread.unreadCount > 0 ? 600 : 400, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        <div style={{ fontSize: '0.78rem', color: thread.unreadCount > 0 ? 'var(--color-primary)' : 'var(--color-text-muted)', fontWeight: thread.unreadCount > 0 ? 600 : 400, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                           {thread.lastMessage?.hasAttachments && '📎 '}
                           {thread.lastMessage?.text || 'Sent attachment'}
                         </div>
@@ -2432,16 +2442,17 @@ export const InstructorDashboard = () => {
             display: 'flex',
             flexDirection: 'column',
             overflow: 'hidden',
-            borderRadius: '16px',
-            background: '#0d131f'
+            borderRadius: 'var(--radius-sm)',
+            background: 'var(--color-surface)',
+            border: '1px solid var(--color-border)'
           }}>
             {selectedThread ? (
               <>
                 {/* Conversation Header */}
                 <div style={{
                   padding: '1rem 1.25rem',
-                  borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-                  background: 'rgba(17, 24, 39, 0.95)',
+                  borderBottom: '1px solid var(--color-border)',
+                  background: 'var(--color-surface)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between'
@@ -2451,7 +2462,7 @@ export const InstructorDashboard = () => {
                       <img 
                         src={selectedThread.student?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150'} 
                         alt={selectedThread.student?.name}
-                        style={{ width: '44px', height: '44px', borderRadius: '50%', objectFit: 'cover', border: '2px solid var(--primary)' }}
+                        style={{ width: '44px', height: '44px', borderRadius: '50%', objectFit: 'cover', border: '2px solid var(--color-primary)' }}
                       />
                       <span style={{
                         position: 'absolute',
@@ -2460,28 +2471,28 @@ export const InstructorDashboard = () => {
                         width: '12px',
                         height: '12px',
                         borderRadius: '50%',
-                        backgroundColor: 'var(--success)',
-                        border: '2px solid #0d131f'
+                        backgroundColor: 'var(--color-accent)',
+                        border: '2px solid var(--color-surface)'
                       }} />
                     </div>
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <h4 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0 }}>
+                        <h4 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: 'var(--color-text)' }}>
                           {selectedThread.student?.name}
                         </h4>
                         <span style={{
                           fontSize: '0.7rem',
                           fontWeight: 600,
                           padding: '1px 8px',
-                          borderRadius: '10px',
-                          background: 'rgba(99, 102, 241, 0.2)',
-                          color: '#a5b4fc',
-                          border: '1px solid rgba(99, 102, 241, 0.4)'
+                          borderRadius: 'var(--radius-full)',
+                          background: 'var(--color-primary-subtle)',
+                          color: 'var(--color-primary)',
+                          border: '1px solid var(--color-border)'
                         }}>
                           Student
                         </span>
                       </div>
-                      <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '2px' }}>
+                      <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '2px' }}>
                         {selectedThread.student?.email}
                       </div>
                     </div>
@@ -2492,28 +2503,28 @@ export const InstructorDashboard = () => {
                     display: 'flex',
                     alignItems: 'center',
                     gap: '10px',
-                    background: 'rgba(6, 182, 212, 0.1)',
-                    border: '1px solid rgba(6, 182, 212, 0.3)',
-                    borderRadius: '10px',
+                    background: 'var(--color-primary-subtle)',
+                    border: '1px solid var(--color-border)',
+                    borderRadius: 'var(--radius-sm)',
                     padding: '6px 12px'
                   }}>
                     <div style={{
                       width: '28px',
                       height: '28px',
                       borderRadius: '8px',
-                      background: 'rgba(6, 182, 212, 0.2)',
+                      background: 'var(--color-surface)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: 'var(--secondary)'
+                      color: 'var(--color-primary)'
                     }}>
                       <BookOpen size={15} />
                     </div>
                     <div>
-                      <span style={{ display: 'block', fontSize: '0.65rem', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>
+                      <span style={{ display: 'block', fontSize: '0.65rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>
                         Inquiring Course
                       </span>
-                      <strong style={{ fontSize: '0.85rem', color: '#ffffff' }}>
+                      <strong style={{ fontSize: '0.85rem', color: 'var(--color-primary)' }}>
                         {selectedThread.courseName}
                       </strong>
                     </div>
@@ -2528,7 +2539,7 @@ export const InstructorDashboard = () => {
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '12px',
-                  background: 'radial-gradient(ellipse at bottom, rgba(99, 102, 241, 0.04) 0%, rgba(13, 19, 31, 0) 70%)'
+                  background: 'var(--color-background)'
                 }}>
                   {threadMessages.map((msg) => {
                     const isTutor = msg.sender?._id === user?._id || msg.sender === user?._id;
@@ -2552,17 +2563,17 @@ export const InstructorDashboard = () => {
                           padding: '10px 14px',
                           borderRadius: isTutor ? '16px 16px 4px 16px' : '16px 16px 16px 4px',
                           background: isTutor 
-                            ? 'linear-gradient(135deg, #4f46e5, #6366f1)' 
-                            : 'rgba(31, 41, 55, 0.85)',
-                          color: '#fff',
-                          border: isTutor ? 'none' : '1px solid rgba(255, 255, 255, 0.08)',
-                          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.25)',
+                            ? 'var(--color-primary)' 
+                            : 'var(--color-surface)',
+                          color: isTutor ? 'var(--color-text-on-dark)' : 'var(--color-text)',
+                          border: isTutor ? 'none' : '1px solid var(--color-border)',
+                          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)',
                           wordBreak: 'break-word',
                           fontSize: '0.92rem',
                           lineHeight: '1.45'
                         }}>
                           {!isTutor && (
-                            <div style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--secondary)', marginBottom: '4px' }}>
+                            <div style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--color-primary)', marginBottom: '4px' }}>
                               {msg.sender?.name || 'Student'}
                             </div>
                           )}
@@ -2579,10 +2590,10 @@ export const InstructorDashboard = () => {
                                     <div 
                                       onClick={() => setChatPreviewImage(att.fileUrl)}
                                       style={{
-                                        borderRadius: '8px',
+                                        borderRadius: 'var(--radius-sm)',
                                         overflow: 'hidden',
                                         cursor: 'pointer',
-                                        border: '1px solid rgba(255, 255, 255, 0.15)',
+                                        border: '1px solid var(--color-border)',
                                         maxHeight: '220px'
                                       }}
                                     >
@@ -2603,20 +2614,20 @@ export const InstructorDashboard = () => {
                                         alignItems: 'center',
                                         gap: '10px',
                                         padding: '8px 12px',
-                                        borderRadius: '8px',
-                                        background: 'rgba(0, 0, 0, 0.25)',
-                                        border: '1px solid rgba(255, 255, 255, 0.1)',
-                                        color: '#fff',
+                                        borderRadius: 'var(--radius-sm)',
+                                        background: 'var(--color-surface)',
+                                        border: '1px solid var(--color-border)',
+                                        color: 'var(--color-text)',
                                         textDecoration: 'none',
                                         fontSize: '0.82rem'
                                       }}
                                     >
-                                      <FileText size={18} color="var(--secondary)" />
+                                      <FileText size={18} color="var(--color-primary)" />
                                       <div style={{ flex: 1, minWidth: 0 }}>
                                         <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontWeight: 600 }}>
                                           {att.fileName}
                                         </div>
-                                        <div style={{ fontSize: '0.7rem', color: 'rgba(255, 255, 255, 0.6)' }}>
+                                        <div style={{ fontSize: '0.7rem', color: 'var(--color-text-muted)' }}>
                                           {att.fileSize ? `${Math.round(att.fileSize / 1024)} KB` : 'Document'}
                                         </div>
                                       </div>
@@ -2634,7 +2645,7 @@ export const InstructorDashboard = () => {
                           alignItems: 'center',
                           gap: '4px',
                           fontSize: '0.72rem',
-                          color: 'var(--text-dim)',
+                          color: 'var(--color-text-muted)',
                           marginTop: '4px',
                           padding: '0 4px'
                         }}>
@@ -2642,7 +2653,7 @@ export const InstructorDashboard = () => {
                           {isTutor && (
                             <CheckCheck 
                               size={14} 
-                              color={msg.read ? 'var(--secondary)' : 'var(--text-dim)'} 
+                              color={msg.read ? 'var(--color-primary)' : 'var(--color-text-muted)'} 
                             />
                           )}
                         </div>
@@ -2656,18 +2667,18 @@ export const InstructorDashboard = () => {
                 {pendingChatAttachment && (
                   <div style={{
                     padding: '8px 16px',
-                    background: 'rgba(99, 102, 241, 0.12)',
-                    borderTop: '1px solid rgba(99, 102, 241, 0.25)',
+                    background: 'var(--color-primary-subtle)',
+                    borderTop: '1px solid var(--color-border)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     fontSize: '0.82rem'
                   }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#fff' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-text)' }}>
                       {pendingChatAttachment.fileType === 'image' ? (
-                        <ImageIcon size={16} color="var(--primary)" />
+                        <ImageIcon size={16} color="var(--color-primary)" />
                       ) : (
-                        <FileText size={16} color="var(--secondary)" />
+                        <FileText size={16} color="var(--color-primary)" />
                       )}
                       <span style={{ fontWeight: 600 }}>Attached Solution: {pendingChatAttachment.fileName}</span>
                     </div>
@@ -2686,8 +2697,8 @@ export const InstructorDashboard = () => {
                   onSubmit={handleSendTutorReply}
                   style={{
                     padding: '1rem',
-                    borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-                    background: 'rgba(17, 24, 39, 0.98)',
+                    borderTop: '1px solid var(--color-border)',
+                    background: 'var(--color-surface)',
                     display: 'flex',
                     alignItems: 'center',
                     gap: '10px'
@@ -2706,12 +2717,12 @@ export const InstructorDashboard = () => {
                     onClick={() => chatFileInputRef.current?.click()}
                     disabled={uploadingChatAttachment || sendingReply}
                     style={{
-                      background: 'rgba(255, 255, 255, 0.06)',
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
-                      color: pendingChatAttachment ? 'var(--primary)' : 'var(--text-muted)',
+                      background: 'var(--color-surface)',
+                      border: '1px solid var(--color-border)',
+                      color: pendingChatAttachment ? 'var(--color-primary)' : 'var(--color-text-muted)',
                       width: '40px',
                       height: '40px',
-                      borderRadius: '10px',
+                      borderRadius: 'var(--radius-sm)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -2731,10 +2742,11 @@ export const InstructorDashboard = () => {
                     onChange={(e) => setThreadInput(e.target.value)}
                     style={{
                       flex: 1,
-                      borderRadius: '12px',
+                      borderRadius: 'var(--radius-sm)',
                       padding: '10px 14px',
-                      background: 'rgba(255, 255, 255, 0.04)',
-                      border: '1px solid rgba(255, 255, 255, 0.12)'
+                      background: 'var(--color-surface)',
+                      border: '1px solid var(--color-border)',
+                      color: 'var(--color-text)'
                     }}
                   />
 
@@ -2745,7 +2757,7 @@ export const InstructorDashboard = () => {
                     style={{
                       width: '42px',
                       height: '40px',
-                      borderRadius: '10px',
+                      borderRadius: 'var(--radius-sm)',
                       padding: 0,
                       display: 'flex',
                       alignItems: 'center',
@@ -2758,9 +2770,9 @@ export const InstructorDashboard = () => {
                 </form>
               </>
             ) : (
-              <div style={{ margin: 'auto', textAlign: 'center', color: 'var(--text-muted)' }}>
-                <MessageSquare size={48} color="var(--text-dim)" style={{ marginBottom: '1rem' }} />
-                <h3>Select a Student Doubt Thread</h3>
+              <div style={{ margin: 'auto', textAlign: 'center', color: 'var(--color-text-muted)' }}>
+                <MessageSquare size={48} color="var(--color-primary)" style={{ marginBottom: '1rem' }} />
+                <h3 style={{ color: 'var(--color-primary)' }}>Select a Student Doubt Thread</h3>
                 <p style={{ fontSize: '0.88rem' }}>Choose any conversation from the list to view questions and reply.</p>
               </div>
             )}
@@ -2770,13 +2782,13 @@ export const InstructorDashboard = () => {
 
       {/* Tutor Earnings & Student Purchase History Table (Revenue Tab or Curriculum footer) */}
       {(activeStudioTab === 'revenue' || activeStudioTab === 'curriculum') && (
-      <div className="glass-panel" style={{ padding: '1.5rem', marginTop: '2rem' }}>
+      <div className="glass-panel" style={{ padding: '1.5rem', marginTop: '2rem', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '10px' }}>
           <div>
-            <h3 style={{ fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <CreditCard size={20} color="var(--success)" /> Student Purchases &amp; Course Earnings History
+            <h3 style={{ fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-primary)' }}>
+              <CreditCard size={20} color="var(--color-primary)" /> Student Purchases &amp; Course Earnings History
             </h3>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', marginTop: '2px' }}>
+            <p style={{ color: 'var(--color-text-muted)', fontSize: '0.82rem', marginTop: '2px' }}>
               Real-time payment transactions and earnings from students enrolled in your courses
             </p>
           </div>
@@ -2786,10 +2798,10 @@ export const InstructorDashboard = () => {
         </div>
 
         {earningsData.recentTransactions.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '2.5rem', color: 'var(--text-muted)', fontSize: '0.88rem' }}>
+          <div style={{ textAlign: 'center', padding: '2.5rem', color: 'var(--color-text-muted)', fontSize: '0.88rem' }}>
             <div style={{ fontSize: '2rem', marginBottom: '8px', opacity: 0.7 }}>💰</div>
-            <p style={{ fontWeight: 600, color: 'var(--text-main)', marginBottom: '4px' }}>No student purchases recorded yet.</p>
-            <p style={{ fontSize: '0.78rem', color: 'var(--text-dim)' }}>
+            <p style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '4px' }}>No student purchases recorded yet.</p>
+            <p style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>
               When students purchase your paid courses, their payment details and your revenue will appear here in real-time.
             </p>
           </div>
@@ -2797,7 +2809,7 @@ export const InstructorDashboard = () => {
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.86rem' }}>
               <thead>
-                <tr style={{ borderBottom: '1px solid var(--border-color)', textAlign: 'left', color: 'var(--text-dim)' }}>
+                <tr style={{ borderBottom: '1px solid var(--color-border)', textAlign: 'left', color: 'var(--color-text-muted)' }}>
                   <th style={{ padding: '10px 12px' }}>Student</th>
                   <th style={{ padding: '10px 12px' }}>Course</th>
                   <th style={{ padding: '10px 12px' }}>Amount Earned</th>
@@ -2808,7 +2820,7 @@ export const InstructorDashboard = () => {
               </thead>
               <tbody>
                 {earningsData.recentTransactions.map((tx) => (
-                  <tr key={tx._id} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
+                  <tr key={tx._id} style={{ borderBottom: '1px solid var(--color-border)' }}>
                     <td style={{ padding: '10px 12px' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <img 
@@ -2817,15 +2829,15 @@ export const InstructorDashboard = () => {
                           style={{ width: '28px', height: '28px', borderRadius: '50%', objectFit: 'cover' }}
                         />
                         <div>
-                          <div style={{ fontWeight: 600 }}>{tx.user_id?.name || 'Student'}</div>
-                          <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>{tx.user_id?.email}</div>
+                          <div style={{ fontWeight: 600, color: 'var(--color-text)' }}>{tx.user_id?.name || 'Student'}</div>
+                          <div style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)' }}>{tx.user_id?.email}</div>
                         </div>
                       </div>
                     </td>
-                    <td style={{ padding: '10px 12px', fontWeight: 600, color: 'var(--secondary)' }}>
+                    <td style={{ padding: '10px 12px', fontWeight: 600, color: 'var(--color-primary)' }}>
                       {tx.course_id?.name || 'Course'}
                     </td>
-                    <td style={{ padding: '10px 12px', fontWeight: 700, color: 'var(--success)' }}>
+                    <td style={{ padding: '10px 12px', fontWeight: 700, color: 'var(--color-primary)' }}>
                       +${Number(tx.amount || 0).toFixed(2)}
                     </td>
                     <td style={{ padding: '10px 12px' }}>
@@ -2833,10 +2845,10 @@ export const InstructorDashboard = () => {
                         {tx.payment_method || 'CARD'}
                       </span>
                     </td>
-                    <td style={{ padding: '10px 12px', fontFamily: 'monospace', fontSize: '0.75rem', color: 'var(--text-dim)' }}>
+                    <td style={{ padding: '10px 12px', fontFamily: 'monospace', fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
                       {tx.transaction_reference}
                     </td>
-                    <td style={{ padding: '10px 12px', color: 'var(--text-muted)', fontSize: '0.8rem' }}>
+                    <td style={{ padding: '10px 12px', color: 'var(--color-text-muted)', fontSize: '0.8rem' }}>
                       {new Date(tx.createdAt || tx.transaction_date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
                     </td>
                   </tr>
@@ -2852,10 +2864,10 @@ export const InstructorDashboard = () => {
       {showCreateCourse && (
         <div style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-          background: 'rgba(0,0,0,0.8)', zIndex: 2000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem'
+          background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)', zIndex: 2000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem'
         }}>
-          <div className="glass-panel" style={{ maxWidth: '550px', width: '100%', padding: '2rem' }}>
-            <h2 style={{ fontSize: '1.5rem', marginBottom: '1.25rem' }}>Create New Course</h2>
+          <div className="glass-panel" style={{ maxWidth: '550px', width: '100%', padding: '2rem', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)' }}>
+            <h2 style={{ fontSize: '1.5rem', marginBottom: '1.25rem', color: 'var(--color-primary)' }}>Create New Course</h2>
             <form onSubmit={handleCreateCourseSubmit}>
               <div className="form-group">
                 <label>Course Title</label>
@@ -2865,6 +2877,7 @@ export const InstructorDashboard = () => {
                   placeholder="e.g. Master React 19 & Next.js"
                   value={newCourse.name}
                   onChange={(e) => setNewCourse({ ...newCourse, name: e.target.value })}
+                  style={{ borderRadius: 'var(--radius-sm)' }}
                   required
                 />
               </div>
@@ -2877,6 +2890,7 @@ export const InstructorDashboard = () => {
                   placeholder="Course overview and objectives..."
                   value={newCourse.desc}
                   onChange={(e) => setNewCourse({ ...newCourse, desc: e.target.value })}
+                  style={{ borderRadius: 'var(--radius-sm)' }}
                   required
                 />
               </div>
@@ -2888,6 +2902,7 @@ export const InstructorDashboard = () => {
                     className="form-control"
                     value={newCourse.type}
                     onChange={(e) => setNewCourse({ ...newCourse, type: e.target.value, price: e.target.value === 'free' ? 0 : newCourse.price })}
+                    style={{ borderRadius: 'var(--radius-sm)' }}
                   >
                     <option value="free">Free Course</option>
                     <option value="paid">Paid Course</option>
@@ -2903,6 +2918,7 @@ export const InstructorDashboard = () => {
                       placeholder="49.99"
                       value={newCourse.price}
                       onChange={(e) => setNewCourse({ ...newCourse, price: parseFloat(e.target.value) })}
+                      style={{ borderRadius: 'var(--radius-sm)' }}
                       required
                     />
                   </div>
@@ -2915,6 +2931,7 @@ export const InstructorDashboard = () => {
                   className="form-control"
                   value={newCourse.category}
                   onChange={(e) => setNewCourse({ ...newCourse, category: e.target.value })}
+                  style={{ borderRadius: 'var(--radius-sm)' }}
                   required
                 >
                   <option value="">Select Category...</option>
@@ -2931,9 +2948,10 @@ export const InstructorDashboard = () => {
                   accept="image/*"
                   className="form-control"
                   onChange={handleThumbnailUpload}
+                  style={{ borderRadius: 'var(--radius-sm)' }}
                 />
                 {uploadingThumbnail && (
-                  <div style={{ fontSize: '0.8rem', color: 'var(--secondary)', marginTop: '4px' }}>
+                  <div style={{ fontSize: '0.8rem', color: 'var(--color-primary)', marginTop: '4px' }}>
                     ⚡ Uploading course thumbnail image... Please wait.
                   </div>
                 )}
@@ -2942,9 +2960,9 @@ export const InstructorDashboard = () => {
                     <img 
                       src={newCourse.thumbnail} 
                       alt="Thumbnail Preview" 
-                      style={{ width: '90px', height: '55px', objectFit: 'cover', borderRadius: '6px', border: '1px solid var(--primary-glow)' }}
+                      style={{ width: '90px', height: '55px', objectFit: 'cover', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)' }}
                     />
-                    <div style={{ fontSize: '0.8rem', color: 'var(--success)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <div style={{ fontSize: '0.8rem', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', gap: '4px' }}>
                       <CheckCircle size={14} /> Course Thumbnail Uploaded!
                     </div>
                   </div>
@@ -2952,8 +2970,8 @@ export const InstructorDashboard = () => {
               </div>
 
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '1.5rem' }}>
-                <button type="button" onClick={() => setShowCreateCourse(false)} className="btn btn-secondary">Cancel</button>
-                <button type="submit" className="btn btn-primary">Create Course</button>
+                <button type="button" onClick={() => setShowCreateCourse(false)} className="btn btn-secondary" style={{ borderRadius: 'var(--radius-sm)' }}>Cancel</button>
+                <button type="submit" className="btn btn-primary" style={{ borderRadius: 'var(--radius-sm)' }}>Create Course</button>
               </div>
             </form>
           </div>
@@ -2964,10 +2982,10 @@ export const InstructorDashboard = () => {
       {showCreateQuiz && (
         <div style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-          background: 'rgba(0,0,0,0.8)', zIndex: 2000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem'
+          background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)', zIndex: 2000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem'
         }}>
-          <div className="glass-panel" style={{ maxWidth: '600px', width: '100%', padding: '2rem' }}>
-            <h2 style={{ fontSize: '1.5rem', marginBottom: '1.25rem' }}>Create Quiz for {selectedCourse?.name}</h2>
+          <div className="glass-panel" style={{ maxWidth: '600px', width: '100%', padding: '2rem', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)' }}>
+            <h2 style={{ fontSize: '1.5rem', marginBottom: '1.25rem', color: 'var(--color-primary)' }}>Create Quiz for {selectedCourse?.name}</h2>
             <form onSubmit={handleCreateQuizSubmit}>
               <div className="form-group">
                 <label>Quiz Title</label>
@@ -2977,6 +2995,7 @@ export const InstructorDashboard = () => {
                   placeholder="e.g. Assessment Quiz 1"
                   value={quizForm.title}
                   onChange={(e) => setQuizForm({ ...quizForm, title: e.target.value })}
+                  style={{ borderRadius: 'var(--radius-sm)' }}
                   required
                 />
               </div>
@@ -2989,6 +3008,7 @@ export const InstructorDashboard = () => {
                     className="form-control" 
                     value={quizForm.duration}
                     onChange={(e) => setQuizForm({ ...quizForm, duration: parseInt(e.target.value) })}
+                    style={{ borderRadius: 'var(--radius-sm)' }}
                     required
                   />
                 </div>
@@ -2999,6 +3019,7 @@ export const InstructorDashboard = () => {
                     className="form-control" 
                     value={quizForm.total_marks}
                     onChange={(e) => setQuizForm({ ...quizForm, total_marks: parseInt(e.target.value) })}
+                    style={{ borderRadius: 'var(--radius-sm)' }}
                     required
                   />
                 </div>
@@ -3007,12 +3028,12 @@ export const InstructorDashboard = () => {
               {/* Questions & Options Builder */}
               <div style={{ marginTop: '1rem', maxHeight: '340px', overflowY: 'auto', paddingRight: '6px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                  <h4 style={{ fontSize: '1rem', color: 'var(--secondary)' }}>Quiz Questions ({quizForm.questions.length})</h4>
+                  <h4 style={{ fontSize: '1rem', color: 'var(--color-primary)' }}>Quiz Questions ({quizForm.questions.length})</h4>
                   <button 
                     type="button" 
                     onClick={handleAddQuestionItem} 
                     className="btn btn-secondary btn-sm"
-                    style={{ fontSize: '0.8rem' }}
+                    style={{ fontSize: '0.8rem', borderRadius: 'var(--radius-sm)' }}
                   >
                     + Add Question
                   </button>
@@ -3020,14 +3041,14 @@ export const InstructorDashboard = () => {
 
                 {quizForm.questions.map((q, qIdx) => (
                   <div key={qIdx} style={{
-                    background: 'rgba(255, 255, 255, 0.03)',
-                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                    background: 'var(--color-background)',
+                    border: '1px solid var(--color-border)',
                     borderRadius: 'var(--radius-sm)',
                     padding: '1rem',
                     marginBottom: '1rem'
                   }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                      <span style={{ fontWeight: 'bold', fontSize: '0.88rem', color: 'var(--primary)' }}>
+                      <span style={{ fontWeight: 'bold', fontSize: '0.88rem', color: 'var(--color-primary)' }}>
                         Question {qIdx + 1}
                       </span>
                       {quizForm.questions.length > 1 && (
@@ -3048,11 +3069,12 @@ export const InstructorDashboard = () => {
                         placeholder="Enter question text..."
                         value={q.question}
                         onChange={(e) => handleQuestionTextChange(qIdx, e.target.value)}
+                        style={{ borderRadius: 'var(--radius-sm)' }}
                         required
                       />
                     </div>
 
-                    <div style={{ fontSize: '0.8rem', color: 'var(--text-dim)', marginBottom: '6px' }}>
+                    <div style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', marginBottom: '6px' }}>
                       Options (Select radio button for Correct Answer):
                     </div>
 
@@ -3065,12 +3087,12 @@ export const InstructorDashboard = () => {
                             checked={opt.is_correct === true}
                             onChange={() => handleSetCorrectOption(qIdx, oIdx)}
                             title="Mark as correct option"
-                            style={{ cursor: 'pointer', accentColor: 'var(--primary)' }}
+                            style={{ cursor: 'pointer', accentColor: 'var(--color-primary)' }}
                           />
                           <input 
                             type="text" 
                             className="form-control" 
-                            style={{ fontSize: '0.82rem', padding: '6px 10px', flex: 1 }}
+                            style={{ fontSize: '0.82rem', padding: '6px 10px', flex: 1, borderRadius: 'var(--radius-sm)' }}
                             placeholder={`Option ${oIdx + 1}`}
                             value={opt.option_text}
                             onChange={(e) => handleOptionTextChange(qIdx, oIdx, e.target.value)}
@@ -3104,7 +3126,7 @@ export const InstructorDashboard = () => {
                       <button 
                         type="button" 
                         onClick={() => handleAddOptionItem(qIdx)}
-                        style={{ background: 'none', border: 'none', color: 'var(--secondary)', cursor: 'pointer', fontSize: '0.78rem' }}
+                        style={{ background: 'none', border: 'none', color: 'var(--color-primary)', cursor: 'pointer', fontSize: '0.78rem' }}
                       >
                         + Add Extra Option
                       </button>
@@ -3114,8 +3136,8 @@ export const InstructorDashboard = () => {
               </div>
 
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '1.5rem' }}>
-                <button type="button" onClick={() => setShowCreateQuiz(false)} className="btn btn-secondary">Cancel</button>
-                <button type="submit" className="btn btn-primary">Save Quiz & Questions</button>
+                <button type="button" onClick={() => setShowCreateQuiz(false)} className="btn btn-secondary" style={{ borderRadius: 'var(--radius-sm)' }}>Cancel</button>
+                <button type="submit" className="btn btn-primary" style={{ borderRadius: 'var(--radius-sm)' }}>Save Quiz & Questions</button>
               </div>
             </form>
           </div>
@@ -3126,10 +3148,10 @@ export const InstructorDashboard = () => {
       {editingLesson && (
         <div style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-          background: 'rgba(0,0,0,0.8)', zIndex: 2000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem'
+          background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)', zIndex: 2000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem'
         }}>
-          <div className="glass-panel" style={{ maxWidth: '550px', width: '100%', padding: '2rem' }}>
-            <h2 style={{ fontSize: '1.4rem', marginBottom: '1.25rem' }}>Edit Lesson, Video &amp; PDF Notes</h2>
+          <div className="glass-panel" style={{ maxWidth: '550px', width: '100%', padding: '2rem', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)' }}>
+            <h2 style={{ fontSize: '1.4rem', marginBottom: '1.25rem', color: 'var(--color-primary)' }}>Edit Lesson, Video &amp; PDF Notes</h2>
             <form onSubmit={handleSaveEditedLesson}>
               <div className="form-group">
                 <label>Lesson Title</label>
@@ -3138,6 +3160,7 @@ export const InstructorDashboard = () => {
                   className="form-control" 
                   value={editLessonForm.title}
                   onChange={(e) => setEditLessonForm({ ...editLessonForm, title: e.target.value })}
+                  style={{ borderRadius: 'var(--radius-sm)' }}
                   required
                 />
               </div>
@@ -3145,26 +3168,27 @@ export const InstructorDashboard = () => {
               {/* Video File Upload / Replace */}
               <div className="form-group">
                 <label style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <Video size={16} color="var(--primary)" /> Replace / Upload New MP4 Video File
+                  <Video size={16} color="var(--color-primary)" /> Replace / Upload New MP4 Video File
                 </label>
                 <input 
                   type="file" 
                   accept="video/mp4,video/mkv,video/webm"
                   className="form-control"
                   onChange={handleEditVideoUpload}
+                  style={{ borderRadius: 'var(--radius-sm)' }}
                 />
                 {uploadingEditVideo && (
-                  <div style={{ fontSize: '0.8rem', color: 'var(--secondary)', marginTop: '4px' }}>
+                  <div style={{ fontSize: '0.8rem', color: 'var(--color-primary)', marginTop: '4px' }}>
                     ⚡ Uploading new local MP4 video file... Please wait.
                   </div>
                 )}
                 {editVideoFileName && !uploadingEditVideo && (
-                  <div style={{ fontSize: '0.8rem', color: 'var(--success)', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  <div style={{ fontSize: '0.8rem', color: 'var(--color-primary)', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
                     <CheckCircle size={14} /> New Video Uploaded: {editVideoFileName}
                   </div>
                 )}
                 {editLessonForm.video_url && (
-                  <div style={{ fontSize: '0.78rem', color: 'var(--text-dim)', marginTop: '4px', wordBreak: 'break-all' }}>
+                  <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '4px', wordBreak: 'break-all' }}>
                     Current Video: {editLessonForm.video_url}
                   </div>
                 )}
@@ -3173,28 +3197,29 @@ export const InstructorDashboard = () => {
               {/* PDF Notes / Document Upload & Replace */}
               <div className="form-group">
                 <label style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <FileText size={16} color="var(--secondary)" /> Attach / Change PDF Study Notes
+                  <FileText size={16} color="var(--color-primary)" /> Attach / Change PDF Study Notes
                 </label>
                 <input 
                   type="file" 
                   accept=".pdf,.doc,.docx"
                   className="form-control"
                   onChange={handleEditDocUpload}
+                  style={{ borderRadius: 'var(--radius-sm)' }}
                 />
                 {uploadingEditDoc && (
-                  <div style={{ fontSize: '0.8rem', color: 'var(--secondary)', marginTop: '4px' }}>
+                  <div style={{ fontSize: '0.8rem', color: 'var(--color-primary)', marginTop: '4px' }}>
                     ⚡ Uploading new PDF document... Please wait.
                   </div>
                 )}
                 {editDocFileName && !uploadingEditDoc && (
-                  <div style={{ fontSize: '0.8rem', color: 'var(--success)', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  <div style={{ fontSize: '0.8rem', color: 'var(--color-primary)', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
                     <CheckCircle size={14} /> New PDF Notes Selected: {editDocFileName}
                   </div>
                 )}
                 {editLessonForm.document_url && (
-                  <div style={{ fontSize: '0.78rem', color: 'var(--text-dim)', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                    <span style={{ color: 'var(--success)' }}>✓ Notes currently attached:</span>
-                    <a href={editLessonForm.document_url} target="_blank" rel="noreferrer" style={{ color: 'var(--secondary)', textDecoration: 'underline' }}>
+                  <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                    <span style={{ color: 'var(--color-primary)' }}>✓ Notes currently attached:</span>
+                    <a href={editLessonForm.document_url} target="_blank" rel="noreferrer" style={{ color: 'var(--color-primary)', textDecoration: 'underline' }}>
                       View / Download
                     </a>
                     <button 
@@ -3211,7 +3236,7 @@ export const InstructorDashboard = () => {
               <div className="form-group">
                 <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Clock size={14} /> Class Duration</span>
-                  <span style={{ fontSize: '0.72rem', color: 'var(--success)', fontWeight: 500 }}>
+                  <span style={{ fontSize: '0.72rem', color: 'var(--color-primary)', fontWeight: 500 }}>
                     ⚡ Auto-calculated from video ({editLessonForm.duration || '15 mins'})
                   </span>
                 </label>
@@ -3221,12 +3246,13 @@ export const InstructorDashboard = () => {
                   value={editLessonForm.duration}
                   onChange={(e) => setEditLessonForm({ ...editLessonForm, duration: e.target.value })}
                   placeholder="e.g. 15 mins or 12m 30s"
+                  style={{ borderRadius: 'var(--radius-sm)' }}
                 />
               </div>
 
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '1.5rem' }}>
-                <button type="button" onClick={() => setEditingLesson(null)} className="btn btn-secondary">Cancel</button>
-                <button type="submit" className="btn btn-primary">Save Updated Lesson &amp; Notes</button>
+                <button type="button" onClick={() => setEditingLesson(null)} className="btn btn-secondary" style={{ borderRadius: 'var(--radius-sm)' }}>Cancel</button>
+                <button type="submit" className="btn btn-primary" style={{ borderRadius: 'var(--radius-sm)' }}>Save Updated Lesson &amp; Notes</button>
               </div>
             </form>
           </div>
@@ -3240,7 +3266,8 @@ export const InstructorDashboard = () => {
           style={{
             position: 'fixed',
             inset: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            backgroundColor: 'rgba(0, 0, 0, 0.75)',
+            backdropFilter: 'blur(4px)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -3252,7 +3279,7 @@ export const InstructorDashboard = () => {
             <img 
               src={chatPreviewImage} 
               alt="Enlarged doubt screenshot" 
-              style={{ maxWidth: '100%', maxHeight: '90vh', borderRadius: '8px', objectFit: 'contain' }}
+              style={{ maxWidth: '100%', maxHeight: '90vh', borderRadius: 'var(--radius-sm)', objectFit: 'contain' }}
             />
             <button
               onClick={() => setChatPreviewImage(null)}

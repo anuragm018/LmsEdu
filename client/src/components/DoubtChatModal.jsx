@@ -129,8 +129,8 @@ export const DoubtChatModal = ({ isOpen, onClose, course, initialStudent = null 
     <div style={{
       position: 'fixed',
       inset: 0,
-      backgroundColor: 'rgba(5, 8, 16, 0.8)',
-      backdropFilter: 'blur(10px)',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      backdropFilter: 'blur(4px)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -139,18 +139,16 @@ export const DoubtChatModal = ({ isOpen, onClose, course, initialStudent = null 
       animation: 'fadeIn 0.2s ease-out'
     }}>
       <div 
-        className="glass-panel"
         style={{
-          width: '100%',
-          maxWidth: '680px',
-          height: '85vh',
-          maxHeight: '740px',
+          width: '640px',
+          maxWidth: '100%',
+          height: '700px',
+          maxHeight: '92vh',
           display: 'flex',
           flexDirection: 'column',
-          backgroundColor: '#0d131f',
-          border: '1px solid rgba(99, 102, 241, 0.3)',
-          borderRadius: '16px',
-          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.8)',
+          backgroundColor: 'var(--color-surface)',
+          border: '1px solid var(--color-border)',
+          borderRadius: 'var(--radius-sm)',
           overflow: 'hidden',
           position: 'relative'
         }}
@@ -158,11 +156,11 @@ export const DoubtChatModal = ({ isOpen, onClose, course, initialStudent = null 
         {/* Chat Header */}
         <div style={{
           padding: '1rem 1.25rem',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+          borderBottom: '1px solid var(--color-border)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          background: 'rgba(17, 24, 39, 0.95)'
+          background: 'var(--color-surface)'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <div style={{ position: 'relative' }}>
@@ -170,43 +168,43 @@ export const DoubtChatModal = ({ isOpen, onClose, course, initialStudent = null 
                 src={otherUser?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150'} 
                 alt={otherUser?.name}
                 style={{
-                  width: '42px',
-                  height: '42px',
+                  width: '40px',
+                  height: '40px',
                   borderRadius: '50%',
                   objectFit: 'cover',
-                  border: '2px solid var(--primary)'
+                  border: '2px solid var(--color-primary)'
                 }}
               />
               <span style={{
                 position: 'absolute',
                 bottom: 0,
                 right: 0,
-                width: '11px',
-                height: '11px',
+                width: '10px',
+                height: '10px',
                 borderRadius: '50%',
-                backgroundColor: 'var(--success)',
-                border: '2px solid #0d131f'
+                backgroundColor: 'var(--color-accent)',
+                border: '2px solid var(--color-surface)'
               }} />
             </div>
 
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <h3 style={{ fontSize: '1.05rem', margin: 0, fontWeight: 700 }}>
+                <h3 style={{ fontSize: '1rem', margin: 0, fontWeight: 700, color: 'var(--color-primary)' }}>
                   {otherUser?.name}
                 </h3>
                 <span style={{
                   fontSize: '0.7rem',
                   padding: '2px 8px',
-                  borderRadius: '10px',
-                  background: user?.role === 'student' ? 'rgba(99, 102, 241, 0.2)' : 'rgba(6, 182, 212, 0.2)',
-                  color: user?.role === 'student' ? 'var(--primary)' : 'var(--secondary)',
+                  borderRadius: 'var(--radius-full)',
+                  background: 'var(--color-primary-subtle)',
+                  color: 'var(--color-primary)',
                   fontWeight: 600
                 }}>
                   {user?.role === 'student' ? '👨‍🏫 Course Tutor' : '🎓 Enrolled Student'}
                 </span>
               </div>
-              <p style={{ margin: 0, fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                Course: <strong style={{ color: '#fff' }}>{course?.name}</strong>
+              <p style={{ margin: 0, fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>
+                Course: <strong style={{ color: 'var(--color-text)' }}>{course?.name}</strong>
               </p>
             </div>
           </div>
@@ -216,10 +214,10 @@ export const DoubtChatModal = ({ isOpen, onClose, course, initialStudent = null 
             style={{
               background: 'none',
               border: 'none',
-              color: 'var(--text-dim)',
+              color: 'var(--color-text-muted)',
               cursor: 'pointer',
               padding: '6px',
-              borderRadius: '8px',
+              borderRadius: 'var(--radius-sm)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center'
@@ -238,30 +236,30 @@ export const DoubtChatModal = ({ isOpen, onClose, course, initialStudent = null 
           display: 'flex',
           flexDirection: 'column',
           gap: '12px',
-          background: 'radial-gradient(ellipse at bottom, rgba(99, 102, 241, 0.05) 0%, rgba(13, 19, 31, 0) 70%)'
+          background: 'var(--color-background)'
         }}>
           {messages.length === 0 ? (
             <div style={{
               margin: 'auto',
               textAlign: 'center',
-              color: 'var(--text-muted)',
+              color: 'var(--color-text-muted)',
               maxWidth: '360px',
               padding: '2rem 1rem'
             }}>
               <div style={{
-                width: '56px',
-                height: '56px',
-                borderRadius: '50%',
-                background: 'rgba(99, 102, 241, 0.15)',
-                color: 'var(--primary)',
+                width: '52px',
+                height: '52px',
+                borderRadius: 'var(--radius-sm)',
+                background: 'var(--color-primary-subtle)',
+                color: 'var(--color-primary)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 margin: '0 auto 1rem'
               }}>
-                <MessageSquare size={28} />
+                <MessageSquare size={26} />
               </div>
-              <h4 style={{ color: '#fff', marginBottom: '0.4rem' }}>
+              <h4 style={{ color: 'var(--color-primary)', marginBottom: '0.4rem' }}>
                 {user?.role === 'student' ? 'Ask your tutor any doubt' : 'No messages yet'}
               </h4>
               <p style={{ fontSize: '0.85rem' }}>
@@ -291,15 +289,12 @@ export const DoubtChatModal = ({ isOpen, onClose, course, initialStudent = null 
                 >
                   <div style={{
                     padding: '10px 14px',
-                    borderRadius: isMe ? '16px 16px 4px 16px' : '16px 16px 16px 4px',
-                    background: isMe 
-                      ? 'linear-gradient(135deg, #4f46e5, #6366f1)' 
-                      : 'rgba(31, 41, 55, 0.85)',
-                    color: '#fff',
-                    border: isMe ? 'none' : '1px solid rgba(255, 255, 255, 0.08)',
-                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.25)',
+                    borderRadius: 'var(--radius-sm)',
+                    background: isMe ? 'var(--color-primary)' : 'var(--color-surface)',
+                    color: isMe ? 'var(--color-text-on-dark)' : 'var(--color-text)',
+                    border: '1px solid var(--color-border)',
                     wordBreak: 'break-word',
-                    fontSize: '0.92rem',
+                    fontSize: '0.9rem',
                     lineHeight: '1.45'
                   }}>
                     {/* Sender name for other party */}
@@ -307,7 +302,7 @@ export const DoubtChatModal = ({ isOpen, onClose, course, initialStudent = null 
                       <div style={{
                         fontSize: '0.74rem',
                         fontWeight: 700,
-                        color: 'var(--secondary)',
+                        color: 'var(--color-primary)',
                         marginBottom: '4px'
                       }}>
                         {msg.sender?.name || 'User'}
@@ -328,10 +323,10 @@ export const DoubtChatModal = ({ isOpen, onClose, course, initialStudent = null 
                               <div 
                                 onClick={() => setPreviewImage(att.fileUrl)}
                                 style={{
-                                  borderRadius: '8px',
+                                  borderRadius: 'var(--radius-sm)',
                                   overflow: 'hidden',
                                   cursor: 'pointer',
-                                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                                  border: '1px solid var(--color-border)',
                                   maxHeight: '220px'
                                 }}
                               >
@@ -357,20 +352,20 @@ export const DoubtChatModal = ({ isOpen, onClose, course, initialStudent = null 
                                   alignItems: 'center',
                                   gap: '10px',
                                   padding: '8px 12px',
-                                  borderRadius: '8px',
-                                  background: 'rgba(0, 0, 0, 0.25)',
-                                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                                  color: '#fff',
+                                  borderRadius: 'var(--radius-sm)',
+                                  background: 'var(--color-primary-subtle)',
+                                  border: '1px solid var(--color-border)',
+                                  color: 'var(--color-primary)',
                                   textDecoration: 'none',
                                   fontSize: '0.82rem'
                                 }}
                               >
-                                <FileText size={18} color="var(--secondary)" />
+                                <FileText size={18} />
                                 <div style={{ flex: 1, minWidth: 0 }}>
                                   <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontWeight: 600 }}>
                                     {att.fileName}
                                   </div>
-                                  <div style={{ fontSize: '0.7rem', color: 'rgba(255, 255, 255, 0.6)' }}>
+                                  <div style={{ fontSize: '0.7rem', color: 'var(--color-text-muted)' }}>
                                     {att.fileSize ? `${Math.round(att.fileSize / 1024)} KB` : 'Document'}
                                   </div>
                                 </div>
@@ -389,7 +384,7 @@ export const DoubtChatModal = ({ isOpen, onClose, course, initialStudent = null 
                     alignItems: 'center',
                     gap: '4px',
                     fontSize: '0.72rem',
-                    color: 'var(--text-dim)',
+                    color: 'var(--color-text-subtle)',
                     marginTop: '4px',
                     padding: '0 4px'
                   }}>
@@ -397,7 +392,7 @@ export const DoubtChatModal = ({ isOpen, onClose, course, initialStudent = null 
                     {isMe && (
                       <CheckCheck 
                         size={14} 
-                        color={msg.read ? 'var(--secondary)' : 'var(--text-dim)'} 
+                        color={msg.read ? 'var(--color-accent)' : 'var(--color-text-subtle)'} 
                         title={msg.read ? 'Read' : 'Delivered'}
                       />
                     )}
@@ -413,18 +408,18 @@ export const DoubtChatModal = ({ isOpen, onClose, course, initialStudent = null 
         {pendingAttachment && (
           <div style={{
             padding: '8px 16px',
-            background: 'rgba(99, 102, 241, 0.12)',
-            borderTop: '1px solid rgba(99, 102, 241, 0.25)',
+            background: 'var(--color-primary-subtle)',
+            borderTop: '1px solid var(--color-border)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             fontSize: '0.82rem'
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#fff' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-primary)' }}>
               {pendingAttachment.fileType === 'image' ? (
-                <ImageIcon size={16} color="var(--primary)" />
+                <ImageIcon size={16} />
               ) : (
-                <FileText size={16} color="var(--secondary)" />
+                <FileText size={16} />
               )}
               <span style={{ fontWeight: 600 }}>Attached: {pendingAttachment.fileName}</span>
             </div>
@@ -434,7 +429,7 @@ export const DoubtChatModal = ({ isOpen, onClose, course, initialStudent = null 
               style={{
                 background: 'none',
                 border: 'none',
-                color: 'var(--danger)',
+                color: 'var(--color-danger)',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center'
@@ -449,8 +444,8 @@ export const DoubtChatModal = ({ isOpen, onClose, course, initialStudent = null 
         {/* Input Bar */}
         <div style={{
           padding: '1rem',
-          borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-          background: 'rgba(17, 24, 39, 0.98)',
+          borderTop: '1px solid var(--color-border)',
+          background: 'var(--color-surface)',
           display: 'flex',
           alignItems: 'center',
           gap: '10px'
@@ -470,12 +465,12 @@ export const DoubtChatModal = ({ isOpen, onClose, course, initialStudent = null 
             onClick={() => fileInputRef.current?.click()}
             disabled={uploadingAttachment || sending}
             style={{
-              background: 'rgba(255, 255, 255, 0.06)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              color: pendingAttachment ? 'var(--primary)' : 'var(--text-muted)',
+              background: 'var(--color-surface)',
+              border: '1px solid var(--color-border)',
+              color: pendingAttachment ? 'var(--color-primary)' : 'var(--color-text-muted)',
               width: '40px',
               height: '40px',
-              borderRadius: '10px',
+              borderRadius: 'var(--radius-sm)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -486,7 +481,7 @@ export const DoubtChatModal = ({ isOpen, onClose, course, initialStudent = null 
             title="Attach image or document (PDF, DOCX)"
           >
             {uploadingAttachment ? (
-              <div style={{ width: '16px', height: '16px', border: '2px solid var(--primary)', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
+              <div style={{ width: '16px', height: '16px', border: '2px solid var(--color-primary)', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
             ) : (
               <Paperclip size={18} />
             )}
@@ -503,34 +498,22 @@ export const DoubtChatModal = ({ isOpen, onClose, course, initialStudent = null 
             disabled={sending}
             style={{
               flex: 1,
-              borderRadius: '12px',
-              padding: '10px 14px',
-              background: 'rgba(255, 255, 255, 0.04)',
-              border: '1px solid rgba(255, 255, 255, 0.12)'
+              borderRadius: 'var(--radius-sm)',
+              padding: '10px 14px'
             }}
           />
 
-          {/* Send Button */}
+          {/* Send Button: Green Primary CTA */}
           <button
             type="button"
             onClick={handleSendMessage}
             disabled={(!inputText.trim() && !pendingAttachment) || sending || uploadingAttachment}
+            className="btn btn-primary"
             style={{
               width: '42px',
               height: '40px',
-              borderRadius: '10px',
-              background: (!inputText.trim() && !pendingAttachment) 
-                ? 'rgba(255, 255, 255, 0.08)' 
-                : 'linear-gradient(135deg, var(--primary), var(--accent))',
-              color: '#fff',
-              border: 'none',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: (!inputText.trim() && !pendingAttachment) ? 'not-allowed' : 'pointer',
-              flexShrink: 0,
-              boxShadow: (!inputText.trim() && !pendingAttachment) ? 'none' : '0 2px 10px rgba(99, 102, 241, 0.4)',
-              transition: 'all 0.2s ease'
+              padding: 0,
+              flexShrink: 0
             }}
             title="Send Message (Enter)"
           >

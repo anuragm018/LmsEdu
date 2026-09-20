@@ -96,12 +96,12 @@ export default mongoose.model('User', userSchema);
 \`\`\``;
   }
 
-  return `🤖 **EduSphere AI**:
-Regarding your question: **"${query}"** in **${lessonTitle || courseName || "your course"}**:
+  return `🤖 EduSphere AI:
+Regarding your question: "${query}" in ${lessonTitle || courseName || "your course"}:
 
-1. **Explanation**: Break down the concept into smaller parts, understand the logic, and test with small code examples.
-2. **Key Takeaway**: Always verify syntax, test edge cases, and inspect runtime data.
-3. **Next Step**: Review the accompanying video lecture, and feel free to ask more specific questions or request a code snippet!
+1. Explanation: Break down the concept into smaller parts, understand the logic, and test with small code examples.
+2. Key Takeaway: Always verify syntax, test edge cases, and inspect runtime data.
+3. Next Step: Review the accompanying video lecture, and feel free to ask more specific questions or request a code snippet!
 
 *(Note: Add your free Gemini key to \`backend/.env\` under \`GEMINI_API_KEY\` from https://aistudio.google.com/ to get real-time dynamic AI explanations)*`;
 };

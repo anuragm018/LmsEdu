@@ -48,13 +48,13 @@ const FormattedMessage = ({ text }) => {
 
     return segments.map((seg, i) => {
       if (seg.startsWith('**') && seg.endsWith('**')) {
-        return <strong key={i} style={{ color: '#fff', fontWeight: 700 }}>{seg.slice(2, -2)}</strong>;
+        return <strong key={i} style={{ fontWeight: 700 }}>{seg.slice(2, -2)}</strong>;
       }
       if (seg.startsWith('`') && seg.endsWith('`')) {
         return (
           <code key={i} style={{
-            background: 'rgba(99, 102, 241, 0.25)',
-            color: '#a5b4fc',
+            background: 'var(--color-primary-subtle)',
+            color: 'var(--color-primary)',
             padding: '2px 6px',
             borderRadius: '4px',
             fontSize: '0.82em',
@@ -75,16 +75,16 @@ const FormattedMessage = ({ text }) => {
           return (
             <div key={pIdx} style={{
               margin: '8px 0',
-              background: '#070b14',
-              borderRadius: '8px',
-              border: '1px solid rgba(255,255,255,0.1)',
+              background: 'var(--color-background)',
+              borderRadius: 'var(--radius-sm)',
+              border: '1px solid var(--color-border)',
               overflow: 'hidden'
             }}>
               <div style={{
                 padding: '4px 10px',
-                background: 'rgba(255,255,255,0.05)',
+                background: 'var(--color-primary-subtle)',
                 fontSize: '0.7rem',
-                color: 'var(--text-dim)',
+                color: 'var(--color-primary)',
                 textTransform: 'uppercase',
                 fontWeight: 600,
                 letterSpacing: '0.05em'
@@ -95,7 +95,7 @@ const FormattedMessage = ({ text }) => {
                 margin: 0,
                 padding: '10px 12px',
                 fontSize: '0.82rem',
-                color: '#e2e8f0',
+                color: 'var(--color-text)',
                 fontFamily: 'Consolas, Monaco, "Courier New", monospace',
                 overflowX: 'auto',
                 lineHeight: 1.45
@@ -117,14 +117,14 @@ const FormattedMessage = ({ text }) => {
               }
               if (trimmed.startsWith('### ')) {
                 return (
-                  <h4 key={lIdx} style={{ fontSize: '0.95rem', fontWeight: 700, margin: '8px 0 4px', color: '#fff' }}>
+                  <h4 key={lIdx} style={{ fontSize: '0.95rem', fontWeight: 700, margin: '8px 0 4px', color: 'var(--color-text)' }}>
                     {renderInline(trimmed.slice(4))}
                   </h4>
                 );
               }
               if (trimmed.startsWith('## ')) {
                 return (
-                  <h3 key={lIdx} style={{ fontSize: '1.05rem', fontWeight: 700, margin: '10px 0 4px', color: '#fff' }}>
+                  <h3 key={lIdx} style={{ fontSize: '1.05rem', fontWeight: 700, margin: '10px 0 4px', color: 'var(--color-text)' }}>
                     {renderInline(trimmed.slice(3))}
                   </h3>
                 );
@@ -132,7 +132,7 @@ const FormattedMessage = ({ text }) => {
               if (trimmed.startsWith('* ') || trimmed.startsWith('- ') || trimmed.startsWith('• ')) {
                 return (
                   <div key={lIdx} style={{ display: 'flex', gap: '6px', alignItems: 'flex-start', margin: '3px 0' }}>
-                    <span style={{ color: 'var(--primary)', fontWeight: 'bold' }}>•</span>
+                    <span style={{ color: 'var(--color-primary)', fontWeight: 'bold' }}>•</span>
                     <span style={{ flex: 1 }}>{renderInline(trimmed.replace(/^(\*|-|•)\s+/, ''))}</span>
                   </div>
                 );
@@ -257,54 +257,41 @@ export const AIChatbot = ({ courseName = '', lessonTitle = '' }) => {
 
   return (
     <>
-      {/* Floating Trigger Button: Ask AI */}
+      {/* Floating Trigger Button: Navy */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         style={{
           position: 'fixed',
           bottom: '24px',
           right: '24px',
-          height: '56px',
-          padding: '0 20px',
-          borderRadius: '28px',
-          background: 'linear-gradient(135deg, var(--primary), var(--secondary))',
-          color: '#ffffff',
-          border: '1px solid rgba(255, 255, 255, 0.25)',
-          boxShadow: '0 8px 24px rgba(99, 102, 241, 0.45)',
+          height: '48px',
+          padding: '0 18px',
+          borderRadius: 'var(--radius-sm)',
+          background: 'var(--color-primary)',
+          color: 'var(--color-text-on-dark)',
+          border: '1px solid var(--color-primary-hover)',
           cursor: 'pointer',
           zIndex: 1500,
           display: 'flex',
           alignItems: 'center',
-          gap: '10px',
-          fontWeight: 700,
-          fontSize: '0.92rem',
-          letterSpacing: '0.01em',
+          gap: '8px',
+          fontWeight: 600,
+          fontSize: '0.9rem',
           outline: 'none',
-          transition: 'all 0.25s ease'
+          transition: 'all 0.2s ease'
         }}
         title="EduSphere AI Doubt Assistant"
       >
-        <div style={{
-          width: '32px',
-          height: '32px',
-          borderRadius: '50%',
-          background: 'rgba(255, 255, 255, 0.2)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}>
-          {isOpen ? <X size={20} color="#ffffff" /> : <Bot size={20} color="#ffffff" />}
-        </div>
+        <Bot size={18} />
         <span>{isOpen ? 'Close AI' : 'Ask AI'}</span>
       </button>
 
       {/* Chat Window Popup */}
       {isOpen && (
         <div
-          className="glass-panel"
           style={{
             position: 'fixed',
-            bottom: '96px',
+            bottom: '84px',
             right: '24px',
             width: '380px',
             maxWidth: 'calc(100vw - 32px)',
@@ -313,18 +300,18 @@ export const AIChatbot = ({ courseName = '', lessonTitle = '' }) => {
             display: 'flex',
             flexDirection: 'column',
             overflow: 'hidden',
-            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.6)',
-            border: '1px solid rgba(99, 102, 241, 0.3)',
-            borderRadius: '20px',
-            background: '#0d1322'
+            border: '1px solid var(--color-border)',
+            borderRadius: 'var(--radius-sm)',
+            background: 'var(--color-surface)'
           }}
         >
-          {/* Header */}
+          {/* Header: Navy */}
           <div
             style={{
               padding: '12px 16px',
-              background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(6, 182, 212, 0.2))',
-              borderBottom: '1px solid var(--border-color)',
+              background: 'var(--color-primary)',
+              color: 'var(--color-text-on-dark)',
+              borderBottom: '1px solid var(--color-border)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between'
@@ -332,25 +319,25 @@ export const AIChatbot = ({ courseName = '', lessonTitle = '' }) => {
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <div style={{
-                width: '34px',
-                height: '34px',
-                borderRadius: '50%',
-                background: 'linear-gradient(135deg, var(--primary), var(--accent))',
+                width: '30px',
+                height: '30px',
+                borderRadius: 'var(--radius-sm)',
+                background: 'rgba(255, 255, 255, 0.15)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 color: '#fff'
               }}>
-                <Sparkles size={18} />
+                <Sparkles size={16} />
               </div>
               <div>
-                <h4 style={{ fontSize: '0.95rem', fontWeight: 700 }}>EduSphere AI Assistant</h4>
-                <span style={{ fontSize: '0.72rem', color: 'var(--success)', fontWeight: 600 }}>● Online • Doubt Solver</span>
+                <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--color-text-on-dark)', margin: 0 }}>EduSphere AI Assistant</h4>
+                <span style={{ fontSize: '0.72rem', color: 'var(--color-accent)', fontWeight: 600 }}>● Online • Doubt Solver</span>
               </div>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}
+              style={{ background: 'none', border: 'none', color: 'var(--color-text-on-dark)', cursor: 'pointer' }}
             >
               <ChevronDown size={20} />
             </button>
@@ -364,7 +351,8 @@ export const AIChatbot = ({ courseName = '', lessonTitle = '' }) => {
               overflowY: 'auto',
               display: 'flex',
               flexDirection: 'column',
-              gap: '12px'
+              gap: '12px',
+              background: 'var(--color-background)'
             }}
           >
             {messages.map((msg, idx) => (
@@ -378,10 +366,10 @@ export const AIChatbot = ({ courseName = '', lessonTitle = '' }) => {
                 <div
                   style={{
                     padding: '10px 14px',
-                    borderRadius: msg.sender === 'user' ? '16px 16px 2px 16px' : '16px 16px 16px 2px',
-                    background: msg.sender === 'user' ? 'linear-gradient(135deg, var(--primary), var(--accent))' : 'rgba(255, 255, 255, 0.06)',
-                    border: msg.sender === 'user' ? 'none' : '1px solid var(--border-color)',
-                    color: '#ffffff',
+                    borderRadius: 'var(--radius-sm)',
+                    background: msg.sender === 'user' ? 'var(--color-primary)' : 'var(--color-surface)',
+                    border: '1px solid var(--color-border)',
+                    color: msg.sender === 'user' ? 'var(--color-text-on-dark)' : 'var(--color-text)',
                     fontSize: '0.86rem',
                     lineHeight: '1.45'
                   }}
@@ -399,10 +387,10 @@ export const AIChatbot = ({ courseName = '', lessonTitle = '' }) => {
                               style={{
                                 maxWidth: '100%',
                                 maxHeight: '160px',
-                                borderRadius: '8px',
+                                borderRadius: 'var(--radius-sm)',
                                 objectFit: 'cover',
                                 display: 'block',
-                                border: '1px solid rgba(255,255,255,0.2)'
+                                border: '1px solid var(--color-border)'
                               }}
                             />
                           ) : (
@@ -410,9 +398,10 @@ export const AIChatbot = ({ courseName = '', lessonTitle = '' }) => {
                               display: 'inline-flex',
                               alignItems: 'center',
                               gap: '6px',
-                              background: 'rgba(255, 255, 255, 0.15)',
+                              background: 'var(--color-primary-subtle)',
+                              color: 'var(--color-primary)',
                               padding: '4px 8px',
-                              borderRadius: '6px',
+                              borderRadius: 'var(--radius-sm)',
                               fontSize: '0.78rem'
                             }}>
                               <File size={14} />
@@ -432,7 +421,7 @@ export const AIChatbot = ({ courseName = '', lessonTitle = '' }) => {
                 <div
                   style={{
                     fontSize: '0.65rem',
-                    color: 'var(--text-dim)',
+                    color: 'var(--color-text-subtle)',
                     marginTop: '2px',
                     textAlign: msg.sender === 'user' ? 'right' : 'left'
                   }}
@@ -442,7 +431,7 @@ export const AIChatbot = ({ courseName = '', lessonTitle = '' }) => {
               </div>
             ))}
             {loading && (
-              <div style={{ alignSelf: 'flex-start', color: 'var(--secondary)', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <div style={{ alignSelf: 'flex-start', color: 'var(--color-text-muted)', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <Sparkles size={14} className="animate-spin" /> AI is thinking...
               </div>
             )}
@@ -456,18 +445,18 @@ export const AIChatbot = ({ courseName = '', lessonTitle = '' }) => {
               display: 'flex',
               gap: '6px',
               overflowX: 'auto',
-              borderTop: '1px solid var(--border-color)',
-              background: 'rgba(0, 0, 0, 0.2)'
+              borderTop: '1px solid var(--color-border)',
+              background: 'var(--color-surface)'
             }}
           >
             <button
               onClick={() => handleSend('Explain this lesson simply')}
               style={{
-                background: 'rgba(99, 102, 241, 0.15)',
-                border: '1px solid rgba(99, 102, 241, 0.3)',
-                color: 'var(--primary)',
+                background: 'var(--color-primary-subtle)',
+                border: '1px solid var(--color-border)',
+                color: 'var(--color-primary)',
                 padding: '4px 10px',
-                borderRadius: 'var(--radius-full)',
+                borderRadius: 'var(--radius-sm)',
                 fontSize: '0.72rem',
                 cursor: 'pointer',
                 whiteSpace: 'nowrap',
@@ -482,11 +471,11 @@ export const AIChatbot = ({ courseName = '', lessonTitle = '' }) => {
             <button
               onClick={() => handleSend('Give me a code example')}
               style={{
-                background: 'rgba(6, 182, 212, 0.15)',
-                border: '1px solid rgba(6, 182, 212, 0.3)',
-                color: 'var(--secondary)',
+                background: 'var(--color-primary-subtle)',
+                border: '1px solid var(--color-border)',
+                color: 'var(--color-primary)',
                 padding: '4px 10px',
-                borderRadius: 'var(--radius-full)',
+                borderRadius: 'var(--radius-sm)',
                 fontSize: '0.72rem',
                 cursor: 'pointer',
                 whiteSpace: 'nowrap',
@@ -501,11 +490,11 @@ export const AIChatbot = ({ courseName = '', lessonTitle = '' }) => {
             <button
               onClick={() => handleSend('Summarize key points')}
               style={{
-                background: 'rgba(16, 185, 129, 0.15)',
-                border: '1px solid rgba(16, 185, 129, 0.3)',
-                color: 'var(--success)',
+                background: 'var(--color-primary-subtle)',
+                border: '1px solid var(--color-border)',
+                color: 'var(--color-primary)',
                 padding: '4px 10px',
-                borderRadius: 'var(--radius-full)',
+                borderRadius: 'var(--radius-sm)',
                 fontSize: '0.72rem',
                 cursor: 'pointer',
                 whiteSpace: 'nowrap',
@@ -522,26 +511,26 @@ export const AIChatbot = ({ courseName = '', lessonTitle = '' }) => {
           {attachment && (
             <div style={{
               padding: '6px 12px',
-              background: 'rgba(99, 102, 241, 0.12)',
-              borderTop: '1px solid rgba(99, 102, 241, 0.25)',
+              background: 'var(--color-primary-subtle)',
+              borderTop: '1px solid var(--color-border)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
               gap: '8px'
             }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', color: '#a5b4fc', minWidth: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', color: 'var(--color-primary)', minWidth: 0 }}>
                 {attachment.fileType === 'image' ? <ImageIcon size={14} /> : <File size={14} />}
                 <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {attachment.fileName}
                 </span>
-                <span style={{ fontSize: '0.68rem', color: 'var(--text-dim)' }}>
+                <span style={{ fontSize: '0.68rem', color: 'var(--color-text-subtle)' }}>
                   ({Math.round(attachment.fileSize / 1024)} KB)
                 </span>
               </div>
               <button
                 type="button"
                 onClick={() => setAttachment(null)}
-                style={{ background: 'none', border: 'none', color: 'var(--danger)', cursor: 'pointer', display: 'flex', padding: '2px' }}
+                style={{ background: 'none', border: 'none', color: 'var(--color-danger)', cursor: 'pointer', display: 'flex', padding: '2px' }}
                 title="Remove attachment"
               >
                 <X size={14} />
@@ -569,7 +558,8 @@ export const AIChatbot = ({ courseName = '', lessonTitle = '' }) => {
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
-              background: '#090d16'
+              background: 'var(--color-surface)',
+              borderTop: '1px solid var(--color-border)'
             }}
           >
             {/* Attach File Button */}
@@ -578,10 +568,10 @@ export const AIChatbot = ({ courseName = '', lessonTitle = '' }) => {
               onClick={() => fileInputRef.current?.click()}
               disabled={uploadingFile || loading}
               style={{
-                background: 'rgba(255, 255, 255, 0.08)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
+                background: 'var(--color-surface)',
+                border: '1px solid var(--color-border)',
                 borderRadius: 'var(--radius-sm)',
-                color: uploadingFile ? 'var(--primary)' : 'var(--text-muted)',
+                color: uploadingFile ? 'var(--color-primary)' : 'var(--color-text-muted)',
                 padding: '8px',
                 display: 'flex',
                 alignItems: 'center',
@@ -602,10 +592,10 @@ export const AIChatbot = ({ courseName = '', lessonTitle = '' }) => {
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
             />
+            {/* One primary green CTA */}
             <button
               type="submit"
               className="btn btn-primary btn-sm"
-              style={{ borderRadius: 'var(--radius-sm)' }}
               disabled={loading || uploadingFile || (!inputMessage.trim() && !attachment)}
             >
               <Send size={16} />

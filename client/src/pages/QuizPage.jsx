@@ -81,7 +81,7 @@ export const QuizPage = () => {
   };
 
   if (loading || !quiz) {
-    return <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-muted)' }}>Loading Quiz...</div>;
+    return <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--color-text-muted)' }}>Loading Quiz...</div>;
   }
 
   return (
@@ -98,25 +98,25 @@ export const QuizPage = () => {
           <button onClick={() => navigate(-1)} className="btn btn-sm btn-secondary" style={{ marginBottom: '8px' }}>
             <ArrowLeft size={14} /> Back
           </button>
-          <h2 style={{ fontSize: '1.5rem' }}>{quiz.title}</h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Total Marks: {quiz.total_marks}</p>
+          <h2 style={{ fontSize: '1.5rem', color: 'var(--color-primary)', fontWeight: 700 }}>{quiz.title}</h2>
+          <p style={{ color: 'var(--color-text-muted)', fontSize: '0.85rem' }}>Total Marks: {quiz.total_marks}</p>
         </div>
 
         {/* Live Timer */}
         {!result && (
           <div style={{
-            background: 'rgba(245, 158, 11, 0.15)',
-            border: '1px solid rgba(245, 158, 11, 0.4)',
+            background: 'var(--color-primary-subtle)',
+            border: '1px solid var(--color-primary)',
             padding: '10px 18px',
             borderRadius: 'var(--radius-sm)',
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
-            color: '#f59e0b',
+            color: 'var(--color-primary)',
             fontWeight: 800,
             fontSize: '1.3rem'
           }}>
-            <Clock size={22} /> {formatTimer(timeLeft)}
+            <Clock size={22} color="var(--color-primary)" /> {formatTimer(timeLeft)}
           </div>
         )}
       </div>
@@ -127,19 +127,21 @@ export const QuizPage = () => {
           padding: '2.5rem',
           textAlign: 'center',
           marginBottom: '2rem',
-          border: result.passed ? '2px solid rgba(16, 185, 129, 0.4)' : '2px solid rgba(239, 68, 68, 0.4)'
+          background: 'var(--color-surface)',
+          borderRadius: 'var(--radius-sm)',
+          border: result.passed ? '2px solid var(--color-accent)' : '2px solid var(--color-danger)'
         }}>
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
             {result.passed ? (
-              <CheckCircle size={64} color="var(--success)" />
+              <CheckCircle size={64} color="var(--color-accent)" />
             ) : (
-              <XCircle size={64} color="var(--danger)" />
+              <XCircle size={64} color="var(--color-danger)" />
             )}
           </div>
-          <h2 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>
+          <h2 style={{ fontSize: '2rem', marginBottom: '0.5rem', color: result.passed ? 'var(--color-primary)' : 'var(--color-danger)', fontWeight: 700 }}>
             {result.passed ? 'Congratulations! Quiz Passed' : 'Quiz Attempt Completed'}
           </h2>
-          <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
+          <p style={{ color: 'var(--color-text-muted)', marginBottom: '1.5rem' }}>
             You scored <strong>{result.score}</strong> out of <strong>{result.totalPossible}</strong> ({result.percentage}%)
           </p>
           <button onClick={() => navigate(-1)} className="btn btn-primary">
@@ -151,9 +153,9 @@ export const QuizPage = () => {
       {/* Questions List */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
         {quiz.questions?.map((q, idx) => (
-          <div key={q._id} className="glass-panel" style={{ padding: '1.5rem' }}>
-            <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', display: 'flex', gap: '10px' }}>
-              <span style={{ color: 'var(--primary)' }}>Q{idx + 1}.</span> {q.question}
+          <div key={q._id} className="glass-panel" style={{ padding: '1.5rem', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)' }}>
+            <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', display: 'flex', gap: '10px', color: 'var(--color-text)' }}>
+              <span style={{ color: 'var(--color-primary)', fontWeight: 700 }}>Q{idx + 1}.</span> {q.question}
             </h3>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -167,12 +169,13 @@ export const QuizPage = () => {
                       textAlign: 'left',
                       padding: '12px 16px',
                       borderRadius: 'var(--radius-sm)',
-                      background: isSelected ? 'rgba(99, 102, 241, 0.2)' : 'rgba(255, 255, 255, 0.03)',
-                      border: isSelected ? '1px solid var(--primary)' : '1px solid var(--border-color)',
-                      color: isSelected ? '#ffffff' : 'var(--text-muted)',
+                      background: isSelected ? 'var(--color-primary-subtle)' : 'var(--color-surface)',
+                      border: isSelected ? '2px solid var(--color-primary)' : '1px solid var(--color-border)',
+                      color: isSelected ? 'var(--color-primary)' : 'var(--color-text)',
                       cursor: result ? 'default' : 'pointer',
                       fontSize: '0.9rem',
-                      fontWeight: isSelected ? 600 : 400
+                      fontWeight: isSelected ? 700 : 400,
+                      transition: 'all 0.15s ease'
                     }}
                   >
                     {opt.option_text}

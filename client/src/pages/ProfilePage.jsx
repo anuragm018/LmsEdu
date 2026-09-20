@@ -116,49 +116,49 @@ export const ProfilePage = () => {
   };
 
   if (loading) {
-    return <p style={{ color: 'var(--text-muted)', padding: '2rem' }}>Loading profile...</p>;
+    return <p style={{ color: 'var(--color-text-muted)', padding: '2rem' }}>Loading profile...</p>;
   }
 
   return (
-    <div className="animate-fade-in" style={{ maxWidth: '680px', margin: '0 auto' }}>
+    <div className="animate-fade-in" style={{ maxWidth: '680px', margin: '0 auto', padding: '1.5rem 1rem' }}>
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '2rem' }}>
         <button 
           onClick={() => navigate(-1)} 
-          style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+          style={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)', color: 'var(--color-text-muted)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '36px', height: '36px' }}
         >
-          <ArrowLeft size={22} />
+          <ArrowLeft size={18} />
         </button>
         <div>
-          <h1 style={{ fontSize: '1.6rem' }}>Edit Profile</h1>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Update your personal details and preferences</p>
+          <h1 style={{ fontSize: '1.6rem', color: 'var(--color-text)', fontWeight: 700, margin: 0 }}>Edit Profile</h1>
+          <p style={{ color: 'var(--color-text-muted)', fontSize: '0.85rem', margin: '4px 0 0' }}>Update your personal details and preferences</p>
         </div>
       </div>
 
       {/* Success / Error Messages */}
       {success && (
-        <div style={{ padding: '12px 16px', background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(16,185,129,0.4)', borderRadius: 'var(--radius-sm)', marginBottom: '1.25rem', color: 'var(--success)', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.88rem' }}>
+        <div style={{ padding: '12px 16px', background: 'var(--color-accent-subtle)', border: '1px solid rgba(34, 197, 94, 0.3)', borderRadius: 'var(--radius-sm)', marginBottom: '1.25rem', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.88rem', fontWeight: 500 }}>
           <CheckCircle size={18} /> {success}
         </div>
       )}
       {error && (
-        <div style={{ padding: '12px 16px', background: 'rgba(239,68,68,0.15)', border: '1px solid rgba(239,68,68,0.4)', borderRadius: 'var(--radius-sm)', marginBottom: '1.25rem', color: 'var(--danger)', fontSize: '0.88rem' }}>
+        <div style={{ padding: '12px 16px', background: 'var(--color-danger-subtle)', border: '1px solid rgba(239, 68, 68, 0.3)', borderRadius: 'var(--radius-sm)', marginBottom: '1.25rem', color: 'var(--color-danger)', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.88rem', fontWeight: 500 }}>
           {error}
         </div>
       )}
 
       <form onSubmit={handleSubmit}>
         {/* Avatar Section */}
-        <div className="glass-panel" style={{ padding: '1.5rem', marginBottom: '1.5rem' }}>
-          <h3 style={{ fontSize: '1rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Camera size={18} color="var(--primary)" /> Profile Photo
+        <div style={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)', padding: '1.5rem', marginBottom: '1.5rem' }}>
+          <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--color-text)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Camera size={18} color="var(--color-primary)" /> Profile Photo
           </h3>
           <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
             <div style={{ position: 'relative' }}>
               <img 
                 src={form.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150'} 
                 alt="Avatar" 
-                style={{ width: '90px', height: '90px', borderRadius: '50%', objectFit: 'cover', border: '3px solid var(--primary)' }}
+                style={{ width: '90px', height: '90px', borderRadius: '50%', objectFit: 'cover', border: '3px solid var(--color-primary)' }}
               />
             </div>
             <div style={{ flex: 1 }}>
@@ -170,20 +170,20 @@ export const ProfilePage = () => {
                 style={{ fontSize: '0.85rem' }}
               />
               {uploadingAvatar && (
-                <p style={{ fontSize: '0.78rem', color: 'var(--secondary)', marginTop: '4px' }}>⚡ Uploading avatar image...</p>
+                <p style={{ fontSize: '0.78rem', color: 'var(--color-primary)', marginTop: '4px' }}>⚡ Uploading avatar image...</p>
               )}
             </div>
           </div>
         </div>
 
         {/* Personal Info */}
-        <div className="glass-panel" style={{ padding: '1.5rem', marginBottom: '1.5rem' }}>
-          <h3 style={{ fontSize: '1rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <User size={18} color="var(--secondary)" /> Personal Information
+        <div style={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)', padding: '1.5rem', marginBottom: '1.5rem' }}>
+          <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--color-text)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <User size={18} color="var(--color-primary)" /> Personal Information
           </h3>
 
-          <div className="form-group">
-            <label>Full Name</label>
+          <div className="form-group" style={{ marginBottom: '1rem' }}>
+            <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', fontWeight: 500, color: 'var(--color-text)' }}>Full Name</label>
             <input 
               type="text" 
               className="form-control" 
@@ -193,19 +193,19 @@ export const ProfilePage = () => {
             />
           </div>
 
-          <div className="form-group">
-            <label>Email Address (cannot be changed)</label>
+          <div className="form-group" style={{ marginBottom: '1rem' }}>
+            <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', fontWeight: 500, color: 'var(--color-text)' }}>Email Address (cannot be changed)</label>
             <input 
               type="email" 
               className="form-control" 
               value={form.email}
               disabled
-              style={{ opacity: 0.6, cursor: 'not-allowed' }}
+              style={{ opacity: 0.7, cursor: 'not-allowed', background: 'var(--color-background)' }}
             />
           </div>
 
-          <div className="form-group">
-            <label style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <div className="form-group" style={{ marginBottom: '1rem' }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px', fontSize: '0.85rem', fontWeight: 500, color: 'var(--color-text)' }}>
               <Phone size={14} /> Phone Number
             </label>
             <input 
@@ -218,7 +218,7 @@ export const ProfilePage = () => {
           </div>
 
           <div className="form-group" style={{ marginBottom: 0 }}>
-            <label style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px', fontSize: '0.85rem', fontWeight: 500, color: 'var(--color-text)' }}>
               <FileText size={14} /> Bio
             </label>
             <textarea 

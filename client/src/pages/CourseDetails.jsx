@@ -118,7 +118,7 @@ export const CourseDetails = () => {
   };
 
   if (loading || !course) {
-    return <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-muted)' }}>Loading course details...</div>;
+    return <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--color-text-muted)' }}>Loading course details...</div>;
   }
 
   return (
@@ -137,12 +137,12 @@ export const CourseDetails = () => {
               </span>
             </div>
 
-            <h1 style={{ fontSize: '2.2rem', marginBottom: '1rem', lineHeight: '1.25' }}>{course.name}</h1>
-            <p style={{ color: 'var(--text-muted)', fontSize: '1rem', marginBottom: '1.5rem' }}>{course.desc}</p>
+            <h1 style={{ fontSize: '2.2rem', marginBottom: '1rem', lineHeight: '1.25', color: 'var(--color-primary)', fontWeight: 700 }}>{course.name}</h1>
+            <p style={{ color: 'var(--color-text-muted)', fontSize: '1rem', marginBottom: '1.5rem' }}>{course.desc}</p>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', color: 'var(--text-dim)', fontSize: '0.9rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <User size={16} /> Created by <strong style={{ color: 'var(--text-main)' }}>{course.tutor?.name || 'Prof. Alex Morgan'}</strong>
+                <User size={16} /> Created by <strong style={{ color: 'var(--color-text)' }}>{course.tutor?.name || 'Prof. Alex Morgan'}</strong>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <Clock size={16} /> {course.duration || '4h 30m'} Total
@@ -151,11 +151,11 @@ export const CourseDetails = () => {
           </div>
 
           {/* Action Card */}
-          <div className="glass-card" style={{ padding: '1.5rem', textAlign: 'center' }}>
+          <div className="glass-card" style={{ padding: '1.5rem', textAlign: 'center', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)' }}>
             <img 
               src={course.thumbnail} 
               alt={course.name} 
-              style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: 'var(--radius-sm)', marginBottom: '1.25rem' }} 
+              style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: 'var(--radius-sm)', marginBottom: '1.25rem', border: '1px solid var(--color-border)' }} 
             />
 
             {isEnrolled ? (
@@ -173,7 +173,7 @@ export const CourseDetails = () => {
               </button>
             )}
 
-            <p style={{ fontSize: '0.78rem', color: 'var(--text-dim)', marginTop: '10px' }}>
+            <p style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '10px' }}>
               ✓ Full Lifetime Access • Includes Certificate & Quizzes
             </p>
           </div>
@@ -183,13 +183,13 @@ export const CourseDetails = () => {
       {/* Syllabus / Content Section */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
         <div>
-          <h2 style={{ fontSize: '1.5rem', marginBottom: '1.25rem' }}>Course Syllabus</h2>
+          <h2 style={{ fontSize: '1.5rem', marginBottom: '1.25rem', color: 'var(--color-primary)', fontWeight: 700 }}>Course Syllabus</h2>
           {syllabus.length === 0 ? (
-            <div className="glass-panel" style={{ padding: '1.5rem', color: 'var(--text-muted)' }}>No syllabus sections created yet.</div>
+            <div className="glass-panel" style={{ padding: '1.5rem', color: 'var(--color-text-muted)' }}>No syllabus sections created yet.</div>
           ) : (
             syllabus.map((section, idx) => (
-              <div key={section._id} className="glass-panel" style={{ padding: '1.25rem', marginBottom: '1rem' }}>
-                <h3 style={{ fontSize: '1.1rem', marginBottom: '0.75rem', color: 'var(--secondary)' }}>
+              <div key={section._id} className="glass-panel" style={{ padding: '1.25rem', marginBottom: '1rem', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)' }}>
+                <h3 style={{ fontSize: '1.1rem', marginBottom: '0.75rem', color: 'var(--color-primary)', fontWeight: 700 }}>
                   {section.name}
                 </h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -199,15 +199,16 @@ export const CourseDetails = () => {
                       alignItems: 'center',
                       justifyContent: 'space-between',
                       padding: '8px 12px',
-                      background: 'rgba(255, 255, 255, 0.03)',
+                      background: 'var(--color-primary-subtle)',
+                      border: '1px solid var(--color-border)',
                       borderRadius: 'var(--radius-sm)',
                       fontSize: '0.88rem'
                     }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <PlayCircle size={16} color="var(--primary)" />
-                        <span>{les.title}</span>
+                        <PlayCircle size={16} color="var(--color-primary)" />
+                        <span style={{ color: 'var(--color-text)' }}>{les.title}</span>
                       </div>
-                      <span style={{ fontSize: '0.78rem', color: 'var(--text-dim)' }}>{les.duration}</span>
+                      <span style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>{les.duration}</span>
                     </div>
                   ))}
                 </div>
@@ -218,12 +219,12 @@ export const CourseDetails = () => {
 
         {/* Reviews & Discussion Forum */}
         <div>
-          <h2 style={{ fontSize: '1.5rem', marginBottom: '1.25rem' }}>Discussion & Reviews</h2>
+          <h2 style={{ fontSize: '1.5rem', marginBottom: '1.25rem', color: 'var(--color-primary)', fontWeight: 700 }}>Discussion & Reviews</h2>
 
           {/* Rate Course */}
           {user && isEnrolled && (
             <div className="glass-panel" style={{ padding: '1.25rem', marginBottom: '1.5rem' }}>
-              <h4 style={{ fontSize: '0.95rem', marginBottom: '8px' }}>Rate this Course</h4>
+              <h4 style={{ fontSize: '0.95rem', marginBottom: '8px', color: 'var(--color-text)' }}>Rate this Course</h4>
               <div style={{ display: 'flex', gap: '6px', cursor: 'pointer' }}>
                 {[1, 2, 3, 4, 5].map((s) => (
                   <Star 
@@ -260,7 +261,7 @@ export const CourseDetails = () => {
           {/* Comments List */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {comments.length === 0 ? (
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem' }}>No discussions posted yet.</p>
+              <p style={{ color: 'var(--color-text-muted)', fontSize: '0.88rem' }}>No discussions posted yet.</p>
             ) : (
               comments.map((c) => (
                 <div key={c._id} className="glass-panel" style={{ padding: '1rem' }}>
@@ -280,16 +281,16 @@ export const CourseDetails = () => {
                       </div>
                     )}
                   </div>
-                  <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)' }}>{c.comment}</p>
+                  <p style={{ fontSize: '0.88rem', color: 'var(--color-text-muted)' }}>{c.comment}</p>
 
                   {/* Tutor Official Response */}
                   {c.reply && c.reply.text && (
                     <div style={{
                       marginTop: '10px',
                       padding: '10px 14px',
-                      borderRadius: '8px',
-                      background: 'rgba(99, 102, 241, 0.09)',
-                      borderLeft: '3px solid var(--primary)',
+                      borderRadius: 'var(--radius-sm)',
+                      background: 'var(--color-primary-subtle)',
+                      borderLeft: '3px solid var(--color-primary)',
                       display: 'flex',
                       flexDirection: 'column',
                       gap: '4px'
@@ -300,16 +301,16 @@ export const CourseDetails = () => {
                           alt=""
                           style={{ width: '22px', height: '22px', borderRadius: '50%' }}
                         />
-                        <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--primary)' }}>
+                        <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-primary)' }}>
                           👨‍🏫 Instructor Response
                         </span>
                         {c.reply.replied_at && (
-                          <span style={{ fontSize: '0.7rem', color: 'var(--text-dim)' }}>
+                          <span style={{ fontSize: '0.7rem', color: 'var(--color-text-muted)' }}>
                             • {new Date(c.reply.replied_at).toLocaleDateString()}
                           </span>
                         )}
                       </div>
-                      <p style={{ fontSize: '0.84rem', color: 'var(--text-main)', margin: 0, paddingLeft: '30px' }}>
+                      <p style={{ fontSize: '0.84rem', color: 'var(--color-text)', margin: 0, paddingLeft: '30px' }}>
                         {c.reply.text}
                       </p>
                     </div>

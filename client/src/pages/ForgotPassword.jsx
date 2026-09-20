@@ -60,30 +60,30 @@ export const ForgotPassword = () => {
           <div>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
               <div style={{
-                width: '54px',
-                height: '54px',
-                borderRadius: '16px',
-                background: 'linear-gradient(135deg, var(--danger), var(--accent))',
+                width: '52px',
+                height: '52px',
+                borderRadius: 'var(--radius-sm)',
+                background: 'var(--color-primary-subtle)',
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#fff',
+                color: 'var(--color-primary)',
                 marginBottom: '1rem',
-                boxShadow: '0 4px 14px rgba(239, 68, 68, 0.4)'
+                border: '1px solid var(--color-border)'
               }}>
                 <Key size={26} />
               </div>
-              <h2 style={{ fontSize: '1.6rem' }}>Forgot Password?</h2>
-              <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginTop: '4px' }}>
+              <h2 style={{ fontSize: '1.6rem', color: 'var(--color-primary)', fontWeight: 700 }}>Forgot Password?</h2>
+              <p style={{ fontSize: '0.88rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
                 Enter your email address to receive a 6-digit reset OTP code
               </p>
             </div>
 
             {error && (
               <div style={{
-                background: 'rgba(239, 68, 68, 0.15)',
-                border: '1px solid rgba(239, 68, 68, 0.4)',
-                color: 'var(--danger)',
+                background: 'rgba(220, 38, 38, 0.1)',
+                border: '1px solid var(--color-danger)',
+                color: 'var(--color-danger)',
                 padding: '10px 14px',
                 borderRadius: 'var(--radius-sm)',
                 fontSize: '0.85rem',
@@ -120,7 +120,7 @@ export const ForgotPassword = () => {
             </form>
 
             <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
-              <Link to="/login" style={{ fontSize: '0.85rem', color: 'var(--text-muted)', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+              <Link to="/login" style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', display: 'inline-flex', alignItems: 'center', gap: '4px', fontWeight: 500 }}>
                 <ArrowLeft size={14} /> Back to Sign In
               </Link>
             </div>
@@ -132,29 +132,30 @@ export const ForgotPassword = () => {
           <div>
             <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
               <div style={{
-                width: '54px',
-                height: '54px',
-                borderRadius: '16px',
-                background: 'linear-gradient(135deg, var(--warning), var(--primary))',
+                width: '52px',
+                height: '52px',
+                borderRadius: 'var(--radius-sm)',
+                background: 'var(--color-primary-subtle)',
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#fff',
-                marginBottom: '1rem'
+                color: 'var(--color-primary)',
+                marginBottom: '1rem',
+                border: '1px solid var(--color-border)'
               }}>
                 <ShieldCheck size={28} />
               </div>
-              <h2 style={{ fontSize: '1.6rem' }}>Reset Password</h2>
-              <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginTop: '4px' }}>
+              <h2 style={{ fontSize: '1.6rem', color: 'var(--color-primary)', fontWeight: 700 }}>Reset Password</h2>
+              <p style={{ fontSize: '0.88rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
                 Enter the 6-digit OTP code sent to <strong>{email}</strong>
               </p>
             </div>
 
             {error && (
               <div style={{
-                background: 'rgba(239, 68, 68, 0.15)',
-                border: '1px solid rgba(239, 68, 68, 0.4)',
-                color: 'var(--danger)',
+                background: 'rgba(220, 38, 38, 0.1)',
+                border: '1px solid var(--color-danger)',
+                color: 'var(--color-danger)',
                 padding: '10px 14px',
                 borderRadius: 'var(--radius-sm)',
                 fontSize: '0.85rem',
@@ -169,13 +170,14 @@ export const ForgotPassword = () => {
 
             {message && (
               <div style={{
-                background: 'rgba(16, 185, 129, 0.15)',
-                border: '1px solid rgba(16, 185, 129, 0.4)',
-                color: 'var(--success)',
+                background: 'var(--color-accent-subtle)',
+                border: '1px solid var(--color-accent)',
+                color: 'var(--color-primary)',
                 padding: '10px 14px',
                 borderRadius: 'var(--radius-sm)',
                 fontSize: '0.85rem',
-                marginBottom: '1.25rem'
+                marginBottom: '1.25rem',
+                fontWeight: 600
               }}>
                 {message}
               </div>
@@ -194,7 +196,7 @@ export const ForgotPassword = () => {
                     fontSize: '1.25rem',
                     fontWeight: '700',
                     textAlign: 'center',
-                    color: 'var(--secondary)'
+                    color: 'var(--color-primary)'
                   }}
                   value={otp}
                   onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
@@ -228,7 +230,7 @@ export const ForgotPassword = () => {
             <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
               <button 
                 onClick={() => setStep(1)} 
-                style={{ background: 'none', border: 'none', color: 'var(--primary)', cursor: 'pointer', fontSize: '0.85rem' }}
+                style={{ background: 'none', border: 'none', color: 'var(--color-primary)', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 600 }}
               >
                 ← Request New OTP Code
               </button>
@@ -239,11 +241,11 @@ export const ForgotPassword = () => {
         {/* Step 3: Success Screen */}
         {step === 3 && (
           <div style={{ textAlign: 'center' }}>
-            <div style={{ display: 'inline-block', marginBottom: '1rem', color: 'var(--success)' }}>
+            <div style={{ display: 'inline-block', marginBottom: '1rem', color: 'var(--color-accent)' }}>
               <CheckCircle2 size={64} />
             </div>
-            <h2 style={{ fontSize: '1.8rem', color: '#ffffff' }}>Password Updated!</h2>
-            <p style={{ color: 'var(--text-muted)', margin: '1rem 0 1.5rem' }}>{message}</p>
+            <h2 style={{ fontSize: '1.8rem', color: 'var(--color-primary)', fontWeight: 700 }}>Password Updated!</h2>
+            <p style={{ color: 'var(--color-text-muted)', margin: '1rem 0 1.5rem' }}>{message}</p>
             <Link to="/login" className="btn btn-primary btn-lg" style={{ width: '100%', justifyContent: 'center' }}>
               Sign In with New Password
             </Link>

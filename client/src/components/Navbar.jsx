@@ -90,14 +90,12 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="glass-panel" style={{
+    <nav style={{
       position: 'sticky',
       top: 0,
       zIndex: 1000,
-      borderRadius: 0,
-      borderTop: 'none',
-      borderLeft: 'none',
-      borderRight: 'none',
+      background: 'var(--color-surface)',
+      borderBottom: '1px solid var(--color-border)',
       padding: '0.8rem 1.5rem'
     }}>
       <div style={{
@@ -107,33 +105,32 @@ export const Navbar = () => {
         alignItems: 'center',
         justifyContent: 'space-between'
       }}>
-        {/* Brand Logo */}
+        {/* Brand Logo: Forest Green */}
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div style={{
-            width: '42px',
-            height: '42px',
-            borderRadius: '12px',
-            background: 'linear-gradient(135deg, var(--primary), var(--accent))',
+            width: '38px',
+            height: '38px',
+            borderRadius: 'var(--radius-sm)',
+            background: 'var(--color-primary)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#fff',
-            boxShadow: '0 4px 12px rgba(99, 102, 241, 0.4)'
+            color: 'var(--color-text-on-dark)'
           }}>
-            <GraduationCap size={24} />
+            <GraduationCap size={22} />
           </div>
           <div>
-            <span style={{ fontSize: '1.4rem', fontWeight: 800, letterSpacing: '-0.03em' }}>
-              Edu<span style={{ color: 'var(--secondary)' }}>Sphere</span>
+            <span style={{ fontSize: '1.35rem', fontWeight: 800, letterSpacing: '-0.03em', color: 'var(--color-primary)' }}>
+              Edu<span style={{ color: 'var(--color-accent)' }}>Sphere</span>
             </span>
-            <span style={{ display: 'block', fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+            <span style={{ display: 'block', fontSize: '0.65rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
               Next-Gen LMS
             </span>
           </div>
         </Link>
 
-        {/* Navigation Links with Active & Hover Effects */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        {/* Navigation Links */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <Link to="/courses" className={`nav-link ${isActive('/courses') ? 'active' : ''}`}>
             <BookOpen size={17} /> Catalog
           </Link>
@@ -157,12 +154,12 @@ export const Navbar = () => {
                     <span>Doubts</span>
                     {unreadDoubtsCount > 0 && (
                       <span style={{
-                        background: 'var(--danger)',
-                        color: '#fff',
+                        background: 'var(--color-danger)',
+                        color: 'var(--color-text-on-dark)',
                         fontSize: '0.68rem',
                         fontWeight: 800,
                         padding: '1px 6px',
-                        borderRadius: '10px',
+                        borderRadius: 'var(--radius-full)',
                         lineHeight: 1.2
                       }}>
                         {unreadDoubtsCount}
@@ -186,36 +183,35 @@ export const Navbar = () => {
                     onClick={handleRevenueClick}
                     className="revenue-nav-btn"
                     style={{
-                      background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.16), rgba(6, 182, 212, 0.12))',
-                      border: '1px solid rgba(16, 185, 129, 0.4)',
-                      color: '#10b981',
+                      background: 'var(--color-surface)',
+                      border: '1px solid var(--color-border)',
+                      color: 'var(--color-text-muted)',
                       fontWeight: 700,
                       fontSize: '0.82rem',
                       display: 'flex',
                       alignItems: 'center',
                       gap: '7px',
-                      padding: '6px 13px',
-                      borderRadius: 'var(--radius-full)',
-                      boxShadow: '0 2px 12px rgba(16, 185, 129, 0.18)',
-                      cursor: 'pointer',
-                      textDecoration: 'none'
+                      padding: '6px 12px',
+                      borderRadius: 'var(--radius-sm)',
+                      cursor: 'pointer'
                     }}
                     title="Tutor Total Revenue - Click to view earnings analytics"
                   >
                     <div style={{
-                      width: '20px',
-                      height: '20px',
-                      borderRadius: '50%',
-                      background: 'rgba(16, 185, 129, 0.25)',
+                      width: '18px',
+                      height: '18px',
+                      borderRadius: 'var(--radius-sm)',
+                      background: 'var(--color-primary-subtle)',
+                      color: 'var(--color-primary)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       flexShrink: 0
                     }}>
-                      <DollarSign size={13} style={{ strokeWidth: 3 }} />
+                      <DollarSign size={12} style={{ strokeWidth: 3 }} />
                     </div>
                     <span>
-                      Total Revenue: <span style={{ color: '#ffffff', fontWeight: 800 }}>${revenue.toFixed(2)}</span>
+                      Revenue: <span style={{ color: 'var(--color-text)', fontWeight: 800 }}>${revenue.toFixed(2)}</span>
                     </span>
                   </button>
 
@@ -223,31 +219,25 @@ export const Navbar = () => {
                     onClick={() => navigate('/dashboard/instructor?tab=doubts')}
                     className="nav-link"
                     style={{
-                      background: unreadDoubtsCount > 0 ? 'rgba(99, 102, 241, 0.15)' : 'rgba(255, 255, 255, 0.05)',
-                      border: unreadDoubtsCount > 0 ? '1px solid rgba(99, 102, 241, 0.45)' : '1px solid rgba(255, 255, 255, 0.1)',
-                      color: unreadDoubtsCount > 0 ? '#a5b4fc' : 'var(--text-main)',
-                      fontWeight: 600,
-                      fontSize: '0.82rem',
                       display: 'flex',
                       alignItems: 'center',
                       gap: '7px',
                       padding: '6px 12px',
-                      borderRadius: 'var(--radius-full)',
                       cursor: 'pointer',
                       position: 'relative'
                     }}
                     title="Student Doubts & Questions - Click to open doubts chat"
                   >
-                    <MessageSquare size={15} color={unreadDoubtsCount > 0 ? 'var(--primary)' : 'var(--text-muted)'} />
+                    <MessageSquare size={15} />
                     <span>Doubts</span>
                     {unreadDoubtsCount > 0 && (
                       <span style={{
-                        background: 'var(--danger)',
-                        color: '#fff',
+                        background: 'var(--color-danger)',
+                        color: 'var(--color-text-on-dark)',
                         fontSize: '0.68rem',
                         fontWeight: 800,
                         padding: '1px 6px',
-                        borderRadius: '10px',
+                        borderRadius: 'var(--radius-full)',
                         lineHeight: 1.2
                       }}>
                         {unreadDoubtsCount}
@@ -255,7 +245,7 @@ export const Navbar = () => {
                     )}
                   </button>
 
-                  <Link to="/dashboard/instructor" className="btn btn-sm btn-primary" style={{ marginLeft: '4px' }}>
+                  <Link to="/dashboard/instructor" className="btn btn-sm btn-secondary" style={{ marginLeft: '4px' }}>
                     <PlusCircle size={16} /> Studio
                   </Link>
                 </>
@@ -267,71 +257,70 @@ export const Navbar = () => {
                   onClick={handleRevenueClick}
                   className="revenue-nav-btn"
                   style={{
-                    background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.16), rgba(6, 182, 212, 0.12))',
-                    border: '1px solid rgba(16, 185, 129, 0.4)',
-                    color: '#10b981',
+                    background: 'var(--color-surface)',
+                    border: '1px solid var(--color-border)',
+                    color: 'var(--color-text-muted)',
                     fontWeight: 700,
                     fontSize: '0.82rem',
                     display: 'flex',
                     alignItems: 'center',
                     gap: '7px',
-                    padding: '6px 13px',
-                    borderRadius: 'var(--radius-full)',
-                    boxShadow: '0 2px 12px rgba(16, 185, 129, 0.18)',
-                    cursor: 'pointer',
-                    textDecoration: 'none'
+                    padding: '6px 12px',
+                    borderRadius: 'var(--radius-sm)',
+                    cursor: 'pointer'
                   }}
                   title="Platform Total Revenue - Click to view dashboard"
                 >
                   <div style={{
-                    width: '20px',
-                    height: '20px',
-                    borderRadius: '50%',
-                    background: 'rgba(16, 185, 129, 0.25)',
+                    width: '18px',
+                    height: '18px',
+                    borderRadius: 'var(--radius-sm)',
+                    background: 'var(--color-primary-subtle)',
+                    color: 'var(--color-primary)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0
                   }}>
-                    <DollarSign size={13} style={{ strokeWidth: 3 }} />
+                    <DollarSign size={12} style={{ strokeWidth: 3 }} />
                   </div>
                   <span>
-                    Total Revenue: <span style={{ color: '#ffffff', fontWeight: 800 }}>${revenue.toFixed(2)}</span>
+                    Revenue: <span style={{ color: 'var(--color-text)', fontWeight: 800 }}>${revenue.toFixed(2)}</span>
                   </span>
                 </button>
               )}
 
-              {/* User Profile Badge — Click to Edit Profile */}
+              {/* User Profile Badge */}
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
                 gap: '10px',
-                background: 'rgba(255,255,255,0.05)',
-                padding: '5px 14px',
-                borderRadius: 'var(--radius-full)',
-                border: '1px solid var(--border-color)',
-                marginLeft: '8px'
+                background: 'var(--color-surface)',
+                padding: '4px 12px',
+                borderRadius: 'var(--radius-sm)',
+                border: '1px solid var(--color-border)',
+                marginLeft: '6px'
               }}>
-                <Link to="/profile" style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }} title="Edit Profile">
+                <Link to="/profile" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }} title="Edit Profile">
                   <img 
                     src={user.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150'} 
                     alt={user.name} 
-                    style={{ width: '26px', height: '26px', borderRadius: '50%', objectFit: 'cover' }}
+                    style={{ width: '24px', height: '24px', borderRadius: '50%', objectFit: 'cover' }}
                   />
-                  <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>{user.name}</span>
+                  <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--color-text)' }}>{user.name}</span>
                 </Link>
                 
                 <button 
                   onClick={handleLogout} 
                   title="Logout" 
-                  style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', display: 'flex', alignItems: 'center', marginLeft: '4px' }}
+                  style={{ background: 'none', border: 'none', color: 'var(--color-text-muted)', cursor: 'pointer', display: 'flex', alignItems: 'center', marginLeft: '4px' }}
                 >
                   <LogOut size={16} />
                 </button>
               </div>
             </>
           ) : (
-            <div style={{ display: 'flex', gap: '10px', marginLeft: '8px' }}>
+            <div style={{ display: 'flex', gap: '8px', marginLeft: '8px' }}>
               <Link to="/login" className="btn btn-sm btn-secondary">Sign In</Link>
               <Link to="/register" className="btn btn-sm btn-primary">Get Started</Link>
             </div>

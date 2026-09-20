@@ -103,11 +103,11 @@ export const VerifyEmail = () => {
       <div className="glass-panel" style={{ padding: '2.5rem 2rem' }}>
         {status === 'success' ? (
           <div style={{ textAlign: 'center' }}>
-            <div style={{ display: 'inline-block', marginBottom: '1rem', color: 'var(--success)' }}>
+            <div style={{ display: 'inline-block', marginBottom: '1rem', color: 'var(--color-accent)' }}>
               <CheckCircle2 size={64} />
             </div>
-            <h2 style={{ fontSize: '1.8rem', color: '#ffffff' }}>Account Activated!</h2>
-            <p style={{ color: 'var(--text-muted)', margin: '1rem 0 1.5rem' }}>{message}</p>
+            <h2 style={{ fontSize: '1.8rem', color: 'var(--color-primary)', fontWeight: 700 }}>Account Activated!</h2>
+            <p style={{ color: 'var(--color-text-muted)', margin: '1rem 0 1.5rem' }}>{message}</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <Link to={getDashboardLink()} className="btn btn-primary btn-lg" style={{ width: '100%', justifyContent: 'center' }}>
                 Go to Dashboard <ArrowRight size={18} />
@@ -121,30 +121,30 @@ export const VerifyEmail = () => {
           <div>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
               <div style={{
-                width: '56px',
-                height: '56px',
-                borderRadius: '16px',
-                background: 'linear-gradient(135deg, var(--primary), var(--secondary))',
+                width: '52px',
+                height: '52px',
+                borderRadius: 'var(--radius-sm)',
+                background: 'var(--color-primary-subtle)',
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#fff',
+                color: 'var(--color-primary)',
                 marginBottom: '1rem',
-                boxShadow: '0 4px 14px rgba(99,102,241,0.4)'
+                border: '1px solid var(--color-border)'
               }}>
                 <KeyRound size={28} />
               </div>
-              <h2 style={{ fontSize: '1.6rem' }}>Enter 6-Digit OTP Code</h2>
-              <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginTop: '4px' }}>
+              <h2 style={{ fontSize: '1.6rem', color: 'var(--color-primary)', fontWeight: 700 }}>Enter 6-Digit OTP Code</h2>
+              <p style={{ fontSize: '0.88rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
                 Enter the 6-digit OTP code sent to your email to activate your account
               </p>
             </div>
 
             {status === 'error' && (
               <div style={{
-                background: 'rgba(239, 68, 68, 0.15)',
-                border: '1px solid rgba(239, 68, 68, 0.4)',
-                color: 'var(--danger)',
+                background: 'rgba(220, 38, 38, 0.1)',
+                border: '1px solid var(--color-danger)',
+                color: 'var(--color-danger)',
                 padding: '10px 14px',
                 borderRadius: 'var(--radius-sm)',
                 fontSize: '0.85rem',
@@ -182,7 +182,7 @@ export const VerifyEmail = () => {
                     fontSize: '1.3rem',
                     fontWeight: '700',
                     textAlign: 'center',
-                    color: 'var(--secondary)'
+                    color: 'var(--color-primary)'
                   }}
                   value={otp}
                   onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
@@ -207,7 +207,7 @@ export const VerifyEmail = () => {
                   style={{
                     background: 'none',
                     border: 'none',
-                    color: (resending || cooldown > 0) ? 'var(--text-dim)' : 'var(--primary)',
+                    color: (resending || cooldown > 0) ? 'var(--color-text-muted)' : 'var(--color-primary)',
                     fontSize: '0.85rem',
                     fontWeight: 600,
                     cursor: (resending || cooldown > 0) ? 'not-allowed' : 'pointer',
@@ -219,8 +219,9 @@ export const VerifyEmail = () => {
                 {resendMsg && (
                   <p style={{ 
                     fontSize: '0.82rem', 
-                    color: resendMsg.includes('Failed') ? 'var(--danger)' : 'var(--success)', 
-                    marginTop: '6px' 
+                    color: resendMsg.includes('Failed') ? 'var(--color-danger)' : 'var(--color-primary)', 
+                    marginTop: '6px',
+                    fontWeight: 500
                   }}>
                     {resendMsg}
                   </p>
@@ -228,7 +229,7 @@ export const VerifyEmail = () => {
               </div>
             </form>
 
-            <p style={{ textAlign: 'center', fontSize: '0.82rem', marginTop: '1.5rem', color: 'var(--text-dim)' }}>
+            <p style={{ textAlign: 'center', fontSize: '0.82rem', marginTop: '1.5rem', color: 'var(--color-text-muted)' }}>
               Didn't receive the email? Check your spam folder or click Resend OTP above.
             </p>
           </div>

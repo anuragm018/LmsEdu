@@ -121,8 +121,8 @@ export const CourseCatalog = () => {
   return (
     <div className="animate-fade-in">
       <div style={{ marginBottom: '2.5rem' }}>
-        <h1 style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>Explore Course Catalog</h1>
-        <p style={{ color: 'var(--text-muted)' }}>Discover high-impact courses, interactive lessons, and timed quiz certifications</p>
+        <h1 style={{ fontSize: '2.2rem', marginBottom: '0.5rem', color: 'var(--color-primary)', fontWeight: 700 }}>Explore Course Catalog</h1>
+        <p style={{ color: 'var(--color-text-muted)' }}>Discover high-impact courses, interactive lessons, and timed quiz certifications</p>
       </div>
 
       {/* Filter & Search Bar */}
@@ -131,7 +131,7 @@ export const CourseCatalog = () => {
           
           {/* Search Input Container with Suggestions */}
           <div ref={searchContainerRef} style={{ flex: 1, minWidth: '260px', position: 'relative' }}>
-            <Search size={18} style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-dim)', zIndex: 2 }} />
+            <Search size={18} style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-muted)', zIndex: 2 }} />
             
             <input 
               type="text" 
@@ -160,7 +160,7 @@ export const CourseCatalog = () => {
                   transform: 'translateY(-50%)',
                   background: 'none',
                   border: 'none',
-                  color: 'var(--text-dim)',
+                  color: 'var(--color-text-muted)',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
@@ -181,11 +181,10 @@ export const CourseCatalog = () => {
                   top: 'calc(100% + 8px)',
                   left: 0,
                   right: 0,
-                  backgroundColor: '#111827',
-                  border: '1px solid rgba(99, 102, 241, 0.3)',
-                  borderRadius: '12px',
-                  boxShadow: '0 12px 36px rgba(0, 0, 0, 0.65)',
-                  backdropFilter: 'blur(16px)',
+                  backgroundColor: 'var(--color-surface)',
+                  border: '1px solid var(--color-border)',
+                  borderRadius: 'var(--radius-sm)',
+                  boxShadow: 'var(--shadow-lg)',
                   overflow: 'hidden',
                   zIndex: 100,
                   animation: 'fadeIn 0.15s ease-out'
@@ -197,18 +196,18 @@ export const CourseCatalog = () => {
                   fontWeight: 600,
                   textTransform: 'uppercase',
                   letterSpacing: '0.05em',
-                  color: 'var(--primary)',
+                  color: 'var(--color-primary)',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '6px',
-                  borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
-                  background: 'rgba(99, 102, 241, 0.08)'
+                  borderBottom: '1px solid var(--color-border)',
+                  background: 'var(--color-primary-subtle)'
                 }}>
                   <Sparkles size={14} /> Matching Course Suggestions
                 </div>
 
                 {suggestions.length === 0 ? (
-                  <div style={{ padding: '1.2rem', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+                  <div style={{ padding: '1.2rem', textAlign: 'center', color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>
                     {loading ? 'Searching courses...' : `No courses matching "${search}"`}
                   </div>
                 ) : (
@@ -223,24 +222,24 @@ export const CourseCatalog = () => {
                           alignItems: 'center',
                           gap: '12px',
                           cursor: 'pointer',
-                          borderBottom: '1px solid rgba(255, 255, 255, 0.04)',
+                          borderBottom: '1px solid var(--color-border)',
                           transition: 'background-color 0.15s ease'
                         }}
-                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(99, 102, 241, 0.14)'}
+                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--color-primary-subtle)'}
                         onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                       >
                         {/* Course Thumbnail */}
                         <div style={{
                           width: '42px',
                           height: '42px',
-                          borderRadius: '8px',
+                          borderRadius: 'var(--radius-sm)',
                           overflow: 'hidden',
-                          backgroundColor: '#1f293d',
+                          backgroundColor: 'var(--color-primary-subtle)',
                           flexShrink: 0,
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          border: '1px solid rgba(255, 255, 255, 0.08)'
+                          border: '1px solid var(--color-border)'
                         }}>
                           {item.thumbnail ? (
                             <img 
@@ -249,7 +248,7 @@ export const CourseCatalog = () => {
                               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                             />
                           ) : (
-                            <GraduationCap size={20} color="var(--primary)" />
+                            <GraduationCap size={20} color="var(--color-primary)" />
                           )}
                         </div>
 
@@ -258,7 +257,7 @@ export const CourseCatalog = () => {
                           <div style={{
                             fontWeight: 600,
                             fontSize: '0.92rem',
-                            color: '#fff',
+                            color: 'var(--color-text)',
                             whiteSpace: 'nowrap',
                             overflow: 'hidden',
                             textOverflow: 'ellipsis'
@@ -267,7 +266,7 @@ export const CourseCatalog = () => {
                           </div>
                           <div style={{
                             fontSize: '0.78rem',
-                            color: 'var(--text-muted)',
+                            color: 'var(--color-text-muted)',
                             display: 'flex',
                             alignItems: 'center',
                             gap: '8px',
@@ -285,13 +284,13 @@ export const CourseCatalog = () => {
                             fontSize: '0.8rem',
                             fontWeight: 700,
                             padding: '3px 8px',
-                            borderRadius: '6px',
-                            background: item.type === 'free' ? 'rgba(16, 185, 129, 0.15)' : 'rgba(99, 102, 241, 0.15)',
-                            color: item.type === 'free' ? 'var(--success)' : 'var(--primary)'
+                            borderRadius: 'var(--radius-sm)',
+                            background: item.type === 'free' ? 'var(--color-accent-subtle)' : 'var(--color-primary-subtle)',
+                            color: 'var(--color-primary)'
                           }}>
                             {item.type === 'free' ? 'FREE' : `$${item.price}`}
                           </span>
-                          <ArrowRight size={15} color="var(--text-dim)" />
+                          <ArrowRight size={15} color="var(--color-text-muted)" />
                         </div>
                       </div>
                     ))}
@@ -303,13 +302,13 @@ export const CourseCatalog = () => {
                         padding: '9px 14px',
                         textAlign: 'center',
                         fontSize: '0.82rem',
-                        color: 'var(--primary)',
+                        color: 'var(--color-primary)',
                         cursor: 'pointer',
-                        background: 'rgba(255, 255, 255, 0.02)',
+                        background: 'var(--color-surface)',
                         fontWeight: 600
                       }}
-                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(99, 102, 241, 0.1)'}
-                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.02)'}
+                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--color-primary-subtle)'}
+                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--color-surface)'}
                     >
                       View all {courses.length} matching courses in catalog →
                     </div>
@@ -333,7 +332,7 @@ export const CourseCatalog = () => {
               aria-expanded={isCatDropdownOpen}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflow: 'hidden' }}>
-                <LayoutGrid size={15} color="var(--primary)" style={{ flexShrink: 0 }} />
+                <LayoutGrid size={15} color="var(--color-primary)" style={{ flexShrink: 0 }} />
                 <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                   {selectedCat 
                     ? (categories.find(c => c._id === selectedCat)?.name || 'Category')
@@ -344,7 +343,7 @@ export const CourseCatalog = () => {
                 size={16} 
                 style={{ 
                   flexShrink: 0, 
-                  color: 'var(--text-muted)',
+                  color: 'var(--color-text-muted)',
                   transform: isCatDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                   transition: 'transform 0.25s cubic-bezier(0.4, 0, 0.2, 1)'
                 }} 
@@ -364,7 +363,7 @@ export const CourseCatalog = () => {
                   fontWeight: 600,
                   textTransform: 'uppercase',
                   letterSpacing: '0.05em',
-                  color: 'var(--text-dim)'
+                  color: 'var(--color-text-muted)'
                 }}>
                   Select Category
                 </div>
@@ -382,7 +381,7 @@ export const CourseCatalog = () => {
                     }}
                   >
                     <span>All Categories</span>
-                    {!selectedCat && <Check size={14} color="var(--primary)" />}
+                    {!selectedCat && <Check size={14} color="var(--color-primary)" />}
                   </button>
 
                   {/* Dynamic Categories */}
@@ -403,7 +402,7 @@ export const CourseCatalog = () => {
                         <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                           {c.name}
                         </span>
-                        {isSelected && <Check size={14} color="var(--primary)" style={{ flexShrink: 0 }} />}
+                        {isSelected && <Check size={14} color="var(--color-primary)" style={{ flexShrink: 0 }} />}
                       </button>
                     );
                   })}
@@ -426,7 +425,7 @@ export const CourseCatalog = () => {
               aria-expanded={isTypeDropdownOpen}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflow: 'hidden' }}>
-                <Tag size={15} color="var(--secondary)" style={{ flexShrink: 0 }} />
+                <Tag size={15} color="var(--color-primary)" style={{ flexShrink: 0 }} />
                 <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                   {typeFilter === 'free' 
                     ? 'Free Courses' 
@@ -439,7 +438,7 @@ export const CourseCatalog = () => {
                 size={16} 
                 style={{ 
                   flexShrink: 0, 
-                  color: 'var(--text-muted)',
+                  color: 'var(--color-text-muted)',
                   transform: isTypeDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                   transition: 'transform 0.25s cubic-bezier(0.4, 0, 0.2, 1)'
                 }} 
@@ -460,7 +459,7 @@ export const CourseCatalog = () => {
                   fontWeight: 600,
                   textTransform: 'uppercase',
                   letterSpacing: '0.05em',
-                  color: 'var(--text-dim)'
+                  color: 'var(--color-text-muted)'
                 }}>
                   Select Pricing
                 </div>
@@ -478,7 +477,7 @@ export const CourseCatalog = () => {
                     }}
                   >
                     <span>All Pricing</span>
-                    {!typeFilter && <Check size={14} color="var(--primary)" />}
+                    {!typeFilter && <Check size={14} color="var(--color-primary)" />}
                   </button>
 
                   {/* Free Courses */}
@@ -493,7 +492,7 @@ export const CourseCatalog = () => {
                     }}
                   >
                     <span>Free Courses</span>
-                    {typeFilter === 'free' && <Check size={14} color="var(--primary)" />}
+                    {typeFilter === 'free' && <Check size={14} color="var(--color-primary)" />}
                   </button>
 
                   {/* Paid Courses */}
@@ -508,7 +507,7 @@ export const CourseCatalog = () => {
                     }}
                   >
                     <span>Paid Courses</span>
-                    {typeFilter === 'paid' && <Check size={14} color="var(--primary)" />}
+                    {typeFilter === 'paid' && <Check size={14} color="var(--color-primary)" />}
                   </button>
                 </div>
               </div>
@@ -519,12 +518,12 @@ export const CourseCatalog = () => {
 
       {/* Course Grid */}
       {loading ? (
-        <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-muted)' }}>Loading courses...</div>
+        <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--color-text-muted)' }}>Loading courses...</div>
       ) : courses.length === 0 ? (
         <div className="glass-panel" style={{ textAlign: 'center', padding: '4rem' }}>
-          <BookOpen size={48} color="var(--text-dim)" style={{ marginBottom: '1rem' }} />
-          <h3>No Courses Found</h3>
-          <p style={{ color: 'var(--text-muted)' }}>Try adjusting your search criteria or filters</p>
+          <BookOpen size={48} color="var(--color-primary)" style={{ marginBottom: '1rem' }} />
+          <h3 style={{ color: 'var(--color-primary)' }}>No Courses Found</h3>
+          <p style={{ color: 'var(--color-text-muted)' }}>Try adjusting your search criteria or filters</p>
         </div>
       ) : (
         <div style={{

@@ -38,27 +38,28 @@ export const Login = () => {
       <div className="glass-panel" style={{ padding: '2.5rem 2rem' }}>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <div style={{
-            width: '50px',
-            height: '50px',
-            borderRadius: '14px',
-            background: 'linear-gradient(135deg, var(--primary), var(--accent))',
+            width: '52px',
+            height: '52px',
+            borderRadius: 'var(--radius-sm)',
+            background: 'var(--color-primary-subtle)',
             display: 'inline-flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#fff',
-            marginBottom: '1rem'
+            color: 'var(--color-primary)',
+            marginBottom: '1rem',
+            border: '1px solid var(--color-border)'
           }}>
             <LogIn size={26} />
           </div>
-          <h2 style={{ fontSize: '1.6rem' }}>Welcome Back</h2>
-          <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)' }}>Sign in to continue your learning journey</p>
+          <h2 style={{ fontSize: '1.6rem', color: 'var(--color-primary)', fontWeight: 700 }}>Welcome Back</h2>
+          <p style={{ fontSize: '0.88rem', color: 'var(--color-text-muted)' }}>Sign in to continue your learning journey</p>
         </div>
 
         {error && (
           <div style={{
-            background: 'rgba(239, 68, 68, 0.15)',
-            border: '1px solid rgba(239, 68, 68, 0.4)',
-            color: 'var(--danger)',
+            background: 'rgba(220, 38, 38, 0.1)',
+            border: '1px solid var(--color-danger)',
+            color: 'var(--color-danger)',
             padding: '10px 14px',
             borderRadius: 'var(--radius-sm)',
             fontSize: '0.85rem',
@@ -87,7 +88,7 @@ export const Login = () => {
           <div className="form-group">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <label><Key size={14} style={{ display: 'inline', marginRight: '4px' }} /> Password</label>
-              <Link to="/forgot-password" style={{ fontSize: '0.78rem', color: 'var(--secondary)' }}>
+              <Link to="/forgot-password" style={{ fontSize: '0.78rem', color: 'var(--color-primary)', fontWeight: 600 }}>
                 Forgot Password?
               </Link>
             </div>
@@ -111,13 +112,13 @@ export const Login = () => {
                   transform: 'translateY(-50%)',
                   background: 'none',
                   border: 'none',
-                  color: showPassword ? 'var(--primary)' : 'var(--text-dim)',
+                  color: showPassword ? 'var(--color-primary)' : 'var(--color-text-muted)',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   padding: '4px',
-                  borderRadius: '4px',
+                  borderRadius: 'var(--radius-sm)',
                   transition: 'color 0.2s ease'
                 }}
                 title={showPassword ? 'Hide password' : 'Show password'}
@@ -138,8 +139,8 @@ export const Login = () => {
           </button>
         </form>
 
-        <p style={{ textAlign: 'center', fontSize: '0.85rem', marginTop: '1.5rem', color: 'var(--text-muted)' }}>
-          Don't have an account? <Link to="/register" style={{ color: 'var(--primary)', fontWeight: 600 }}>Create One</Link>
+        <p style={{ textAlign: 'center', fontSize: '0.85rem', marginTop: '1.5rem', color: 'var(--color-text-muted)' }}>
+          Don't have an account? <Link to="/register" style={{ color: 'var(--color-primary)', fontWeight: 600 }}>Create One</Link>
         </p>
       </div>
     </div>

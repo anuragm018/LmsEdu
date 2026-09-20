@@ -104,25 +104,26 @@ export const AdminDashboard = () => {
   const blockedCount = users.filter(u => u.isBlocked).length;
 
   if (loading) {
-    return <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-muted)' }}>Loading Admin Portal...</div>;
+    return <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--color-text-muted)' }}>Loading Admin Portal...</div>;
   }
 
   return (
     <div className="animate-fade-in">
       {/* Header */}
-      <div className="glass-panel" style={{ padding: '2rem', marginBottom: '2rem' }}>
+      <div className="glass-panel" style={{ padding: '2rem', marginBottom: '2rem', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div style={{
             padding: '12px',
-            borderRadius: '12px',
-            background: 'linear-gradient(135deg, var(--danger), var(--accent))',
-            color: '#fff'
+            borderRadius: 'var(--radius-sm)',
+            background: 'var(--color-primary-subtle)',
+            color: 'var(--color-primary)',
+            border: '1px solid var(--color-border)'
           }}>
             <ShieldCheck size={28} />
           </div>
           <div>
-            <h1 style={{ fontSize: '1.8rem' }}>System Administrator Command Center</h1>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+            <h1 style={{ fontSize: '1.8rem', color: 'var(--color-primary)', fontWeight: 700 }}>System Administrator Command Center</h1>
+            <p style={{ color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>
               Full governance over EduSphere platform users, courses, access control, and revenue
             </p>
           </div>
@@ -137,22 +138,22 @@ export const AdminDashboard = () => {
           gap: '1.25rem',
           marginBottom: '2rem'
         }}>
-          <div className="glass-panel" style={{ padding: '1.25rem' }}>
-            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Total Users</p>
-            <h3 style={{ fontSize: '1.8rem', color: 'var(--primary)' }}>{stats.totalUsers}</h3>
-            <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>{stats.totalStudents} Students • {stats.totalInstructors} Tutors</span>
+          <div className="glass-panel" style={{ padding: '1.25rem', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderLeft: '3px solid var(--color-primary)', borderRadius: 'var(--radius-sm)' }}>
+            <p style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>Total Users</p>
+            <h3 style={{ fontSize: '1.8rem', color: 'var(--color-primary)', fontWeight: 800 }}>{stats.totalUsers}</h3>
+            <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>{stats.totalStudents} Students • {stats.totalInstructors} Tutors</span>
           </div>
 
-          <div className="glass-panel" style={{ padding: '1.25rem' }}>
-            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Total Courses</p>
-            <h3 style={{ fontSize: '1.8rem', color: 'var(--secondary)' }}>{stats.totalCourses}</h3>
-            <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>{stats.totalEnrollments} Enrollments</span>
+          <div className="glass-panel" style={{ padding: '1.25rem', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderLeft: '3px solid var(--color-primary)', borderRadius: 'var(--radius-sm)' }}>
+            <p style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>Total Courses</p>
+            <h3 style={{ fontSize: '1.8rem', color: 'var(--color-primary)', fontWeight: 800 }}>{stats.totalCourses}</h3>
+            <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>{stats.totalEnrollments} Enrollments</span>
           </div>
 
-          <div className="glass-panel" style={{ padding: '1.25rem' }}>
-            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Platform Revenue</p>
-            <h3 style={{ fontSize: '1.8rem', color: 'var(--success)' }}>${stats.totalRevenue?.toFixed(2)}</h3>
-            <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>Total Processed Transactions</span>
+          <div className="glass-panel" style={{ padding: '1.25rem', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderLeft: '3px solid var(--color-accent)', borderRadius: 'var(--radius-sm)' }}>
+            <p style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>Platform Revenue</p>
+            <h3 style={{ fontSize: '1.8rem', color: 'var(--color-primary)', fontWeight: 800 }}>${stats.totalRevenue?.toFixed(2)}</h3>
+            <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>Total Processed Transactions</span>
           </div>
         </div>
       )}
@@ -162,6 +163,7 @@ export const AdminDashboard = () => {
         <button 
           onClick={() => setActiveTab('users')} 
           className={`btn ${activeTab === 'users' ? 'btn-primary' : 'btn-secondary'}`}
+          style={{ borderRadius: 'var(--radius-sm)' }}
         >
           <Users size={16} /> User Management ({users.length})
         </button>
@@ -169,6 +171,7 @@ export const AdminDashboard = () => {
         <button 
           onClick={() => setActiveTab('transactions')} 
           className={`btn ${activeTab === 'transactions' ? 'btn-primary' : 'btn-secondary'}`}
+          style={{ borderRadius: 'var(--radius-sm)' }}
         >
           <DollarSign size={16} /> Revenue & Transactions ({transactions.length})
         </button>
@@ -176,7 +179,7 @@ export const AdminDashboard = () => {
 
       {/* Users Management Tab */}
       {activeTab === 'users' && (
-        <div className="glass-panel" style={{ padding: '1.25rem' }}>
+        <div className="glass-panel" style={{ padding: '1.25rem', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)' }}>
           {/* Controls: Filter Pills & Search */}
           <div style={{
             display: 'flex',
@@ -186,7 +189,7 @@ export const AdminDashboard = () => {
             gap: '12px',
             marginBottom: '1.25rem',
             paddingBottom: '1rem',
-            borderBottom: '1px solid var(--border-color)'
+            borderBottom: '1px solid var(--color-border)'
           }}>
             {/* Filter Pills */}
             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
@@ -194,14 +197,14 @@ export const AdminDashboard = () => {
                 onClick={() => setUserFilter('all')}
                 style={{
                   padding: '6px 12px',
-                  borderRadius: '20px',
+                  borderRadius: 'var(--radius-full)',
                   fontSize: '0.8rem',
                   fontWeight: 600,
                   cursor: 'pointer',
                   border: '1px solid',
-                  borderColor: userFilter === 'all' ? 'var(--primary)' : 'rgba(255,255,255,0.1)',
-                  background: userFilter === 'all' ? 'rgba(99, 102, 241, 0.2)' : 'rgba(255,255,255,0.03)',
-                  color: userFilter === 'all' ? '#fff' : 'var(--text-muted)',
+                  borderColor: userFilter === 'all' ? 'var(--color-primary)' : 'var(--color-border)',
+                  background: userFilter === 'all' ? 'var(--color-primary-subtle)' : 'var(--color-surface)',
+                  color: userFilter === 'all' ? 'var(--color-primary)' : 'var(--color-text-muted)',
                   transition: 'all 0.15s ease'
                 }}
               >
@@ -211,14 +214,14 @@ export const AdminDashboard = () => {
                 onClick={() => setUserFilter('students')}
                 style={{
                   padding: '6px 12px',
-                  borderRadius: '20px',
+                  borderRadius: 'var(--radius-full)',
                   fontSize: '0.8rem',
                   fontWeight: 600,
                   cursor: 'pointer',
                   border: '1px solid',
-                  borderColor: userFilter === 'students' ? '#06b6d4' : 'rgba(255,255,255,0.1)',
-                  background: userFilter === 'students' ? 'rgba(6, 182, 212, 0.18)' : 'rgba(255,255,255,0.03)',
-                  color: userFilter === 'students' ? '#22d3ee' : 'var(--text-muted)',
+                  borderColor: userFilter === 'students' ? 'var(--color-primary)' : 'var(--color-border)',
+                  background: userFilter === 'students' ? 'var(--color-primary-subtle)' : 'var(--color-surface)',
+                  color: userFilter === 'students' ? 'var(--color-primary)' : 'var(--color-text-muted)',
                   transition: 'all 0.15s ease'
                 }}
               >
@@ -228,14 +231,14 @@ export const AdminDashboard = () => {
                 onClick={() => setUserFilter('tutors')}
                 style={{
                   padding: '6px 12px',
-                  borderRadius: '20px',
+                  borderRadius: 'var(--radius-full)',
                   fontSize: '0.8rem',
                   fontWeight: 600,
                   cursor: 'pointer',
                   border: '1px solid',
-                  borderColor: userFilter === 'tutors' ? '#a855f7' : 'rgba(255,255,255,0.1)',
-                  background: userFilter === 'tutors' ? 'rgba(168, 85, 247, 0.18)' : 'rgba(255,255,255,0.03)',
-                  color: userFilter === 'tutors' ? '#c084fc' : 'var(--text-muted)',
+                  borderColor: userFilter === 'tutors' ? 'var(--color-primary)' : 'var(--color-border)',
+                  background: userFilter === 'tutors' ? 'var(--color-primary-subtle)' : 'var(--color-surface)',
+                  color: userFilter === 'tutors' ? 'var(--color-primary)' : 'var(--color-text-muted)',
                   transition: 'all 0.15s ease'
                 }}
               >
@@ -245,14 +248,14 @@ export const AdminDashboard = () => {
                 onClick={() => setUserFilter('blocked')}
                 style={{
                   padding: '6px 12px',
-                  borderRadius: '20px',
+                  borderRadius: 'var(--radius-full)',
                   fontSize: '0.8rem',
                   fontWeight: 600,
                   cursor: 'pointer',
                   border: '1px solid',
-                  borderColor: userFilter === 'blocked' ? '#ef4444' : 'rgba(255,255,255,0.1)',
-                  background: userFilter === 'blocked' ? 'rgba(239, 68, 68, 0.18)' : 'rgba(255,255,255,0.03)',
-                  color: userFilter === 'blocked' ? '#f87171' : 'var(--text-muted)',
+                  borderColor: userFilter === 'blocked' ? 'var(--danger)' : 'var(--color-border)',
+                  background: userFilter === 'blocked' ? 'rgba(239, 68, 68, 0.1)' : 'var(--color-surface)',
+                  color: userFilter === 'blocked' ? 'var(--danger)' : 'var(--color-text-muted)',
                   transition: 'all 0.15s ease'
                 }}
               >
@@ -264,7 +267,7 @@ export const AdminDashboard = () => {
             <div style={{ position: 'relative', minWidth: '240px', maxWidth: '320px', width: '100%' }}>
               <Search 
                 size={14} 
-                style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-dim)' }} 
+                style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-muted)' }} 
               />
               <input
                 type="text"
@@ -274,10 +277,10 @@ export const AdminDashboard = () => {
                 style={{
                   width: '100%',
                   padding: '6px 12px 6px 32px',
-                  borderRadius: '8px',
-                  border: '1px solid rgba(255,255,255,0.12)',
-                  background: 'rgba(15, 23, 42, 0.6)',
-                  color: 'var(--text-main)',
+                  borderRadius: 'var(--radius-sm)',
+                  border: '1px solid var(--color-border)',
+                  background: 'var(--color-surface)',
+                  color: 'var(--color-text)',
                   fontSize: '0.84rem'
                 }}
               />
@@ -288,7 +291,7 @@ export const AdminDashboard = () => {
           <div style={{ overflowX: 'auto', minHeight: '340px' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.88rem' }}>
               <thead>
-                <tr style={{ borderBottom: '1px solid var(--border-color)', textAlign: 'left', color: 'var(--text-dim)' }}>
+                <tr style={{ borderBottom: '1px solid var(--color-border)', textAlign: 'left', color: 'var(--color-text-muted)' }}>
                   <th style={{ padding: '10px' }}>User</th>
                   <th style={{ padding: '10px' }}>Email</th>
                   <th style={{ padding: '10px' }}>Phone</th>
@@ -300,7 +303,7 @@ export const AdminDashboard = () => {
               <tbody>
                 {filteredUsers.length === 0 ? (
                   <tr>
-                    <td colSpan="6" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>
+                    <td colSpan="6" style={{ textAlign: 'center', padding: '3rem', color: 'var(--color-text-muted)' }}>
                       No users match the selected filter or search criteria.
                     </td>
                   </tr>
@@ -313,7 +316,7 @@ export const AdminDashboard = () => {
                       <tr 
                         key={u._id} 
                         style={{ 
-                          borderBottom: '1px solid rgba(255,255,255,0.03)',
+                          borderBottom: '1px solid var(--color-border)',
                           backgroundColor: isBlocked ? 'rgba(239, 68, 68, 0.04)' : 'transparent',
                           transition: 'background-color 0.15s ease'
                         }}
@@ -327,20 +330,21 @@ export const AdminDashboard = () => {
                               width: '34px', 
                               height: '34px', 
                               borderRadius: '50%',
-                              border: isBlocked ? '2px solid rgba(239,68,68,0.5)' : '2px solid rgba(255,255,255,0.08)'
+                              border: isBlocked ? '2px solid var(--danger)' : '1px solid var(--color-border)'
                             }}
                           />
                           <div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                              <strong style={{ color: isBlocked ? 'var(--text-muted)' : 'inherit' }}>{u.name}</strong>
+                              <strong style={{ color: isBlocked ? 'var(--color-text-muted)' : 'var(--color-text)' }}>{u.name}</strong>
                               {isSelf && (
                                 <span style={{
                                   fontSize: '0.68rem',
                                   padding: '1px 6px',
-                                  borderRadius: '4px',
-                                  background: 'rgba(99, 102, 241, 0.25)',
-                                  color: 'var(--primary)',
-                                  fontWeight: 600
+                                  borderRadius: 'var(--radius-full)',
+                                  background: 'var(--color-primary-subtle)',
+                                  color: 'var(--color-primary)',
+                                  fontWeight: 600,
+                                  border: '1px solid var(--color-border)'
                                 }}>
                                   YOU
                                 </span>
@@ -350,10 +354,10 @@ export const AdminDashboard = () => {
                         </td>
 
                         {/* Email */}
-                        <td style={{ padding: '10px', color: 'var(--text-muted)' }}>{u.email}</td>
+                        <td style={{ padding: '10px', color: 'var(--color-text-muted)' }}>{u.email}</td>
 
                         {/* Phone */}
-                        <td style={{ padding: '10px', color: 'var(--text-muted)' }}>{u.phone_no || '—'}</td>
+                        <td style={{ padding: '10px', color: 'var(--color-text-muted)' }}>{u.phone_no || '—'}</td>
 
                         {/* Static Role Badge (Permanent Role) */}
                         <td style={{ padding: '10px' }}>
@@ -362,13 +366,13 @@ export const AdminDashboard = () => {
                               display: 'inline-flex',
                               alignItems: 'center',
                               gap: '5px',
-                              padding: '4px 10px',
-                              borderRadius: '6px',
-                              fontSize: '0.78rem',
+                              padding: '3px 9px',
+                              borderRadius: 'var(--radius-full)',
+                              fontSize: '0.76rem',
                               fontWeight: 600,
-                              background: 'rgba(244, 63, 94, 0.12)',
-                              color: '#fb7185',
-                              border: '1px solid rgba(244, 63, 94, 0.28)'
+                              background: 'rgba(244, 63, 94, 0.1)',
+                              color: '#e11d48',
+                              border: '1px solid rgba(244, 63, 94, 0.25)'
                             }}>
                               <ShieldCheck size={13} />
                               Admin
@@ -378,13 +382,13 @@ export const AdminDashboard = () => {
                               display: 'inline-flex',
                               alignItems: 'center',
                               gap: '5px',
-                              padding: '4px 10px',
-                              borderRadius: '6px',
-                              fontSize: '0.78rem',
+                              padding: '3px 9px',
+                              borderRadius: 'var(--radius-full)',
+                              fontSize: '0.76rem',
                               fontWeight: 600,
-                              background: 'rgba(168, 85, 247, 0.12)',
-                              color: '#c084fc',
-                              border: '1px solid rgba(168, 85, 247, 0.28)'
+                              background: 'var(--color-primary-subtle)',
+                              color: 'var(--color-primary)',
+                              border: '1px solid var(--color-border)'
                             }}>
                               <BookOpen size={13} />
                               Tutor
@@ -394,13 +398,13 @@ export const AdminDashboard = () => {
                               display: 'inline-flex',
                               alignItems: 'center',
                               gap: '5px',
-                              padding: '4px 10px',
-                              borderRadius: '6px',
-                              fontSize: '0.78rem',
+                              padding: '3px 9px',
+                              borderRadius: 'var(--radius-full)',
+                              fontSize: '0.76rem',
                               fontWeight: 600,
-                              background: 'rgba(6, 182, 212, 0.12)',
-                              color: '#22d3ee',
-                              border: '1px solid rgba(6, 182, 212, 0.28)'
+                              background: 'var(--color-surface)',
+                              color: 'var(--color-text)',
+                              border: '1px solid var(--color-border)'
                             }}>
                               <GraduationCap size={13} />
                               Student
@@ -416,19 +420,18 @@ export const AdminDashboard = () => {
                               alignItems: 'center',
                               gap: '5px',
                               padding: '3px 9px',
-                              borderRadius: '20px',
+                              borderRadius: 'var(--radius-full)',
                               fontSize: '0.76rem',
                               fontWeight: 600,
-                              background: 'rgba(239, 68, 68, 0.14)',
-                              color: '#f87171',
-                              border: '1px solid rgba(239, 68, 68, 0.35)'
+                              background: 'rgba(239, 68, 68, 0.1)',
+                              color: 'var(--danger)',
+                              border: '1px solid rgba(239, 68, 68, 0.25)'
                             }}>
                               <span style={{
                                 width: '6px',
                                 height: '6px',
                                 borderRadius: '50%',
-                                background: '#ef4444',
-                                boxShadow: '0 0 6px rgba(239, 68, 68, 0.6)'
+                                background: 'var(--danger)'
                               }} />
                               Blocked
                             </span>
@@ -438,19 +441,18 @@ export const AdminDashboard = () => {
                               alignItems: 'center',
                               gap: '5px',
                               padding: '3px 9px',
-                              borderRadius: '20px',
+                              borderRadius: 'var(--radius-full)',
                               fontSize: '0.76rem',
                               fontWeight: 600,
-                              background: 'rgba(16, 185, 129, 0.12)',
-                              color: '#34d399',
-                              border: '1px solid rgba(16, 185, 129, 0.28)'
+                              background: 'var(--color-accent-subtle)',
+                              color: 'var(--color-primary)',
+                              border: '1px solid var(--color-border)'
                             }}>
                               <span style={{
                                 width: '6px',
                                 height: '6px',
                                 borderRadius: '50%',
-                                background: '#10b981',
-                                boxShadow: '0 0 6px rgba(16, 185, 129, 0.6)'
+                                background: 'var(--color-accent)'
                               }} />
                               Active
                             </span>
@@ -464,7 +466,7 @@ export const AdminDashboard = () => {
                             {isSelf ? (
                               <span style={{
                                 fontSize: '0.75rem',
-                                color: 'var(--text-dim)',
+                                color: 'var(--color-text-muted)',
                                 fontStyle: 'italic',
                                 padding: '4px 6px'
                               }}>
@@ -480,14 +482,14 @@ export const AdminDashboard = () => {
                                   alignItems: 'center',
                                   gap: '5px',
                                   padding: '5px 10px',
-                                  borderRadius: '6px',
+                                  borderRadius: 'var(--radius-sm)',
                                   fontSize: '0.78rem',
                                   fontWeight: 600,
                                   cursor: 'pointer',
                                   transition: 'all 0.15s ease',
-                                  background: isBlocked ? 'rgba(16, 185, 129, 0.16)' : 'rgba(239, 68, 68, 0.14)',
-                                  color: isBlocked ? '#34d399' : '#f87171',
-                                  border: `1px solid ${isBlocked ? 'rgba(16, 185, 129, 0.35)' : 'rgba(239, 68, 68, 0.35)'}`
+                                  background: isBlocked ? 'var(--color-accent-subtle)' : 'rgba(239, 68, 68, 0.1)',
+                                  color: isBlocked ? 'var(--color-primary)' : 'var(--danger)',
+                                  border: `1px solid ${isBlocked ? 'var(--color-border)' : 'rgba(239, 68, 68, 0.25)'}`
                                 }}
                               >
                                 {isBlocked ? <CheckCircle2 size={13} /> : <Ban size={13} />}
@@ -500,7 +502,7 @@ export const AdminDashboard = () => {
                               <button 
                                 onClick={() => handleDeleteUser(u._id)} 
                                 className="btn btn-sm btn-danger"
-                                style={{ padding: '5px 9px', fontSize: '0.78rem' }}
+                                style={{ padding: '5px 9px', fontSize: '0.78rem', borderRadius: 'var(--radius-sm)' }}
                                 title="Delete user permanently"
                               >
                                 <Trash2 size={13} /> Delete
@@ -520,10 +522,10 @@ export const AdminDashboard = () => {
 
       {/* Transactions Table Tab */}
       {activeTab === 'transactions' && (
-        <div className="glass-panel" style={{ padding: '1.25rem', overflowX: 'auto' }}>
+        <div className="glass-panel" style={{ padding: '1.25rem', overflowX: 'auto', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.88rem' }}>
             <thead>
-              <tr style={{ borderBottom: '1px solid var(--border-color)', textAlign: 'left', color: 'var(--text-dim)' }}>
+              <tr style={{ borderBottom: '1px solid var(--color-border)', textAlign: 'left', color: 'var(--color-text-muted)' }}>
                 <th style={{ padding: '10px' }}>Txn Reference</th>
                 <th style={{ padding: '10px' }}>Student</th>
                 <th style={{ padding: '10px' }}>Course</th>
@@ -534,12 +536,12 @@ export const AdminDashboard = () => {
             </thead>
             <tbody>
               {transactions.map((tx) => (
-                <tr key={tx._id} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
-                  <td style={{ padding: '10px', fontFamily: 'monospace', color: 'var(--secondary)' }}>{tx.transaction_reference}</td>
-                  <td style={{ padding: '10px' }}>{tx.user_id?.name || 'Student'}</td>
-                  <td style={{ padding: '10px' }}>{tx.course_id?.name || 'Course'}</td>
-                  <td style={{ padding: '10px', fontWeight: 700, color: 'var(--success)' }}>${tx.amount}</td>
-                  <td style={{ padding: '10px' }}>{tx.payment_method}</td>
+                <tr key={tx._id} style={{ borderBottom: '1px solid var(--color-border)' }}>
+                  <td style={{ padding: '10px', fontFamily: 'monospace', color: 'var(--color-primary)' }}>{tx.transaction_reference}</td>
+                  <td style={{ padding: '10px', color: 'var(--color-text)' }}>{tx.user_id?.name || 'Student'}</td>
+                  <td style={{ padding: '10px', color: 'var(--color-text)' }}>{tx.course_id?.name || 'Course'}</td>
+                  <td style={{ padding: '10px', fontWeight: 700, color: 'var(--color-primary)' }}>${tx.amount}</td>
+                  <td style={{ padding: '10px', color: 'var(--color-text-muted)' }}>{tx.payment_method}</td>
                   <td style={{ padding: '10px' }}>
                     <span className="badge badge-free">SUCCESS</span>
                   </td>

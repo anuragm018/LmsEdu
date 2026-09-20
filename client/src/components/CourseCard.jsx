@@ -33,12 +33,12 @@ export const CourseCard = ({ course }) => {
             position: 'absolute',
             bottom: '12px',
             left: '12px',
-            background: 'rgba(9, 13, 22, 0.8)',
-            backdropFilter: 'blur(8px)',
-            padding: '4px 10px',
-            borderRadius: '6px',
+            background: 'var(--color-surface)',
+            border: '1px solid var(--color-border)',
+            padding: '3px 8px',
+            borderRadius: 'var(--radius-sm)',
             fontSize: '0.75rem',
-            color: 'var(--secondary)',
+            color: 'var(--color-primary)',
             fontWeight: 600
           }}>
             {course.category.name || course.category}
@@ -48,13 +48,13 @@ export const CourseCard = ({ course }) => {
 
       {/* Content */}
       <div style={{ padding: '1.25rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <h3 style={{ fontSize: '1.1rem', marginBottom: '0.6rem', lineHeight: '1.4' }}>
+        <h3 style={{ fontSize: '1.05rem', marginBottom: '0.5rem', lineHeight: '1.4', color: 'var(--color-primary)' }}>
           {course.name}
         </h3>
 
         <p style={{
           fontSize: '0.85rem',
-          color: 'var(--text-muted)',
+          color: 'var(--color-text-muted)',
           display: '-webkit-box',
           WebkitLineClamp: 2,
           WebkitBoxOrient: 'vertical',
@@ -71,8 +71,8 @@ export const CourseCard = ({ course }) => {
           alignItems: 'center',
           justifyContent: 'space-between',
           fontSize: '0.8rem',
-          color: 'var(--text-dim)',
-          borderTop: '1px solid var(--border-color)',
+          color: 'var(--color-text-subtle)',
+          borderTop: '1px solid var(--color-border)',
           paddingTop: '0.75rem',
           marginTop: 'auto'
         }}>

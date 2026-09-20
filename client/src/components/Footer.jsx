@@ -3,14 +3,11 @@ import { GraduationCap } from 'lucide-react';
 
 export const Footer = () => {
   return (
-    <footer className="glass-panel" style={{
-      borderRadius: 0,
-      borderBottom: 'none',
-      borderLeft: 'none',
-      borderRight: 'none',
+    <footer style={{
+      borderTop: '1px solid var(--color-border)',
       marginTop: 'auto',
       padding: '2rem 1.5rem 1.5rem',
-      background: 'rgba(9, 13, 22, 0.95)'
+      background: 'var(--color-surface)'
     }}>
       <div style={{
         maxWidth: '1280px',
@@ -19,37 +16,37 @@ export const Footer = () => {
         flexDirection: 'column',
         alignItems: 'center',
         textAlign: 'center',
-        gap: '1rem',
-        marginBottom: '1.5rem'
+        gap: '0.8rem',
+        marginBottom: '1.25rem'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div style={{
-            width: '36px',
-            height: '36px',
-            borderRadius: '10px',
-            background: 'linear-gradient(135deg, var(--primary), var(--accent))',
+            width: '34px',
+            height: '34px',
+            borderRadius: 'var(--radius-sm)',
+            background: 'var(--color-primary)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#fff'
+            color: 'var(--color-text-on-dark)'
           }}>
-            <GraduationCap size={20} />
+            <GraduationCap size={18} />
           </div>
-          <span style={{ fontSize: '1.3rem', fontWeight: 800 }}>
-            Edu<span style={{ color: 'var(--secondary)' }}>Sphere</span>
+          <span style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-primary)' }}>
+            Edu<span style={{ color: 'var(--color-accent)' }}>Sphere</span>
           </span>
         </div>
-        <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', maxWidth: '500px' }}>
+        <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', maxWidth: '500px' }}>
           Centralized digital learning ecosystem connecting learners, educators, and administrators worldwide.
         </p>
       </div>
 
       <div style={{
-        borderTop: '1px solid var(--border-color)',
+        borderTop: '1px solid var(--color-border)',
         paddingTop: '1rem',
         textAlign: 'center',
         fontSize: '0.8rem',
-        color: 'var(--text-dim)'
+        color: 'var(--color-text-subtle)'
       }}>
         © 2026 EduSphere LMS Platform.
       </div>
