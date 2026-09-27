@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import Course from '../models/Course.js';
 import Category from '../models/Category.js';
 
@@ -63,13 +64,43 @@ export const createCourse = async (req, res) => {
   try {
     const { name, desc, price, type, category, thumbnail, duration, level } = req.body;
 
+    let resolvedCategoryId = null;
+
+    if (category) {
+      if (mongoose.Types.ObjectId.isValid(category)) {
+        const catExists = await Category.findById(category);
+        if (catExists) {
+          resolvedCategoryId = catExists._id;
+        }
+      }
+
+      // If not resolved by ObjectId, check if category was passed as a name string
+      if (!resolvedCategoryId && typeof category === 'string' && category.trim()) {
+        const trimmed = category.trim();
+        let catDoc = await Category.findOne({ name: { $regex: new RegExp(`^${trimmed}$`, 'i') } });
+        if (!catDoc) {
+          catDoc = await Category.create({ name: trimmed, description: `${trimmed} courses`, icon: 'BookOpen' });
+        }
+        resolvedCategoryId = catDoc._id;
+      }
+    }
+
+    // Fallback: If still no category resolved, select or create default category
+    if (!resolvedCategoryId) {
+      let defaultCat = await Category.findOne({});
+      if (!defaultCat) {
+        defaultCat = await Category.create({ name: 'Web Development', description: 'Full stack development', icon: 'Code' });
+      }
+      resolvedCategoryId = defaultCat._id;
+    }
+
     const course = await Course.create({
       name,
       desc,
       price: type === 'free' ? 0 : price,
       type: type || (price > 0 ? 'paid' : 'free'),
       tutor: req.user._id,
-      category,
+      category: resolvedCategoryId,
       thumbnail: thumbnail || undefined,
       duration: duration || '4h 30m',
       level: level || 'All Levels'
@@ -161,7 +192,19 @@ export const getInstructorCourses = async (req, res) => {
 // @access  Public
 export const getCategories = async (req, res) => {
   try {
-    const categories = await Category.find({}).sort({ name: 1 });
+    let categories = await Category.find({}).sort({ name: 1 });
+    if (categories.length === 0) {
+      const defaultCategories = [
+        { name: 'Web Development', description: 'Full stack development with React, Node, Express & MongoDB', icon: 'Code' },
+        { name: 'Data Science & AI', description: 'Machine learning, Python, data analytics, and neural networks', icon: 'Cpu' },
+        { name: 'UI/UX Design', description: 'Figma masterclass, wireframing, and interactive design', icon: 'Palette' },
+        { name: 'Business & Cloud', description: 'AWS Cloud, DevOps, Agile management & product strategies', icon: 'Briefcase' },
+        { name: 'Mobile App Development', description: 'React Native, Flutter, iOS & Android development', icon: 'Smartphone' },
+        { name: 'Cybersecurity', description: 'Network security, ethical hacking, and defense', icon: 'Shield' },
+        { name: 'Programming Languages', description: 'Python, JavaScript, C++, Java, and Go', icon: 'Terminal' }
+      ];
+      categories = await Category.insertMany(defaultCategories);
+    }
     res.json(categories);
   } catch (error) {
     res.status(500).json({ message: error.message });

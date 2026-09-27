@@ -168,10 +168,12 @@ export const addRating = async (req, res) => {
     const { course_id, section_id, rating } = req.body;
     const user_id = req.user._id;
 
-    const query = { user_id, course_id };
-    if (section_id) {
-      query.section_id = section_id;
-    }
+    const cleanSectionId = section_id ? section_id : null;
+    const query = { 
+      user_id, 
+      course_id, 
+      section_id: cleanSectionId ? cleanSectionId : { $in: [null, undefined] }
+    };
 
     let existing = await Rating.findOne(query);
     if (existing) {
@@ -182,7 +184,7 @@ export const addRating = async (req, res) => {
 
     const newRating = await Rating.create({
       course_id,
-      section_id: section_id || undefined,
+      section_id: cleanSectionId,
       rating,
       user_id
     });
@@ -195,7 +197,7 @@ export const addRating = async (req, res) => {
 
 // @desc    Get rating summary for course & user section ratings
 // @route   GET /api/ratings/course/:courseId
-// @access  Public
+// @access  Public (Optional User)
 export const getCourseRatings = async (req, res) => {
   try {
     const ratings = await Rating.find({ course_id: req.params.courseId });

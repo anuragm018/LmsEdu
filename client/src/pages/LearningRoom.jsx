@@ -68,15 +68,20 @@ export const LearningRoom = () => {
   };
 
   const handleRateSection = async (sectionId, ratingVal) => {
+    // Optimistic UI update for immediate star highlight
+    setSectionRatings(prev => ({ ...prev, [sectionId]: ratingVal }));
     try {
       await API.post('/ratings', {
         course_id: courseId,
         section_id: sectionId,
         rating: ratingVal
       });
-      setSectionRatings(prev => ({ ...prev, [sectionId]: ratingVal }));
     } catch (err) {
       console.error('Section rating failed:', err);
+      // Re-fetch ratings if call failed
+      API.get(`/ratings/course/${courseId}`).then(r => {
+        if (r.data.userSectionRatings) setSectionRatings(r.data.userSectionRatings);
+      }).catch(() => {});
     }
   };
 

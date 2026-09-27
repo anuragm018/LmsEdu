@@ -37,10 +37,20 @@ import {
   RefreshCw
 } from 'lucide-react';
 
+const DEFAULT_CATEGORIES = [
+  { _id: 'Web Development', name: 'Web Development' },
+  { _id: 'Data Science & AI', name: 'Data Science & AI' },
+  { _id: 'UI/UX Design', name: 'UI/UX Design' },
+  { _id: 'Business & Cloud', name: 'Business & Cloud' },
+  { _id: 'Mobile App Development', name: 'Mobile App Development' },
+  { _id: 'Cybersecurity', name: 'Cybersecurity' },
+  { _id: 'Programming Languages', name: 'Programming Languages' }
+];
+
 export const InstructorDashboard = () => {
   const { user } = useAuth();
   const [courses, setCourses] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState(DEFAULT_CATEGORIES);
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [syllabus, setSyllabus] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -96,6 +106,8 @@ export const InstructorDashboard = () => {
 
   // Modal / Form States
   const [showCreateCourse, setShowCreateCourse] = useState(false);
+  const [isCustomCategory, setIsCustomCategory] = useState(false);
+  const [customCategoryInput, setCustomCategoryInput] = useState('');
   const [uploadingThumbnail, setUploadingThumbnail] = useState(false);
   const [thumbnailFileName, setThumbnailFileName] = useState('');
   const [newCourse, setNewCourse] = useState({
@@ -457,11 +469,46 @@ export const InstructorDashboard = () => {
   const handleCreateCourseSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await API.post('/courses', newCourse);
+      const selectedCat = isCustomCategory 
+        ? customCategoryInput.trim() 
+        : (newCourse.category || (categories[0]?._id || 'Web Development'));
+
+      if (!selectedCat) {
+        alert('Please select or enter a category');
+        return;
+      }
+
+      const payload = {
+        ...newCourse,
+        category: selectedCat
+      };
+
+      const res = await API.post('/courses', payload);
       setCourses([res.data, ...courses]);
       setSelectedCourse(res.data);
       setShowCreateCourse(false);
+
+      // Reset form
+      setNewCourse({
+        name: '',
+        desc: '',
+        price: 0,
+        type: 'free',
+        category: '',
+        thumbnail: '',
+        duration: '4 Hours',
+        level: 'All Levels'
+      });
+      setIsCustomCategory(false);
+      setCustomCategoryInput('');
+      setThumbnailFileName('');
+
       fetchSyllabus(res.data._id);
+
+      // Refresh categories from server so newly created category appears
+      API.get('/courses/categories').then(r => {
+        if (r.data && r.data.length > 0) setCategories(r.data);
+      }).catch(() => {});
     } catch (err) {
       alert(err.response?.data?.message || 'Error creating course');
     }
@@ -2926,19 +2973,65 @@ export const InstructorDashboard = () => {
               </div>
 
               <div className="form-group">
-                <label>Category</label>
-                <select 
-                  className="form-control"
-                  value={newCourse.category}
-                  onChange={(e) => setNewCourse({ ...newCourse, category: e.target.value })}
-                  style={{ borderRadius: 'var(--radius-sm)' }}
-                  required
-                >
-                  <option value="">Select Category...</option>
-                  {categories.map((cat) => (
-                    <option key={cat._id} value={cat._id}>{cat.name}</option>
-                  ))}
-                </select>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                  <label style={{ margin: 0, fontSize: '0.85rem', fontWeight: 500, color: 'var(--color-text)' }}>Category</label>
+                  <button 
+                    type="button" 
+                    onClick={() => {
+                      setIsCustomCategory(!isCustomCategory);
+                      if (!isCustomCategory) {
+                        setCustomCategoryInput('');
+                      }
+                    }}
+                    style={{ background: 'none', border: 'none', color: 'var(--color-primary)', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}
+                  >
+                    {isCustomCategory ? '← Choose from list' : '+ Enter Custom Category'}
+                  </button>
+                </div>
+
+                {isCustomCategory ? (
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    <input 
+                      type="text" 
+                      className="form-control"
+                      placeholder="Type custom category (e.g. Python, AI Tools, DevOps)..."
+                      value={customCategoryInput}
+                      onChange={(e) => setCustomCategoryInput(e.target.value)}
+                      style={{ borderRadius: 'var(--radius-sm)' }}
+                      required
+                      autoFocus
+                    />
+                    <button 
+                      type="button" 
+                      className="btn btn-secondary"
+                      style={{ whiteSpace: 'nowrap', fontSize: '0.82rem', padding: '6px 12px', borderRadius: 'var(--radius-sm)' }}
+                      onClick={() => setIsCustomCategory(false)}
+                    >
+                      List
+                    </button>
+                  </div>
+                ) : (
+                  <select 
+                    className="form-control"
+                    value={newCourse.category}
+                    onChange={(e) => {
+                      if (e.target.value === '__custom__') {
+                        setIsCustomCategory(true);
+                        setCustomCategoryInput('');
+                      } else {
+                        setNewCourse({ ...newCourse, category: e.target.value });
+                      }
+                    }}
+                    style={{ borderRadius: 'var(--radius-sm)' }}
+                    required
+                  >
+                    <option value="">Select Category...</option>
+                    {categories.map((cat) => (
+                      <option key={cat._id} value={cat._id}>{cat.name}</option>
+                    ))}
+                    <option value="__custom__">➕ + Enter Custom Category...</option>
+                  </select>
+                )}
               </div>
 
               <div className="form-group">

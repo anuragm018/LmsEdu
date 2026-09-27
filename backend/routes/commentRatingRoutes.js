@@ -8,7 +8,7 @@ import {
   addRating, 
   getCourseRatings 
 } from '../controllers/commentRatingController.js';
-import { protect } from '../middleware/authMiddleware.js';
+import { protect, optionalProtect } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
@@ -21,6 +21,6 @@ router.delete('/comments/:id/reply', protect, deleteCommentReply);
 
 // Ratings
 router.post('/ratings', protect, addRating);
-router.get('/ratings/course/:courseId', getCourseRatings);
+router.get('/ratings/course/:courseId', optionalProtect, getCourseRatings);
 
 export default router;

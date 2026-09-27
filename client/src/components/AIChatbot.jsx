@@ -91,15 +91,18 @@ const FormattedMessage = ({ text }) => {
               }}>
                 {part.lang}
               </div>
-              <pre style={{
-                margin: 0,
-                padding: '10px 12px',
-                fontSize: '0.82rem',
-                color: 'var(--color-text)',
-                fontFamily: 'Consolas, Monaco, "Courier New", monospace',
-                overflowX: 'auto',
-                lineHeight: 1.45
-              }}>
+              <pre 
+                className="chat-scroll"
+                style={{
+                  margin: 0,
+                  padding: '10px 12px',
+                  fontSize: '0.82rem',
+                  color: 'var(--color-text)',
+                  fontFamily: 'Consolas, Monaco, "Courier New", monospace',
+                  overflowX: 'auto',
+                  lineHeight: 1.45
+                }}
+              >
                 <code>{part.content}</code>
               </pre>
             </div>
@@ -345,6 +348,7 @@ export const AIChatbot = ({ courseName = '', lessonTitle = '' }) => {
 
           {/* Messages Body */}
           <div
+            className="chat-scroll"
             style={{
               flex: 1,
               padding: '12px 16px',

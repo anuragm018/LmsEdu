@@ -16,7 +16,7 @@ const router = express.Router();
 
 router.get('/', getCourses);
 router.get('/categories', getCategories);
-router.post('/categories', protect, authorize('admin'), createCategory);
+router.post('/categories', protect, authorize('instructor', 'admin'), createCategory);
 
 router.get('/instructor/my-courses', protect, authorize('instructor', 'admin'), getInstructorCourses);
 

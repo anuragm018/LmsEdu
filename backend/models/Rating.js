@@ -14,7 +14,8 @@ const ratingSchema = new mongoose.Schema({
   },
   section_id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Section'
+    ref: 'Section',
+    default: null
   },
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
@@ -27,4 +28,9 @@ const ratingSchema = new mongoose.Schema({
 
 ratingSchema.index({ user_id: 1, course_id: 1, section_id: 1 }, { unique: true });
 
-export default mongoose.model('Rating', ratingSchema);
+const Rating = mongoose.model('Rating', ratingSchema);
+
+// Automatically drop obsolete compound index on (user_id, course_id) if present in database
+Rating.collection.dropIndex('user_id_1_course_id_1').catch(() => {});
+
+export default Rating;

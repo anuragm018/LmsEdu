@@ -641,4 +641,66 @@ select.form-control option {
   font-weight: 600;
 }
 
+/* ==========================================================================
+   Sleek Custom Scrollbar Design
+   ========================================================================== */
+
+/* Modern Global Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(107, 114, 128, 0.25);
+  border-radius: 9999px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(21, 128, 61, 0.5);
+}
+
+::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* AI Chatbot & Messaging Streams Dedicated Scrollbar */
+.chat-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(21, 128, 61, 0.35) transparent;
+}
+
+.chat-scroll::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.chat-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat-scroll::-webkit-scrollbar-thumb {
+  background: rgba(21, 128, 61, 0.3);
+  border-radius: 9999px;
+  transition: background 0.2s ease;
+}
+
+.chat-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+.chat-scroll::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+
 
